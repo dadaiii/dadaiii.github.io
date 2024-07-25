@@ -37,7 +37,7 @@
             <button data-filter="project" value="Souvenir de la pierre">Souvenir de la pierre</button>
         </div>
     </div>
-    <div class="portfolio grid" id="portfolio">
+    <div class="portfolio mosaic" id="portfolio">
         <!-- Les images seront ajoutées ici par JavaScript -->
     </div>
     <footer>
@@ -125,6 +125,17 @@
                 toggleButton.textContent = 'Mosaïque';
             }
         }
+// Définir le texte initial du bouton en fonction de la classe actuelle
+window.onload = function() {
+    const portfolio = document.getElementById('portfolio');
+    const toggleButton = document.getElementById('toggleView');
+
+    if (portfolio.classList.contains('mosaic')) {
+        toggleButton.textContent = 'Grille';
+    } else {
+        toggleButton.textContent = 'Mosaïque';
+    }
+}
 
         function handleFilterButtonClick(event) {
             const button = event.target;
