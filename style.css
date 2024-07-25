@@ -167,7 +167,7 @@ footer a:hover {
 }
 
 .controls button {
-    padding: 1rem 2rem;
+    padding: 0.7rem 2rem;
     border: none;
     border-radius: 5px;
     background-color: #333;
@@ -330,4 +330,12 @@ footer a:hover {
     .filter-group button {
         flex: 1; /* Permet aux boutons de prendre toute la largeur disponible */
     }
+}
+
+@font-face {
+    font-family: 'NintendoFont';
+    src: url('fonts/ma-police.woff2') format('woff2'),
+         url('fonts/ma-police.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
