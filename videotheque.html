@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidéothèque</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content {
+            flex: 1;
+            padding: 2em;
+            text-align: center;
+        }
+        .back-to-home {
+            display: inline-block;
+            padding: 0.5em 1em;
+            margin-bottom: 1em;
+            background-color: #888;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .back-to-home:hover {
+            background-color: #666;
+        }
+        .section {
+            margin-bottom: 2em;
+        }
+        .section h2 {
+            display: inline-block;
+            padding-bottom: 0.2em;
+            margin-bottom: 0.05em;
+        }
+        .section .description {
+            font-size: 0.9em; /* Taille réduite pour la description */
+            margin-bottom: 1em; /* Ajuster l'espace sous la description */
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto 1em auto;
+        }
+        .section .separator {
+            border-bottom: 1px solid #333;
+            margin: 1em auto;
+            max-width: 80%;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            background-color: #fff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        .card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        .card .info {
+            padding: 1em;
+        }
+        .card .info h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .card .info p {
+            color: #666;
+            font-size: 0.8em; /* Réduit la taille des descriptions */
+            margin: 0.5em 0 0;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 0.5em 1em;
+            text-align: left;
+            font-size: 0.7em;
+            line-height: 1.2;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        footer p {
+            margin: 0.1em 0;
+        }
+        footer a {
+            color: #4a90e2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vidéothèque</h1>
+    </header>
+    <div class="content">
+        <a href="index.html" class="back-to-home">Retour à l'accueil</a>
+        <div class="section">
+            <h2>Projets d'Animation 3D</h2>
+            <div class="description">
+                Découvrez les projets d'animation 3D que j'ai réalisés à Waide Somme. Ces vidéos montrent mes compétences en animation 3D et les différents styles que j'ai explorés.
+            </div>
+            <div class="separator"></div>
+            <div class="cards-container">
+                <!-- Exemple de carte avec vidéo -->
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/D2OSE5Fnw7g" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Projet 1</h3>
+                        <p>Description du projet 1.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/MvvCZeqBebY" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Projet 2</h3>
+                        <p>Description du projet 2.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/NdrDBwUguz0" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Projet 3</h3>
+                        <p>Description du projet 3.</p>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de cartes si nécessaire -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Exercices d'Animation</h2>
+            <div class="description">
+                Voici une sélection d'exercices d'animation réalisés à Waide Somme. Ces exercices démontrent ma progression dans la maîtrise des techniques d'animation.
+            </div>
+            <div class="separator"></div>
+            <div class="cards-container">
+                <!-- Exemple de carte avec vidéo -->
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_1" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Exercice 1</h3>
+                        <p>Description de l'exercice 1.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_2" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Exercice 2</h3>
+                        <p>Description de l'exercice 2.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_3" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Exercice 3</h3>
+                        <p>Description de l'exercice 3.</p>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de cartes si nécessaire -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Films d'Animation</h2>
+            <div class="description">
+                Explorez les films d'animation que j'ai réalisés en CPES-CAAP à Simone Veil. Chaque film est un reflet de mes capacités créatives et techniques en animation.
+            </div>
+            <div class="separator"></div>
+            <div class="cards-container">
+                <!-- Exemple de carte avec vidéo -->
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_4" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Film 1</h3>
+                        <p>Description du film 1.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_5" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Film 2</h3>
+                        <p>Description du film 2.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_6" allowfullscreen></iframe>
+                    <div class="info">
+                        <h3>Film 3</h3>
+                        <p>Description du film 3.</p>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de cartes si nécessaire -->
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Mon Nom. Tous droits réservés.</p>
+        <p>Contact : <a href="mailto:monemail@example.com">monemail@example.com</a></p>
+        <p>Suivez-moi sur : 
+            <a href="https://facebook.com/monprofil" target="_blank">Facebook</a>, 
+            <a href="https://

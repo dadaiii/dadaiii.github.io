@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - Mon Portfolio</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        .content {
+            flex: 1; /* Prend tout l'espace disponible */
+            padding: 2em;
+            position: relative;
+        }
+        .profile {
+            position: absolute;
+            top: 2em;
+            left: 2em;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .profile img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .profile-info {
+            margin-left: 180px; /* Espace pour la photo */
+        }
+        .profile-info h1 {
+            margin-top: 0;
+        }
+        .section {
+            margin: 2em 0;
+        }
+        .section h2 {
+            color: #333;
+        }
+        .back {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .back a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .back a:hover {
+            background-color: #555;
+        }
+        .cv-download {
+            text-align: center;
+            margin: 20px 0; /* Espace entre les boutons */
+        }
+        .cv-download a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+        .cv-download a:hover {
+            background-color: #357abd;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 0.5em 1em;
+            text-align: left;
+            font-size: 0.7em;
+            line-height: 1.2;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        footer p {
+            margin: 0.1em 0;
+        }
+        footer a {
+            color: #4a90e2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>À Propos</h1>
+    </header>
+    <div class="content">
+        <div class="profile">
+            <img src="/Users/patrick/Desktop/Dadaiii/photo_de_profil.jpeg" alt="Photo de moi">
+        </div>
+        <div class="profile-info">
+            <h1>Qui suis-je ?</h1>
+            <p>Je suis un animateur et dessinateur passionné avec plusieurs années d'expérience dans le domaine. J'ai travaillé sur divers projets allant des animations pour des publicités aux illustrations pour des livres.</p>
+            <p>Mon travail se concentre sur l'innovation et la créativité, cherchant toujours à repousser les limites de ce qui est possible en animation et en dessin.</p>
+        </div>
+        <div class="section">
+            <h2>Parcours Scolaire</h2>
+            <p>J'ai étudié à l'École de Waide Somme à Amiens, où j'ai développé une solide base en animation et en arts visuels. Cette formation m'a permis d'acquérir des compétences techniques et créatives essentielles dans le domaine de l'animation et du dessin.</p>
+            <p>Au cours de mon cursus, j'ai participé à divers projets académiques qui m'ont permis de perfectionner mes compétences en dessin, en animation 2D et 3D, ainsi qu'en conception graphique.</p>
+        </div>
+        <div class="section">
+            <h2>Parcours Professionnel</h2>
+            <p>Après avoir terminé mes études, j'ai travaillé dans plusieurs studios d'animation où j'ai eu l'opportunité de collaborer avec des équipes talentueuses sur des projets variés. J'ai contribué à des projets allant des animations pour des publicités aux illustrations pour des publications.</p>
+            <p>Mon expérience professionnelle m'a permis de développer une compréhension approfondie des processus de production et de perfectionner mes compétences en animation et en dessin. Je suis constamment à la recherche de nouvelles opportunités pour explorer et exprimer ma créativité.</p>
+        </div>
+        <div class="cv-download">
+            <a href="chemin/vers/votre-cv.pdf" download>Télécharger mon CV</a>
+        </div>
+        <div class="back" style="margin-top: 40px;"> <!-- Augmenter l'espace au-dessus du bouton "Retour à l'accueil" -->
+            <a href="index.html">Retour à l'accueil</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Mon Nom. Tous droits réservés.</p>
+        <p>Contact : <a href="mailto:monemail@example.com">monemail@example.com</a></p>
+        <p>Suivez-moi sur : 
+            <a href="https://facebook.com/monprofil" target="_blank">Facebook</a>, 
+            <a href="https://twitter.com/monprofil" target="_blank">Twitter</a>, 
+            <a href="https://instagram.com/monprofil" target="_blank">Instagram</a>
+        </p>
+    </footer>
+</body>
+</html>

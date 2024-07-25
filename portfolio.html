@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio d'Animation et de Dessin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur mon Portfolio</h1>
+    </header>
+    <div class="filters">
+        <div class="controls">
+            <button id="homeButton">Retour à la page d'accueil</button>
+            <button id="toggleView">Mosaïque</button>
+        </div>
+        <div class="filter-group">
+            <button data-filter="year" value="2024">2024</button>
+            <button data-filter="year" value="2023">2023</button>
+            <button data-filter="year" value="2022">2022</button>
+            <button data-filter="year" value="2021">2021</button>
+        </div>
+        <div class="filter-group">
+            <button data-filter="type" value="Animation">Animation</button>
+            <button data-filter="type" value="Dessin">Dessin</button>
+            <button data-filter="type" value="Illustration">Illustration</button>
+        </div>
+        <div class="filter-group">
+            <button data-filter="medium" value="Numérique">Numérique</button>
+            <button data-filter="medium" value="Traditionnel">Traditionnel</button>
+        </div>
+        <div class="filter-group">
+            <button data-filter="project" value="Le Feutre">Le Feutre</button>
+            <button data-filter="project" value="La Fin">La Fin</button>
+            <button data-filter="project" value="Souvenir de la pierre">Souvenir de la pierre</button>
+        </div>
+    </div>
+    <div class="portfolio grid" id="portfolio">
+        <!-- Les images seront ajoutées ici par JavaScript -->
+    </div>
+    <footer>
+        <p>&copy; 2024 Mon Nom. Tous droits réservés.</p>
+        <p>Contact : <a href="mailto:monemail@example.com">monemail@example.com</a></p>
+        <p>Suivez-moi sur : 
+            <a href="https://facebook.com/monprofil" target="_blank">Facebook</a>, 
+            <a href="https://twitter.com/monprofil" target="_blank">Twitter</a>, 
+            <a href="https://instagram.com/monprofil" target="_blank">Instagram</a>
+        </p>
+    </footer>
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img id="lightboxImage" src="" alt="Lightbox Image">
+        <div class="lightbox-info-card" id="lightboxInfoCard"></div>
+    </div>
+    <script>
+        // Données des images
+        const images = [
+            { src: '/Users/patrick/Desktop/Dadaiii/portfolio/canard.jpeg', year: '2024', type: 'Animation', medium: 'Numérique', project: 'Le Feutre', description: 'Description pour l\'image 1.' },
+            { src: 'image_carousel/image2.jpg', year: '2023', type: 'Dessin', medium: 'Traditionnel', project: 'La Fin', description: 'Description pour l\'image 2.' },
+            { src: 'image_carousel/image3.jpg', year: '2022', type: 'Illustration', medium: 'Numérique', project: 'Souvenir de la pierre', description: 'Description pour l\'image 3.' },
+            { src: 'image_carousel/image4.jpg', year: '2021', type: 'Animation', medium: 'Traditionnel', project: 'Le Feutre', description: 'Description pour l\'image 4.' },
+            { src: 'image_carousel/image5.jpg', year: '2024', type: 'Dessin', medium: 'Numérique', project: '', description: 'Description pour l\'image 5.' },
+            { src: 'image_carousel/image6.jpg', year: '2024', type: 'Dessin', medium: 'Numérique', project: 'Souvenir de la pierre', description: 'Description pour l\'image 6.' }
+        ];
+
+        let activeFilters = {};
+
+        function renderImages(filteredImages) {
+            const portfolio = document.getElementById('portfolio');
+            portfolio.innerHTML = ''; // Clear previous content
+
+            // Trier les images par année (ordre décroissant)
+            filteredImages.sort((a, b) => b.year.localeCompare(a.year));
+
+            filteredImages.forEach(image => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('portfolio-item');
+
+                const imgElement = document.createElement('img');
+                imgElement.src = image.src;
+                imgElement.alt = 'Portfolio Image';
+
+                const infoCard = document.createElement('div');
+                infoCard.classList.add('info-card');
+                infoCard.innerHTML = `<p>${image.description}</p>`; // Utilise la description spécifique de chaque image
+
+                itemElement.appendChild(imgElement);
+                itemElement.appendChild(infoCard);
+
+                // Ajout d'un événement pour l'affichage en plein écran
+                imgElement.addEventListener('click', () => showLightbox(image));
+
+                portfolio.appendChild(itemElement);
+            });
+        }
+
+        function filterImages() {
+            const filteredImages = images.filter(image => {
+                return Object.keys(activeFilters).every(filterType => {
+                    return activeFilters[filterType] === '' || image[filterType] === activeFilters[filterType];
+                });
+            });
+
+            // Si aucun filtre n'est activé, trier les images par année
+            if (Object.keys(activeFilters).length === 0) {
+                filteredImages.sort((a, b) => b.year.localeCompare(a.year));
+            }
+
+            renderImages(filteredImages);
+        }
+
+        function toggleView() {
+            const portfolio = document.getElementById('portfolio');
+            const toggleButton = document.getElementById('toggleView');
+
+            if (portfolio.classList.contains('grid')) {
+                portfolio.classList.remove('grid');
+                portfolio.classList.add('mosaic');
+                toggleButton.textContent = 'Grille';
+            } else {
+                portfolio.classList.remove('mosaic');
+                portfolio.classList.add('grid');
+                toggleButton.textContent = 'Mosaïque';
+            }
+        }
+
+        function handleFilterButtonClick(event) {
+            const button = event.target;
+            const filterType = button.getAttribute('data-filter');
+            const filterValue = button.getAttribute('value');
+
+            if (button.classList.contains('active')) {
+                // Désactiver le filtre
+                delete activeFilters[filterType];
+                button.classList.remove('active');
+            } else {
+                // Activer le filtre
+                activeFilters = { [filterType]: filterValue };
+                document.querySelectorAll('.filter-group button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+            }
+
+            filterImages();
+        }
+
+        // Fonction pour afficher l'image en plein écran (lightbox)
+        function showLightbox(image) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxInfoCard = document.getElementById('lightboxInfoCard');
+
+            lightboxImage.src = image.src;
+            lightboxInfoCard.innerHTML = `<p>${image.description}</p>`; // Utilise la description spécifique de chaque image
+
+            lightbox.style.display = 'flex';
+        }
+
+        // Fonction pour fermer la lightbox
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        // Event listeners pour les boutons de filtre
+        document.querySelectorAll('.filter-group button').forEach(button => {
+            button.addEventListener('click', handleFilterButtonClick);
+        });
+
+        // Event listeners pour les contrôles supplémentaires
+        document.getElementById('homeButton').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Remplace par le lien vers ta page d'accueil
+        });
+
+        document.getElementById('toggleView').addEventListener('click', toggleView);
+
+        // Event listener pour fermer la lightbox
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+
+        // Initial render
+        renderImages(images);
+    </script>
+</body>
+</html>

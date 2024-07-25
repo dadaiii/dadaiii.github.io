@@ -1,0 +1,277 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background-color: #6b8075;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1em;
+    height: 300px; /* Hauteur fixe du carrousel */
+}
+.carousel-inner {
+    display: flex;
+    height: 100%;
+}
+.carousel-inner > div {
+    flex: 0 0 auto; /* Permettre à chaque conteneur de s'ajuster à sa taille */
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+.carousel img {
+    height: 100%;
+    width: auto; /* Ajuster la largeur automatiquement */
+    object-fit: contain; /* Afficher l'image entière */
+    display: block;
+}
+.content {
+    flex: 1;
+    padding: 2em;
+    text-align: center;
+}
+.content h2 {
+    margin-top: 0;
+    font-size: 2em;
+    color: #333;
+}
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+.buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+.buttons a:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+/* Styles pour le footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 0.5em 1em;
+    text-align: left;
+    font-size: 0.7em;
+    line-height: 1.2;
+    width: 100%;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0.1em 0;
+}
+
+footer a {
+    color: #4a90e2;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #fff;
+}
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.video-container iframe {
+    width: 300px;
+    height: 200px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+/* Styles pour les filtres */
+.filters {
+    padding: 1em;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.filter-group {
+    margin-bottom: 0.2em;
+}
+
+.filter-group button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0.4em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+    margin-right: 0.3em;
+}
+
+.filter-group button:hover {
+    background-color: #555;
+}
+
+.filter-group button.active {
+    background-color: #555;
+}
+
+/* Styles pour les contrôles */
+.controls {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.controls button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.controls button:hover {
+    background-color: #555;
+}
+
+/* Styles pour le portfolio */
+.portfolio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    padding: 1em;
+}
+
+.portfolio.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.portfolio.grid .portfolio-item {
+    width: calc(100% - 1em);
+    box-sizing: border-box;
+}
+
+.portfolio.grid img {
+    width: 100%;
+    height: auto;
+}
+
+.portfolio.grid .info-card {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+.portfolio.mosaic {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0;
+}
+
+.portfolio.mosaic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio img {
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.portfolio-item {
+    position: relative;
+}
+
+.info-card {
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: none;
+}
+
+/* Styles pour la lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    margin-bottom: 1em;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-size: 1.5em;
+    border-radius: 5px;
+}
+
+.lightbox-info-card {
+    background-color: #fff;
+    color: #333;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+}
