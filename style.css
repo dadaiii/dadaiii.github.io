@@ -6,10 +6,12 @@ html, body {
     background-color: #f4f4f4;
     color: #333;
 }
+
 body {
     display: flex;
     flex-direction: column;
 }
+
 header {
     background-color: #6b8075;
     color: white;
@@ -17,6 +19,7 @@ header {
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .carousel {
     position: relative;
     width: 100%;
@@ -26,32 +29,38 @@ header {
     margin-bottom: 1em;
     height: 300px; /* Hauteur fixe du carrousel */
 }
+
 .carousel-inner {
     display: flex;
     height: 100%;
 }
+
 .carousel-inner > div {
     flex: 0 0 auto; /* Permettre à chaque conteneur de s'ajuster à sa taille */
     height: 100%;
     box-sizing: border-box;
     margin: 0;
 }
+
 .carousel img {
     height: 100%;
     width: auto; /* Ajuster la largeur automatiquement */
     object-fit: contain; /* Afficher l'image entière */
     display: block;
 }
+
 .content {
     flex: 1;
     padding: 2em;
     text-align: center;
 }
+
 .content h2 {
     margin-top: 0;
     font-size: 2em;
     color: #333;
 }
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -59,6 +68,7 @@ header {
     justify-content: center;
     margin: 20px 0;
 }
+
 .buttons a {
     text-decoration: none;
     padding: 10px 20px;
@@ -68,10 +78,12 @@ header {
     transition: background-color 0.3s, transform 0.3s;
     font-weight: bold;
 }
+
 .buttons a:hover {
     background-color: #555;
     transform: translateY(-2px);
 }
+
 /* Styles pour le footer */
 footer {
     background-color: #333;
@@ -99,12 +111,14 @@ footer a {
 footer a:hover {
     color: #fff;
 }
+
 .video-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
+
 .video-container iframe {
     width: 300px;
     height: 200px;
@@ -112,79 +126,73 @@ footer a:hover {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 /* Styles pour les filtres */
 .filters {
-    padding: 1em;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
 }
 
 .filter-group {
-    margin-bottom: 0.2em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .filter-group button {
-    background-color: #333;
-    color: white;
+    padding: 0.5rem;
     border: none;
-    padding: 0.4em 1em;
     border-radius: 5px;
+    background-color: #f8f9fa;
     cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s;
-    margin-right: 0.3em;
-}
-
-.filter-group button:hover {
-    background-color: #555;
 }
 
 .filter-group button.active {
-    background-color: #555;
+    background-color: #007bff;
+    color: white;
+}
+
+.filter-group button:hover {
+    background-color: #e2e6ea;
 }
 
 /* Styles pour les contrôles */
 .controls {
-    position: absolute;
-    top: 1em;
-    right: 1em;
     display: flex;
-    flex-direction: column;
-    gap: 1em;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .controls button {
-    background-color: #333;
-    color: white;
+    padding: 0.5rem 1rem;
     border: none;
-    padding: 0.5em 1em;
     border-radius: 5px;
+    background-color: #007bff;
+    color: white;
     cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s;
 }
 
 .controls button:hover {
-    background-color: #555;
+    background-color: #0056b3;
 }
 
 /* Styles pour le portfolio */
 .portfolio {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: 1em;
     padding: 1em;
 }
 
+/* Vue en Grille : Une colonne */
 .portfolio.grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
+    grid-template-columns: 1fr; /* Une seule colonne */
 }
 
 .portfolio.grid .portfolio-item {
-    width: calc(100% - 1em);
+    width: 100%; /* Prendre toute la largeur */
     box-sizing: border-box;
 }
 
@@ -199,10 +207,10 @@ footer a:hover {
     margin-bottom: 1em;
 }
 
+/* Vue Mosaïque : Grille adaptative */
 .portfolio.mosaic {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 0;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Colonnes adaptatives */
+    gap: 0; /* Coller les images */
 }
 
 .portfolio.mosaic img {
@@ -274,4 +282,32 @@ footer a:hover {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 90%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-group button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio {
+        grid-template-columns: 1fr; /* Une seule colonne sur petit écran */
+    }
 }
