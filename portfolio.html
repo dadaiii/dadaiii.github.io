@@ -58,15 +58,29 @@
             gap: 10px;
         }
 
-        .portfolio-item {
+        .portfolio.grid .portfolio-item {
             width: calc(33.333% - 20px); /* 3 items per row */
             position: relative;
+            margin-bottom: 20px;
         }
 
-        .portfolio-item img {
+        .portfolio.grid .portfolio-item img {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .portfolio.mosaic .portfolio-item {
+            width: calc(25% - 10px); /* 4 items per row */
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .portfolio.mosaic .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 1/1;
         }
 
         .info-card {
@@ -132,20 +146,29 @@
         }
 
         @media (max-width: 1024px) {
-            .portfolio-item {
+            .portfolio.grid .portfolio-item {
                 width: calc(50% - 20px); /* 2 items per row */
+            }
+            .portfolio.mosaic .portfolio-item {
+                width: calc(33.333% - 10px); /* 3 items per row */
             }
         }
 
         @media (max-width: 768px) {
-            .portfolio-item {
+            .portfolio.grid .portfolio-item {
                 width: calc(50% - 20px); /* 2 items per row */
+            }
+            .portfolio.mosaic .portfolio-item {
+                width: calc(50% - 10px); /* 2 items per row */
             }
         }
 
         @media (max-width: 480px) {
-            .portfolio-item {
+            .portfolio.grid .portfolio-item {
                 width: calc(100% - 20px); /* 1 item per row */
+            }
+            .portfolio.mosaic .portfolio-item {
+                width: calc(100% - 10px); /* 1 item per row */
             }
 
             button {
