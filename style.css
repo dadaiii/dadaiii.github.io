@@ -307,7 +307,11 @@ footer a:hover {
 }
 
 @media (max-width: 480px) {
-    .portfolio {
-        grid-template-columns: 1fr; /* Une seule colonne sur petit écran */
+    .filter-group {
+        flex-direction: row; /* Aligner les boutons en ligne */
+    }
+
+    .filter-group button {
+        flex: 1; /* Permet aux boutons de prendre toute la largeur disponible */
     }
 }
