@@ -1,8 +1,32 @@
+/* Déclaration de la police personnalisée */
+@font-face {
+    font-family: 'NintendoFont';
+    src: url('assets/fonts/Nintendo-DS-BIOS.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FlowerbeeFont';
+    src: url('assets/fonts/Flowerbee.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FloweristaFont';
+    src: url('assets/fonts/Flowerista.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Styles generaux*/
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'NintendoFont', sans-serif;
     background-color: #f4f4f4;
     color: #333;
 }
@@ -12,12 +36,15 @@ body {
     flex-direction: column;
 }
 
+
 header {
     background-color: #6b8075;
     color: white;
-    padding: 1em;
+    padding: 0px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'FloweristaFont', sans-serif;
+    font-size: 3em;
 }
 
 .carousel {
@@ -330,12 +357,4 @@ footer a:hover {
     .filter-group button {
         flex: 1; /* Permet aux boutons de prendre toute la largeur disponible */
     }
-}
-
-@font-face {
-    font-family: 'NintendoFont';
-    src: url('fonts/ma-police.woff2') format('woff2'),
-         url('fonts/ma-police.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
