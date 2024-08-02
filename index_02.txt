@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio d'Animation et de Dessin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="buttons">
+                <a href="about.html">À propos</a> <!-- Bouton "À propos" -->
+                <a href="portfolio.html">Portfolio</a> <!-- Bouton pour accéder au portfolio -->
+                <a href="videotheque.html">Vidéothèque</a> <!-- Nouveau bouton pour accéder à la vidéothèque -->
+            </div>
+        </aside>
+        <div class="content">
+            <h2>Mes Travaux d'Animation et de Dessin</h2>
+            <!-- Ajoutez ici le contenu principal -->
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Mon Nom. Tous droits réservés.</p>
+        <p>Contact : <a href="mailto:monemail@example.com">monemail@example.com</a></p>
+        <p>Suivez-moi sur : 
+            <a href="https://facebook.com/monprofil" target="_blank">Facebook</a>, 
+            <a href="https://twitter.com/monprofil" target="_blank">Twitter</a>, 
+            <a href="https://instagram.com/monprofil" target="_blank">Instagram</a>
+        </p>
+    </footer>
+</body>
+</html>

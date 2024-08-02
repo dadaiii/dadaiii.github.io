@@ -6,24 +6,201 @@
     <title>Mon Portfolio d'Animation et de Dessin</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur mon Portfolio</h1>
-    </header>
-    <div class="carousel">
-        <div class="carousel-inner">
-            <div><img src="photo_de_profil.jpeg" alt="Image 1"></div>
-            <div><img src="https://i.imgur.com/VKPbYpY.jpeg" alt="utfuyfuyg 2"></div>
-            <!-- Ajoutez plus d'images ici -->
-        </div>
-    </div>
-    <div class="content">
-        <h2>Mes Travaux d'Animation et de Dessin</h2>
-        <div class="buttons">
-            <a href="about.html">À propos</a> <!-- Bouton "À propos" -->
-            <a href="portfolio.html">Portfolio</a> <!-- Bouton pour accéder au portfolio -->
-            <a href="videotheque.html">Vidéothèque</a> <!-- Nouveau bouton pour accéder à la vidéothèque -->
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="buttons">
+                <button data-target="about">À propos</button>
+                <button data-target="portfolio">Portfolio</button>
+                <button data-target="videotheque">Vidéothèque</button>
+            </div>
+        </aside>
+        <div class="content">
+            <section id="about" class="hidden">
+                <h2>À propos</h2>
+                <h2>À propos</h2>
+                <div class="profile">
+                    <img src="/Users/patrick/Desktop/Dadaiii/photo_de_profil.jpeg" alt="Photo de moi">
+                </div>
+                <div class="profile-info">
+                    <h1>Qui suis-je ?</h1>
+                    <p class="description">Je suis un animateur et dessinateur passionné avec plusieurs années d'expérience dans le domaine. J'ai travaillé sur divers projets allant des animations pour des publicités aux illustrations pour des livres.</p>
+                    <p class="description">Mon travail se concentre sur l'innovation et la créativité, cherchant toujours à repousser les limites de ce qui est possible en animation et en dessin.</p>
+                </div>
+                <div class="section">
+                    <h2>Parcours Scolaire</h2>
+                    <div class="separator"></div>
+                    <p class="description">J'ai étudié à l'École de Waide Somme à Amiens, où j'ai développé une solide base en animation et en arts visuels. Cette formation m'a permis d'acquérir des compétences techniques et créatives essentielles dans le domaine de l'animation et du dessin.</p>
+                    <p class="description">Au cours de mon cursus, j'ai participé à divers projets académiques qui m'ont permis de perfectionner mes compétences en dessin, en animation 2D et 3D, ainsi qu'en conception graphique.</p>
+                </div>
+                <div class="section">
+                    <h2>Parcours Professionnel</h2>
+                    <div class="separator"></div>
+                    <p class="description">Après avoir terminé mes études, j'ai travaillé dans plusieurs studios d'animation où j'ai eu l'opportunité de collaborer avec des équipes talentueuses sur des projets variés. J'ai contribué à des projets allant des animations pour des publicités aux illustrations pour des publications.</p>
+                    <p class="description">Mon expérience professionnelle m'a permis de développer une compréhension approfondie des processus de production et de perfectionner mes compétences en animation et en dessin. Je suis constamment à la recherche de nouvelles opportunités pour explorer et exprimer ma créativité.</p>
+                </div>
+                <div class="cv-download">
+                    <a href="chemin/vers/votre-cv.pdf" download>Télécharger mon CV</a>
+                </div>
+                <div class="back-to-home">
+                    <a href="index.html">Retour à l'accueil</a>
+                </div>
+            </section>
+            <section id="portfolio" class="hidden">
+                <h2>Portfolio</h2>
+                <div class="filters">
+                    <div class="controls">
+                        <button id="homeButton">Retour à la page d'accueil</button>
+                        <button id="toggleView">Mosaïque</button>
+                    </div>
+                    <div class="filter-group">
+                        <button data-filter="year" value="2024">2024</button>
+                        <button data-filter="year" value="2023">2023</button>
+                        <button data-filter="year" value="2022">2022</button>
+                        <button data-filter="year" value="2021">2021</button>
+                    </div>
+                    <div class="filter-group">
+                        <button data-filter="type" value="Animation">Animation</button>
+                        <button data-filter="type" value="Dessin">Dessin</button>
+                        <button data-filter="type" value="Illustration">Illustration</button>
+                    </div>
+                    <div class="filter-group">
+                        <button data-filter="medium" value="Numérique">Numérique</button>
+                        <button data-filter="medium" value="Traditionnel">Traditionnel</button>
+                    </div>
+                    <div class="filter-group">
+                        <button data-filter="project" value="Le Feutre">Le Feutre</button>
+                        <button data-filter="project" value="La Fin">La Fin</button>
+                        <button data-filter="project" value="Souvenir de la pierre">Souvenir de la pierre</button>
+                    </div>
+                </div>
+                <div class="portfolio mosaic" id="portfolioContainer">
+                    <!-- Les images seront ajoutées ici par JavaScript -->
+                </div>
+            </section>
+            <section id="videotheque" class="hidden">
+                <h2>Vidéothèque</h2>
+                <div class="section">
+                    <h2>Courts métrages</h2>
+                    <div class="description">
+                        Les projets d'animation que j'ai réalisés à Waide Somme...
+                    </div>
+                    <div class="separator"></div>
+                    <div class="cards-container">
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/MvvCZeqBebY" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Le Feutre</h3>
+                                <p>Mon premier court métrage 3D...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/NdrDBwUguz0" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>KARNAJ</h3>
+                                <p>Court métrage réalisé lors d'un workshop...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/D2OSE5Fnw7g" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>La Fin</h3>
+                                <p>Mon premier court métrage intégralement en 3D...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/bKtLhx3766s" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Seanmhathair : souvenir de la pierre</h3>
+                                <p>Premier projet de groupe...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Exercices d'Animation</h2>
+                    <div class="description">
+                        Voici une sélection d'exercices d'animation réalisés à Waide Somme...
+                    </div>
+                    <div class="separator"></div>
+                    <div class="cards-container">
+                        <div class="card">
+                            <iframe src="https://drive.google.com/uc?export=view&id=1q3lXlhzj9A1O6QYb_25FOYLaS4DZ2Tmn" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Exercice 1</h3>
+                                <p>Description de l'exercice 1.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_2" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Exercice 2</h3>
+                                <p>Description de l'exercice 2.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_3" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Exercice 3</h3>
+                                <p>Description de l'exercice 3.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Premières expérimentations vidéo</h2>
+                    <div class="description">
+                        Mes premiers essais d'animations et de réalisation...
+                    </div>
+                    <div class="separator"></div>
+                    <div class="cards-container">
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/54VJJhCuO8Y" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Horreur salée</h3>
+                                <p>Une des deux réponses a l'épreuve plastique...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/XPZlVJWl8g8" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>L'atelier</h3>
+                                <p>Réponse a l'épreuve plastique...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/BGRawqVkdmM" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Le charmeur de libellules</h3>
+                                <p>Réponse a l'épreuve plastique...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/AX43hc0uclo" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Animation pour le projet "Ulysse malgré lui..."</h3>
+                                <p>Lors de mon année de prépa...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/SaQE8hLy4Qg" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Animations de vase...</h3>
+                                <p>Animation réalisée sur photoshop...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <iframe src="https://www.youtube.com/embed/M6UX8qyDnZk" allowfullscreen></iframe>
+                            <div class="info">
+                                <h3>Hot Hell California</h3>
+                                <p>Animation réalisée dans le cadre...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     <footer>
@@ -35,26 +212,5 @@
             <a href="https://instagram.com/monprofil" target="_blank">Instagram</a>
         </p>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const carouselInner = document.querySelector('.carousel-inner');
-            const speed = 20; // pixels per second
-            let position = 0;
-
-            function scrollCarousel() {
-                position -= speed / 60;
-                carouselInner.style.transform = `translateX(${position}px)`;
-                if (Math.abs(position) >= carouselInner.scrollWidth / 2) {
-                    position = 0;
-                }
-                requestAnimationFrame(scrollCarousel);
-            }
-
-            // Clone the images to create a seamless loop
-            carouselInner.innerHTML += carouselInner.innerHTML;
-
-            requestAnimationFrame(scrollCarousel);
-        });
-    </script>
 </body>
 </html>
