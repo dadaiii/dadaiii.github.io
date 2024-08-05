@@ -35,7 +35,7 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'NintendoFont', sans-serif;
-    background-color: var(--couleur-03);
+    background-color: var(--couleur-05);
     color: var(--couleur-02);
     font-size: 1.1rem;
 }
