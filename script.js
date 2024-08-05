@@ -157,5 +157,5 @@ const images = [
     { src: 'https://i.imgur.com/4nXw7WM.jpeg', year: '2022', type: 'Illustration', medium: 'Numérique', project: 'Souvenir de la pierre', description: 'Description pour l\'image 3.' },
     { src: 'https://i.imgur.com/zVtvQGp.jpeg', year: '2021', type: 'Animation', medium: 'Traditionnel', project: 'Le Feutre', description: 'Description pour l\'image 4.' },
     { src: 'https://i.imgur.com/0lX2q4e.jpeg', year: '2024', type: 'Dessin', medium: 'Numérique', project: '', description: 'Description pour l\'image 5.' },
-    { src: 'image_carousel/image6.jpg', year: '2024', type: 'Dessin', medium: 'Numérique', project: 'Souvenir de la pierre', description: 'Description pour l\'image 6.' }
+    { src: 'https://i.imgur.com/Ep7hxu9.jpeg', year: '2024', type: 'Dessin', medium: 'Numérique', project: 'Souvenir de la pierre', description: 'Description pour l\'image 6.' }
 ];
