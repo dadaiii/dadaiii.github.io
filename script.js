@@ -152,8 +152,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Données des images
 const images = [
-    { src: 'https://i.imgur.com/nUhl3ab.jpeg', year: '2024', type: 'Animation', medium: 'Numérique', project: 'Le Feutre', description: 'Description pour l\'image 1.' },
-    { src: 'https://i.imgur.com/XkClidx.jpeg', year: '2023', type: 'Dessin', medium: 'Traditionnel', project: 'La Fin', description: 'Description pour l\'image 2.' },
+    { src: 'https://i.imgur.com/nUhl3ab.jpeg', year: '2024', type: 'Animation', medium: 'Numérique', project: 'Le Feutre', description: 'Une image random que j\'ai trouvée sur Imgur. Est-ce que c\'est de l\'IA ?' },
+    { src: 'https://i.imgur.com/XkClidx.jpeg', year: '2023', type: 'Dessin', medium: 'Traditionnel', project: 'La Fin', description: 'Un Dragon ???????' },
     { src: 'image_carousel/image3.jpg', year: '2022', type: 'Illustration', medium: 'Numérique', project: 'Souvenir de la pierre', description: 'Description pour l\'image 3.' },
     { src: 'image_carousel/image4.jpg', year: '2021', type: 'Animation', medium: 'Traditionnel', project: 'Le Feutre', description: 'Description pour l\'image 4.' },
     { src: 'image_carousel/image5.jpg', year: '2024', type: 'Dessin', medium: 'Numérique', project: '', description: 'Description pour l\'image 5.' },
