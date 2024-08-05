@@ -48,6 +48,13 @@ header {
 
 .main-container {
     display: flex;
+    min-height: 100vh;
+}
+
+/* Wrapper to hold the sidebar and content together */
+.wrapper {
+    display: flex;
+    width: 100%;
 }
 
 .sidebar {
@@ -55,18 +62,28 @@ header {
     background-color: #333;
     padding: 20px;
     position: fixed;
+    top: 0;
+    bottom: 0;
     height: 100%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Pour pousser le footer en bas */
+    z-index: 1000; /* Assurez-vous que la sidebar reste au-dessus du contenu */
+}
+
+.sidebar-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
 }
 
 /* Contenu du footer dans la sidebar */
 .sidebar-footer {
-    margin-top: auto; /* Pour pousser le footer en bas */
+    margin-top: auto;
+    background-color: #333;
     font-size: 0.9rem;
     color: #666;
+    text-align: left; /* Aligner le contenu à gauche */
+    padding-bottom: 25px; /* Ajouter une marge en bas */
 }
 
 .sidebar-footer p {
@@ -83,20 +100,14 @@ header {
     color: #fff;
 }
 
-/* Style de la section content */
-.content {
-    margin-left: 250px; /* Ajuster selon la largeur de la sidebar */
-    padding: 20px;
-    overflow-y: auto;
-}
-
 .buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.buttons button {
+.buttons button,
+.buttons a {
     text-decoration: none;
     padding: 10px 20px;
     background-color: #555;
@@ -114,11 +125,37 @@ header {
     transform: translateY(-2px);
 }
 
-.content {
-    margin-left: 250px;
-    padding: 2em;
-    flex: 1;
+.download-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #555;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
     text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: #777;
+    transform: translateY(-2px);
+}
+
+.content {
+    margin-left: 290px; /* Laisser de l'espace pour la sidebar */
+    padding: 1rem;
+    flex-grow: 1;
+    background-color: #f9f9f9;
+    overflow-x: hidden; /* Empêcher le débordement horizontal */
+    box-sizing: border-box; /* Assure que les marges et le padding sont inclus dans la largeur totale */
+}
+
+.content-container {
+    width: 100%; /* Prendre toute la largeur disponible */
+    margin: 0 auto; /* Centrer le conteneur à l'intérieur de .content */
+    box-sizing: border-box; /* Assurer que le padding et la bordure sont inclus dans la largeur */
 }
 
 .hidden {
@@ -132,6 +169,22 @@ section {
 section h2 {
     font-size: 2em;
     color: #333;
+    text-align: center; /* Centre le texte */
+}
+
+.profile-info {
+    display: flex;
+    align-items: flex-start;
+}
+
+.profile img {
+    width: 300px; /* Ajustez cette valeur selon la taille désirée */
+    height: auto;
+    margin-right: 20px; /* Espace entre l'image et le texte */
+}
+
+.text {
+    max-width: 800px; /* Limite la largeur du texte */
 }
 
 .video-container {
@@ -151,24 +204,25 @@ section h2 {
 
 /* Styles pour les filtres */
 .filters {
+    position: fixed;
+    right: 20px; /* Ajustez cette valeur pour l'espacement à partir du bord droit */
+    top: 10px; /* Ajustez cette valeur pour l'espacement à partir du haut */
+    width: 100px; /* Ajustez la largeur selon vos besoins */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 1rem;
+    gap: 10px; /* Espace entre les boutons */
 }
 
-.filter-group {
+.filter-group, .controls {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem; /* Espace entre les boutons */
-    margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .filter-group button {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #f8f9fa;
+    width: 100%; /* Les boutons prendront toute la largeur du conteneur */
+    padding: 10px;
+    font-size: 0,2em;
     cursor: pointer;
 }
 
@@ -181,11 +235,16 @@ section h2 {
     background-color: #e2e6ea;
 }
 
+.content-portfolio {
+    margin-right: 200px; /* Ajustez cette valeur pour la largeur des filtres plus un peu d'espace */
+}
+
 /* Styles pour les contrôles */
 .controls {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    padding: 0.7rem 2rem;
 }
 
 .controls button {
@@ -195,7 +254,8 @@ section h2 {
     background-color: #333;
     color: white;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.5em;
+text-align: center;
 }
 
 .controls button:hover {
@@ -232,7 +292,6 @@ section h2 {
 
 /* Vue Mosaïque : Grille adaptative */
 .portfolio.mosaic {
-    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajustez la taille minimale des vignettes */
     gap: 0; /* Pas d'espace entre les vignettes */
 }
@@ -255,7 +314,6 @@ section h2 {
 }
 
 .portfolio img {
-    border-radius: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
@@ -352,7 +410,7 @@ section h2 {
     margin-bottom: 1em; /* Ajuster l'espace sous la description */
     text-align: center;
     max-width: 800px;
-    margin: 0 auto 1em auto;
+    margin: 0 auto;
 }
 
 .section .separator {

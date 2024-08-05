@@ -119,10 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', handleFilterButtonClick);
     });
 
-    // Event listeners pour les contrôles supplémentaires
-    document.getElementById('homeButton').addEventListener('click', () => {
-        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-    });
+    
 
     document.getElementById('toggleView').addEventListener('click', toggleView);
 
