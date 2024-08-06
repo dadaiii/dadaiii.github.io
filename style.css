@@ -46,41 +46,42 @@ body {
 }
 
 
-/* Styles pour la section d'accueil */
-#home {
+.home {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Assurez-vous que la section occupe toute la hauteur de la fenêtre */
-    margin-left: 250px; /* Laisser de l'espace pour la sidebar */
+    min-height: 100vh;
+    padding: 20px;
     text-align: center;
 }
 
-/* Styles pour le contenu de la page d'accueil */
-.home-content {
-    padding: 2rem;
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Styles pour le gros titre */
-.home-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    color: var(--couleur-01); /* Utilisez une couleur définie dans vos variables */
+.welcome-message {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Styles pour l'encadré de l'image */
-.image-container {
-    display: inline-block;
-    border: 5px solid var(--couleur-01); /* Bordure de l'encadré */
-    padding: 1rem;
-    background-color: #fff; /* Fond de l'encadré */
+.welcome-message h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
-.image-container img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+.welcome-message p {
+    font-size: 1.2em;
+    max-width: 800px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 100px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 
@@ -229,6 +230,7 @@ body {
 
 section {
     margin-bottom: 2em;
+    text-align: center;
 }
 
 section h2 {
