@@ -33,16 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fonction pour filtrer les images en fonction des filtres actifs
     function filterImages() {
+        console.log('Active Filter:', activeFilter);
         const filteredImages = images.filter(image => {
             if (!activeFilter) return true; // Si aucun filtre n'est actif, afficher toutes les images
             return image[activeFilter.type] === activeFilter.value;
         });
 
-        // Si aucun filtre n'est activé, trier les images par année
-        if (!activeFilter) {
-            filteredImages.sort((a, b) => b.year.localeCompare(a.year));
-        }
-
+        console.log('Filtered Images:', filteredImages);
         renderImages(filteredImages);
     }
 
@@ -58,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             portfolio.classList.remove('grid');
             portfolio.classList.add('mosaic');
-            toggleButton.textContent = 'Grille';
+            toggleButton.textContent = 'Liste';
         }
 
-        renderImages(images); // Re-render images after view toggle
+        filterImages(); // Re-render images after view toggle
     }
 
     // Fonction pour afficher l'image en plein écran (lightbox)
@@ -87,48 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Gestion des filtres
-    function handleFilterButtonClick(event) {
-        const button = event.target;
-        const filterType = button.getAttribute('data-filter');
-        const filterValue = button.getAttribute('value');
-
-        // Désactivez tous les boutons de filtre
-        document.querySelectorAll('.filter-group button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-
-        // Si le bouton était déjà actif, désactivez le filtre
-        if (button.classList.contains('active')) {
-            activeFilter = null;
-            button.classList.remove('active');
-        } else {
-            // Activez le filtre et marquez le bouton comme actif
-            activeFilter = { type: filterType, value: filterValue };
-            button.classList.add('active');
-        }
-
-        filterImages();
-    }
-
-    // Initial rendering
-    renderImages(images);
-
-    // Event listeners pour les boutons de filtre
-    document.querySelectorAll('.filter-group button').forEach(button => {
-        button.addEventListener('click', handleFilterButtonClick);
-    });
-
-    
-
-    document.getElementById('toggleView').addEventListener('click', toggleView);
-
-    // Vérifiez si les éléments existent avant d'ajouter les événements
-    const lightboxClose = document.getElementById('lightboxClose');
-    if (lightboxClose) {
-        lightboxClose.addEventListener('click', closeLightbox);
-    }
-
     // Gestion des boutons de la barre latérale pour naviguer entre les sections
     const buttons = document.querySelectorAll('.buttons button');
     const sections = document.querySelectorAll('.content section');
@@ -148,6 +103,42 @@ document.addEventListener('DOMContentLoaded', function() {
             targetElement.scrollIntoView({ behavior: 'smooth' });
         });
     });
+
+    // Gestion des filtres
+    const filters = document.querySelectorAll('.filter-group button');
+    filters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            if (this.classList.contains('active')) {
+                // Désélectionner le filtre actuel
+                this.classList.remove('active');
+                activeFilter = null;
+            } else {
+                // Désélectionner tous les filtres
+                filters.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Sélectionner le filtre cliqué
+                this.classList.add('active');
+                activeFilter = { type: this.getAttribute('data-filter'), value: this.getAttribute('value') };
+            }
+            filterImages(); // Filtrer les images
+        });
+    });
+
+    // Vérifiez si les éléments existent avant d'ajouter les événements
+    const toggleViewButton = document.getElementById('toggleView');
+    if (toggleViewButton) {
+        toggleViewButton.addEventListener('click', toggleView);
+    }
+
+    const lightboxClose = document.getElementById('lightboxClose');
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    // Initial rendering of images
+    renderImages(images);
 });
 
 // Données des images
