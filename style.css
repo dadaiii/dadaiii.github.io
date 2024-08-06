@@ -45,6 +45,45 @@ body {
     flex-direction: column;
 }
 
+
+/* Styles pour la section d'accueil */
+#home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Assurez-vous que la section occupe toute la hauteur de la fenêtre */
+    margin-left: 250px; /* Laisser de l'espace pour la sidebar */
+    text-align: center;
+}
+
+/* Styles pour le contenu de la page d'accueil */
+.home-content {
+    padding: 2rem;
+}
+
+/* Styles pour le gros titre */
+.home-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--couleur-01); /* Utilisez une couleur définie dans vos variables */
+}
+
+/* Styles pour l'encadré de l'image */
+.image-container {
+    display: inline-block;
+    border: 5px solid var(--couleur-01); /* Bordure de l'encadré */
+    padding: 1rem;
+    background-color: #fff; /* Fond de l'encadré */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
 .main-container {
     display: flex;
     min-height: 100vh;
