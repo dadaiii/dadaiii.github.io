@@ -104,6 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+// Afficher la section "Accueil" par défaut
+    const homeSection = document.getElementById('home');
+    if (homeSection) {
+        homeSection.classList.remove('hidden');
+    }
+
     // Gestion des filtres
     const filters = document.querySelectorAll('.filter-group button');
     filters.forEach(filter => {

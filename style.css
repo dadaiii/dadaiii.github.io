@@ -237,6 +237,7 @@ section h2 {
     font-size: 2em;
     color: var(--couleur-03);
     text-align: center; /* Centre le texte */
+    padding: 0.7rem 2rem;
 }
 
 .profile-info {
