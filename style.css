@@ -71,7 +71,7 @@ body {
 }
 
 .sidebar li {
-    padding: 5px;
+    padding: 2px;
     cursor: pointer;
     position: relative;
     font-size: 0.8rem;
@@ -91,83 +91,78 @@ body {
 
 /* Contenu principal, à droite de la sidebar */
 .content {
-    flex: 1; /* Prend tout l'espace restant */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: #E0E0E0;
+    flex: 1; /* Remplir l'espace restant */
+    padding: 10px;
 }
 
 /* Style de base du lecteur vidéo */
-#video-player {
-    width: 640px; /* Taille classique du lecteur */
-    height: 360px;
+/* Conteneur principal vidéo centré */
+#video-content {
+    display: none; /* Masquer par défaut */
+    display: flex; /* Utilise Flexbox */
+    flex-direction: column; /* Organise les éléments de haut en bas */
+    width: 100%; /* Prend toute la largeur disponible */
+    height: 100%; /* Prend toute la hauteur disponible */
+    padding: 20px; /* Retire tout espace supplémentaire, si nécessaire */
+      overflow-y: auto;
+}
+
+#video-content.hidden {
+    display: none;
+}
+
+
+/* Wrapper pour le lecteur vidéo et les barres */
+.video-wrapper {
+    display: flex;
+    flex-direction: column; /* Organise les éléments de haut en bas */
+    width: 640px; /* Largeur fixe du conteneur */
+    background-color: #000; /* Fond noir autour de la vidéo */
+    border: none; /* Retirer la bordure */
+    margin: 0px; /* S'assure qu'il n'y a pas de marge autour */
+}
+/* Style de la vidéo */
+#film-player {
+    width: 100%; /* Prend toute la largeur du conteneur */
+    height: auto; /* La hauteur sera calculée automatiquement en fonction du ratio */
+    aspect-ratio: 16 / 9; /* Maintient un ratio 16:9 */
     background-color: #000; /* Fond noir pour la vidéo */
-    border: none; /* Retirer la bordure verte */
-    position: relative;
+    border: none; /* Retirer la bordure */
 }
 
-/* Barre grise au-dessus et en dessous du lecteur vidéo */
-#video-player .video-bar {
+
+/* Barre grise du haut (top bar), au-dessus de la vidéo */
+.video-bar.top-bar {
     width: 100%;
-    background-color: #C0C0C0; /* Gris clair */
     height: 20px; /* Hauteur de la barre */
-    position: absolute;
-    left: 0;
-}
-
-#video-player .top-bar {
-    top: 0; /* Positionner la barre en haut */
-}
-
-#video-player .bottom-bar {
-    bottom: 0; /* Positionner la barre en bas */
+    background-color: #8b8b8b; /* Gris clair */
+    border-top: 1px solid #000; /* Bordure supérieure pour simuler les interfaces de Windows 95 */
+    border-left: 1px solid #000;
     display: flex;
     justify-content: space-between;
-    padding: 2px 10px;
     align-items: center;
+    padding: 0 10px;
+    box-shadow: 2px 2px 0px #313131; /* Ombre nette, sans estompe */
+    font-family: "Tahoma", sans-serif; /* Police proche de Windows 95 */
 }
 
-/* Boutons dans la barre du bas (Play, Pause, Volume) */
-.overlay-button {
-    width: 20px;
-    height: 20px;
-    border-radius: 3px;
-    background-color: #C0C0C0; /* Gris clair */
+/* Barre du bas (bottom bar) sous la vidéo */
+.video-bar.bottom-bar {
+    width: 100%;
+    height: 40px; /* Hauteur de la barre */
+    background-color: #8b8b8b; /* Gris clair */
+    border-top: 1px solid #000; /* Bordure supérieure pour simuler les interfaces de Windows 95 */
+    border-left: 1px solid #000;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    padding: 0 10px;
+    box-shadow: 2px 2px 0px #313131; /* Ombre nette, sans estompe */
+    font-family: "Tahoma", sans-serif; /* Police proche de Windows 95 */
 }
 
-/* Effet au survol des boutons */
-.overlay-button:hover {
-    background-color: #A0A0A0; /* Gris plus foncé au survol */
+.hidden {
+    display: none;
 }
 
-/* Icônes des boutons (utilisation de caractères pour l'exemple) */
-.overlay-button::before {
-    content: "▶"; /* Icône Play */
-    font-size: 14px;
-    color: #222; /* Couleur sombre pour le contraste */
-    font-family: "Arial", sans-serif;
-}
-
-.overlay-button.pause::before {
-    content: "⏸"; /* Icône Pause */
-}
-
-.overlay-button.volume::before {
-    content: "🔊"; /* Icône Volume */
-}
-
-/* Contrôle du volume dans la barre du bas */
-#video-player .volume-control {
-    background-color: #C0C0C0;
-    border-radius: 3px;
-    height: 5px;
-    width: 60px; /* Plus large que le précédent */
-    cursor: pointer;
-}

@@ -24,7 +24,8 @@
             <span>Outils</span>
             <span>?</span>
         </div>
-        <!-- Conteneur principal avec sidebar et contenu à droite -->
+        
+        <!-- Conteneur principal avec sidebar et contenu -->
         <div class="main-content">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -66,16 +67,19 @@
                     </li>
                 </ul>
             </div>
-            <!-- Contenu à droite de la sidebar -->
-            <div id="video-content">
-                <iframe id="film-player" src="https://www.youtube.com/embed/Ov6s1ztOPtHUN5ra" frameborder="0" allowfullscreen></iframe>
+
+            <!-- Conteneur content pour la gestion de l'espace -->
+            <div id="video-content" class="hidden">
+                <!-- Wrapper pour centrer et maintenir la position du lecteur vidéo et des barres -->
+                <div class="video-wrapper">
+                    <!-- Barre en haut -->
+                    <div class="video-bar top-bar"></div>
+                    
+                    <!-- Vidéo -->
+                    <iframe id="film-player" src="https://www.youtube.com/embed/Ov6s1ztOPtHUN5ra" frameborder="0" allowfullscreen></iframe>
             
-                <!-- Overlay avec les boutons rétro -->
-                <div id="video-overlay">
-                    <div class="overlay-button play"></div>
-                    <div class="overlay-button pause"></div>
-                    <div class="overlay-button volume"></div>
-                    <div class="volume-control"></div>
+                    <!-- Barre du bas -->
+                    <div class="video-bar bottom-bar"></div> <!-- Barre en bas -->
                 </div>
             </div>
         </div>
