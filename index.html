@@ -24,38 +24,64 @@
             <span>Outils</span>
             <span>?</span>
         </div>
-        <div class="sidebar">
-            <ul>
-                <li class="folder">Le feutre</li>
-                <li class="folder">La fin
-                    <ul>
-                        <li class="images">Images</li>
-                        <li class="folder">Musique</li>
-                        <li class="folder">Musique</li>
-                    </ul>
-                </li>
-                <li class="folder">Seanmhathair, souvenir de la pierre
-                    <ul>
-                        <li class="folder">Disque local (C:)
-                            <ul>
-                                <li>Program Files</li>
-                                <li>Windows</li>
-                                <li>Utilisateurs</li>
-                            </ul>
-                        </li>
-                        <li>Disque compact (D:)</li>
-                    </ul>
-                </li>
-                <li class="folder">La maison des poupées cinglées</li>
-                <li class="folder">Le camion</li>
-            </ul>
-        </div>
-        <div class="content">
-            <!-- Section principale pour les fichiers et dossiers -->
+        <!-- Conteneur principal avec sidebar et contenu à droite -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <ul>
+                    <li class="folder">Le feutre
+                        <ul>
+                            <li class="folder" id="le-film-feutre">Le film</li>
+                            <li class="folder">Explications</li>
+                            <li class="folder">Images</li>
+                        </ul>
+                    </li>
+                    <li class="folder">La fin
+                        <ul>
+                            <li class="folder" id="le-film-fin">Le film</li>
+                            <li class="folder">Explications</li>
+                            <li class="folder">Images</li>
+                        </ul>
+                    </li>
+                    <li class="folder">Seanmhathair, souvenir de la pierre
+                        <ul>
+                            <li class="folder" id="le-film-seanmhathair">Le film</li>
+                            <li class="folder">Explications</li>
+                            <li class="folder">Images</li>
+                        </ul>
+                    </li>
+                    <li class="folder">La maison des poupées cinglées
+                        <ul>
+                            <li class="folder" id="le-film-maison-poupees">Le film</li>
+                            <li class="folder">Explications</li>
+                            <li class="folder">Images</li>
+                        </ul>
+                    </li>
+                    <li class="folder">Le camion
+                        <ul>
+                            <li class="folder" id="le-film-camion">Le film</li>
+                            <li class="folder">Explications</li>
+                            <li class="folder">Images</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Contenu à droite de la sidebar -->
+            <div id="video-content">
+                <iframe id="film-player" src="https://www.youtube.com/embed/Ov6s1ztOPtHUN5ra" frameborder="0" allowfullscreen></iframe>
+            
+                <!-- Overlay avec les boutons rétro -->
+                <div id="video-overlay">
+                    <div class="overlay-button play"></div>
+                    <div class="overlay-button pause"></div>
+                    <div class="overlay-button volume"></div>
+                    <div class="volume-control"></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Ajout de JavaScript pour gérer l'ouverture des sous-dossiers au clic -->
+    <!-- Ajout de JavaScript pour gérer l'ouverture des sous-dossiers au clic et afficher le lecteur vidéo -->
     <script src="script.js"></script>
 </body>
 </html>
