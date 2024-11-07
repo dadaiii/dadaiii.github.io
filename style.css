@@ -93,7 +93,7 @@ body {
 
 .sidebar li.images::before {
     content: "";
-    background-image: url('dadaiii.github.io\assets\imagesimage_icone.png');
+    background-image: url('assets\images\image_icone.png');
     background-size: cover;
     width: 20px;
     height: 20px;
