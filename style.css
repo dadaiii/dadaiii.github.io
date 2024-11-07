@@ -65,7 +65,6 @@ body {
     float: left;
     border-right: 2px solid #A0A0A0;
     height: calc(100% - 56px);
-    font-family: "NintendoFont", sans-serif;
 }
 
 /* Styles pour les listes de la sidebar */
@@ -77,16 +76,27 @@ body {
     padding: 5px;
     cursor: pointer;
     position: relative;
+    font-size: 0.8rem;
 }
 
 /* Styles pour les sous-dossiers (listes imbriquées) */
 .sidebar ul ul {
-    margin-left: 20px; /* Décalage pour simuler l'arborescence */
+    margin-left: 5px; /* Décalage pour simuler l'arborescence */
     display: none; /* Les sous-dossiers sont masqués par défaut */
 }
 
-/* Icône de dossier et styles pour la simulation de l'arborescence */
-.sidebar li::before {
+/* Icône de dossier et styles pour les éléments avec la classe "folder" */
+.sidebar li.folder::before {
     content: "📁"; /* Icône de dossier */
+    margin-right: 1px;
+}
+
+.sidebar li.images::before {
+    content: "";
+    background-image: url('dadaiii.github.io\assets\imagesimage_icone.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
     margin-right: 5px;
+    display: inline-block;
 }
