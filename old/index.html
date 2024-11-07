@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio d'Animation et de Dessin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="wrapper">
+            <aside class="sidebar">
+                <div class="sidebar-content">
+                <div class="sidebar-title">Elisa Lane</div>
+                <div class="sidebar-subtitle">étudiante en animation 3D</div>
+                    <div class="buttons">
+                        <button data-target="home">Accueil</button>
+                        <button data-target="portfolio">Portfolio</button>
+                        <button data-target="videotheque">Vidéothèque</button>
+                        <button data-target="about">À propos</button>
+                    </div>
+                </div>
+                <div class="sidebar-footer">
+                    <p>&copy; 2024 Elisa Lane. Tous droits réservés.</p>
+                    <p>Contact : elisa.lane06@gmail.com</p>
+                    <p>Suivez-moi sur 
+                        <a href="https://www.linkedin.com/in/elisa-lane-042783318/?originalSubdomain=fr" target="_blank">LinkedIn !</a>
+                    </p>
+                </div>
+            </aside>
+ <div class="content">
+<section id="home" class="home hidden">
+    <div class="intro-content">
+        <div class="welcome-message">
+            <h1>Bienvenue sur mon portfolio !</h1>
+            <p>Je suis Elisa Lane, une passionnée d'animation 3D et de dessin. Explorez mon travail et découvrez mes projets récents dans le domaine de l'animation et du dessin.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://i.imgur.com/f7xOKFO.png" alt="Image de bienvenue">
+<img src="https://i.imgur.com/uHiiOL9.png">
+<img src="https://i.imgur.com/f7xOKFO.png" alt="Image de bienvenue">
+        </div>
+    </div>
+    <div class="section">
+        <h2>Cette page d'accueil est encore en chantier ! Mais n'hésitez pas a visiter le reste du site.</h2>
+        <div class="description">
+            <p>Ce site est encore en développement. J'essaye d'apprendre à coder mon propre site, donc cela prend un peu de temps. Cependant le reste du site fonctionnel, je vous invite à decouvrir mon travail en animation et en dessin.</p>
+        </div>
+</div>
+    <div class="section">
+        <h2>Dernières Réalisations</h2>
+        <div class="description">
+            <p>Bientot !</p>
+            <!-- Vous pouvez ajouter des aperçus de vos projets ici -->
+        </div>
+    </div>
+</section>
+
+                    <section id="about" class="hidden">
+    <h2>À propos</h2>
+    <div class="profile-info">
+        <div class="profile">
+            <img src="portfolio/photo_de_profil.jpeg" alt="Photo de moi">
+        </div>
+        <div class="text">
+            <h2>Qui suis-je ?</h2>
+            <p class="description">Je suis un animateur et dessinateur passionné avec plusieurs années d'expérience dans le domaine. J'ai travaillé sur divers projets allant des animations pour des publicités aux illustrations pour des livres.</p>
+            <p class="description">Mon travail se concentre sur l'innovation et la créativité, cherchant toujours à repousser les limites de ce qui est possible en animation et en dessin.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Parcours Scolaire</h2>
+        <div class="separator"></div>
+        <p class="description">J'ai étudié à l'École de Waide Somme à Amiens, où j'ai développé une solide base en animation et en arts visuels. Cette formation m'a permis d'acquérir des compétences techniques et créatives essentielles dans le domaine de l'animation et du dessin.</p>
+        <p class="description">Au cours de mon cursus, j'ai participé à divers projets académiques qui m'ont permis de perfectionner mes compétences en dessin, en animation 2D et 3D, ainsi qu'en conception graphique.</p>
+    </div>
+    <div class="section">
+        <h2>Parcours Professionnel</h2>
+        <div class="separator"></div>
+        <p class="description">Après avoir terminé mes études, j'ai travaillé dans plusieurs studios d'animation où j'ai eu l'opportunité de collaborer avec des équipes talentueuses sur des projets variés. J'ai contribué à des projets allant des animations pour des publicités aux illustrations pour des publications.</p>
+        <p class="description">Mon expérience professionnelle m'a permis de développer une compréhension approfondie des processus de production et de perfectionner mes compétences en animation et en dessin. Je suis constamment à la recherche de nouvelles opportunités pour explorer et exprimer ma créativité.</p>
+    </div>
+    <div class="download-container">
+    <button class="download-button" onclick="window.location.href='chemin/vers/votre-cv.pdf'">Télécharger mon CV</button>
+</div>
+                    </section>
+                    <section id="portfolio" class="hidden content-portfolio">
+                        <h2>Portfolio</h2>
+                        <div class="filters">
+                            <div class="controls">
+                                <button id="toggleView">Mosaïque</button>
+                            </div>
+                            <div class="filter-group">
+                                <button data-filter="year" value="2024">2024</button>
+                                <button data-filter="year" value="2023">2023</button>
+                                <button data-filter="year" value="2022">2022</button>
+                                <button data-filter="year" value="2021">2021</button>
+                                <button data-filter="type" value="Animation">Animation</button>
+                                <button data-filter="type" value="Dessin">Dessin</button>
+                                <button data-filter="type" value="Illustration">Illustration</button>
+                                <button data-filter="type" value="3D">3D</button>
+                                <button data-filter="medium" value="Numérique">Numérique</button>
+                                <button data-filter="medium" value="Traditionnel">Traditionnel</button>
+                                <button data-filter="project" value="Le Feutre">Le Feutre</button>
+                                <button data-filter="project" value="La Fin">La Fin</button>
+                                <button data-filter="project" value="Souvenir de la pierre">Souvenir de la pierre</button>
+                            </div>
+                        </div>
+                        <div class="portfolio mosaic" id="portfolioContainer">
+                            <!-- Les images seront ajoutées ici par JavaScript -->
+                        </div>
+                    </section>
+
+    <!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <div class="lightbox-content-wrapper">
+        <span id="lightboxClose" class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImage" alt="Lightbox Image">
+    </div>
+    <div id="lightboxInfoCard" class="lightbox-info-card"></div>
+</div>
+                    <section id="videotheque" class="hidden">
+                        <h2>Vidéothèque</h2>
+                        <div class="section">
+                            <h2>Courts métrages</h2>
+                            <div class="description">
+                                Les projets d'animation que j'ai réalisés à Waide Somme. C'est en travaillant sur ces projets de court métrages que j'ai découvert que j'aimais particulièrement le travail de modélisation, mais surtout d'animation 2D et 3D. Je prend aussi beaucoup de plaisir a l'écriture et a la réalisation de mes divers projets.
+                            </div>
+                            <div class="separator"></div>
+                            <div class="cards-container">
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/MvvCZeqBebY" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Le Feutre</h3>
+                                        <p>Mon premier court métrage 3D, réalisé lors de ma 1ere année à Waide Somme. Lors de ce premier exercice, nous avons découvert toutes les étapes nécessaires a la réalisation d'un projet d'animation 3D. Les personnages sont entièrement de ma création, de la conceptualisation au rigging, en passant par la modélisation et le texturing. Nous avions comme contrainte d'incruster nos animation sur des images d'une maquette que nous avons réalisé en groupe de six personnes. Je me suis inspirée de ma mère et de mon petit frère, jeune garcon créatif mais très désordonné.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/NdrDBwUguz0" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>KARNAJ</h3>
+                                        <p>Court métrage réalisé lors d'un workshop d'initiation au logiciel Adobe Animate. La contrainte était de réaliser une animation où l'environnement serait impacté. Karnaj, une petite peste démoniaque, va alors mettre la pagaille dans la vieille maison de sa grand mère...</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/D2OSE5Fnw7g" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>La Fin</h3>
+                                        <p>Mon premier court métrage intégralement en 3D, réalisé tout au long de ma 2e année a Waide Somme. Nous avions beaucoup moins de contraintes que pour nos projets de première année, j'ai donc été plus libre en terme de réalisation et de scénario. Raymond, projectionniste dans les années 1940, est obsédé par le travail de Charlie Chaplin. Alors que le cinéma muet laisse place aux nouveaux films parlant, Raymond est victime d'un étrange phénomène paranormal après la fermeture de son cinéma.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/bKtLhx3766s" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Seanmhathair : souvenir de la pierre</h3>
+                                        <p>Premier projet de groupe, coréalisé avec Aurelle Tridant lors de ma 3e année a Waide Somme. J'étais chargée de m'occuper du rig des personnages et de l'intégralité des animations. Apprendre comment s'organiser à plusieurs fut une expérience très enrichissante, et m'a permis de réaliser que ma force est de savoir m'adapter et être flexible en fonction des taches qui ont besoin d'être réalisées. Inspirées par le travail de Tom Moore nous avons choisis de raconter l'histoire d'Evelyn, une vieille ermite vivant dans la foret irlandaise du debut du XXe siècle. Accompagnée de Mary le mouton, elle cherche un endroit où construire sa dernière hutte en pierre.</p>
+                                    </div>
+                                </div>
+                                <!-- Ajoutez plus de cartes si nécessaire -->
+                            </div>
+                        </div>
+                        <div class="section">
+                            <h2>Exercices d'Animation</h2>
+                            <div class="description">
+                                Voici une sélection d'exercices d'animation réalisés à Waide Somme. Ces exercices démontrent ma progression dans la maîtrise des techniques d'animation.
+                            </div>
+                            <div class="separator"></div>
+                            <div class="cards-container">
+                                <!-- Exemple de carte avec vidéo -->
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_3" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>NON CA BUG PAS</h3>
+                                        <p>Description de l'exercice 1.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_2" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>OUI JE SAIS QUE CA MARCHE PAS</h3>
+                                        <p>Description de l'exercice 2.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/EXEMPLE_ID_3" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>PAS DE PANIQUE CA ARRIVE BIENTOT <3 </h3>
+                                        <p>Description de l'exercice 3.</p>
+                                    </div>
+                                </div>
+                                <!-- Ajoutez plus de cartes si nécessaire -->
+                            </div>
+                        </div>
+                        <div class="section">
+                            <h2>Premières expérimentations vidéo</h2>
+                            <div class="description">
+                                Mes premiers essais d'animations et de réalisation. Tous ces projets ont été réalisé avant mon entrée à Waide Somme, en classe préparatoires de la CPES-CAAP du lycée Simone Veil.
+                            </div>
+                            <div class="separator"></div>
+                            <div class="cards-container">
+                                <!-- Exemple de carte avec vidéo -->
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/54VJJhCuO8Y" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Horreur salée</h3>
+                                        <p>Une des deux réponses a l'épreuve plastique du concours d'entrée a la HEAR de Strasbourg. Le sujet demandait d'inventer deux suites originales à un extrait de texte. J'ai réalisé ce court métrage d'horreur ainsi qu'une réponse en roman photo.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/XPZlVJWl8g8" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>L'atelier</h3>
+                                        <p>Réponse a l'épreuve plastique pour le concours d'entrée a l'EESI d'Angoulême. Un court métrage comparant le travail d'artiste a celui de médecin, et l'atelier a un cabinet médical.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/BGRawqVkdmM" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Le charmeur de libellules</h3>
+                                        <p>Réponse a l'épreuve plastique pour le concours d'entrée a l'ESAM de Caen-Cherbourg en 2021, sur le sujet "AMOUR·S, DÉLICE·S, ORGUE·S"</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/AX43hc0uclo" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Animation pour le projet "Ulysse malgré lui..."</h3>
+                                        <p>Lors de mon année de prépa, toute notre promotion a travaillé sur un projet de court métrage adaptant la mythologie grecque à notre époque. Le projet ne fut jamais finalisé, mais m'a permis d'experimenter pour la première fois l'animation 2D traditionnelle.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/SaQE8hLy4Qg" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Animations de vase pour le projet "Ulysse malgré lui..."</h3>
+                                        <p>Animation réalisée sur photoshop dans le cadre d'un exercice visant à apprendre les bases du logiciel. Je m'étais beaucoup amusée à le faire, et je suis encore très fière du résultat.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <iframe src="https://www.youtube.com/embed/M6UX8qyDnZk" allowfullscreen></iframe>
+                                    <div class="info">
+                                        <h3>Hot Hell California</h3>
+                                        <p>Animation réalisée dans le cadre d'un exercice sur le thème "Force de la nature". J'ai en premier lieu réalisé une illustration sur Photoshop, puis j'ai eu envie d'essayer de l'animer légèrement.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

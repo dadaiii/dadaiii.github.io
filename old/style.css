@@ -1,0 +1,569 @@
+:root {
+    --couleur-01: #E57B1E;
+    --couleur-02: #CAC6B9;
+    --couleur-03: #78715B;
+    --couleur-04: #393617;
+    --couleur-05: #1F2A19;
+    --couleur-06: #0E160B;
+}
+
+/* Déclaration de la police personnalisée */
+@font-face {
+    font-family: 'NintendoFont';
+    src: url('assets/fonts/Nintendo-DS-BIOS.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FlowerbeeFont';
+    src: url('assets/fonts/Flowerbee.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FloweristaFont';
+    src: url('assets/fonts/Flowerista.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Styles généraux */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'NintendoFont', sans-serif;
+    background-color: var(--couleur-05);
+    color: var(--couleur-02);
+    font-size: 1.1rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-message {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.welcome-message h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.welcome-message p {
+    font-size: 1.2em;
+    max-width: 800px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 100px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+
+.main-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Wrapper to hold the sidebar and content together */
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--couleur-06);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000; /* Assurez-vous que la sidebar reste au-dessus du contenu */
+}
+
+.sidebar-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    font-size: 4em; /* Taille du texte */
+    color: var(--couleur-01);
+    text-align: center;
+    width: 100%; /* Pour centrer le texte */
+    font-family: 'FlowerbeeFont', sans-serif;
+}
+
+.sidebar-subtitle {
+    font-size: 2em; /* Taille du texte */
+    color: var(--couleur-01);
+    margin-bottom: 1rem; /* Espace en dessous du titre */
+    text-align: center;
+    width: 100%; /* Pour centrer le texte */
+    font-family: 'FloweristaFont', sans-serif;
+    transform: translateY(-15px);
+}
+
+/* Contenu du footer dans la sidebar */
+.sidebar-footer {
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: var(--couleur-04);
+    text-align: left; /* Aligner le contenu à gauche */
+    padding-bottom: 25px; /* Ajouter une marge en bas */
+}
+
+.sidebar-footer p {
+    margin: 0.1em 0;
+}
+
+.sidebar-footer a {
+    color: var(--couleur-01);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.sidebar-footer a:hover {
+    color: var(--couleur-02);
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons button,
+.buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: var(--couleur-05);
+    color: var(--couleur-02);
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: 'NintendoFont', sans-serif;
+    font-size: 1rem;
+}
+
+.buttons button:hover {
+    background-color: var(--couleur-03);
+    transform: translateY(-2px);
+}
+
+.download-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--couleur-05);
+}
+
+.download-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: var(--couleur-01);
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: 'NintendoFont', sans-serif;
+}
+
+.download-button:hover {
+    background-color: var(--couleur-04);
+    transform: translateY(-2px);
+}
+
+.content {
+    margin-left: 290px; /* Laisser de l'espace pour la sidebar */
+    padding: 1rem;
+    flex-grow: 1;
+    background-color: var(--couleur-05);
+    overflow-x: hidden; /* Empêcher le débordement horizontal */
+    box-sizing: border-box; /* Assure que les marges et le padding sont inclus dans la largeur totale */
+}
+
+.content-container {
+    width: 100%; /* Prendre toute la largeur disponible */
+    margin: 0 auto; /* Centrer le conteneur à l'intérieur de .content */
+    box-sizing: border-box; /* Assurer que le padding et la bordure sont inclus dans la largeur */
+}
+
+.hidden {
+    display: none;
+}
+
+section {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2em;
+    color: var(--couleur-03);
+    text-align: center; /* Centre le texte */
+    padding: 0.7rem 2rem;
+}
+
+.profile-info {
+    display: flex;
+    align-items: flex-start;
+}
+
+.profile img {
+    width: 300px; /* Ajustez cette valeur selon la taille désirée */
+    height: auto;
+    margin-right: 20px; /* Espace entre l'image et le texte */
+}
+
+.text {
+    max-width: 800px; /* Limite la largeur du texte */
+}
+
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.video-container iframe {
+    width: 300px;
+    height: 200px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Styles pour les filtres */
+.filters {
+    position: fixed;
+    right: 25px; /* Ajustez cette valeur pour l'espacement à partir du bord droit */
+    top: 10px; /* Ajustez cette valeur pour l'espacement à partir du haut */
+    width: 100px; /* Ajustez la largeur selon vos besoins */
+    display: flex;
+    flex-direction: column;
+    gap: 0px; /* Espace entre les boutons */
+}
+
+.filter-group, .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.controls {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    padding: 0.7rem 2rem;
+}
+
+.controls button {
+    padding: 0.5rem 1.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--couleur-01);
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+text-align: center;
+    font-family: 'NintendoFont', sans-serif;
+}
+
+.controls button:hover {
+    background-color: #666;
+}
+
+.filter-group button {
+    padding: 0.3rem 0.3rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--couleur-03);
+    color: white;
+    cursor: pointer;
+    font-size: 0.8em;
+text-align: center;
+    font-family: 'NintendoFont', sans-serif;
+}
+
+.filter-group button.active {
+    background-color: var(--couleur-02);
+    color: white;
+}
+
+.filter-group button:hover {
+    background-color: var(--couleur-01);
+}
+
+.content-portfolio {
+    margin-right: 120px; /* Ajustez cette valeur pour la largeur des filtres plus un peu d'espace */
+}
+
+/* Styles pour le portfolio */
+.portfolio {
+    display: grid;
+    gap: 1em;
+    padding: 1em;
+}
+
+/* Vue en Grille : Une colonne */
+.portfolio.grid {
+    grid-template-columns: 1fr; /* Une seule colonne */
+}
+
+.portfolio.grid .portfolio-item {
+    width: 100%; /* Prendre toute la largeur */
+    box-sizing: border-box;
+}
+
+.portfolio.grid img {
+    width: 100%;
+    height: auto;
+}
+
+.portfolio.grid .info-card {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+/* Vue Mosaïque : Grille adaptative */
+.portfolio.mosaic {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajustez la taille minimale des vignettes */
+    gap: 0; /* Pas d'espace entre les vignettes */
+}
+
+.portfolio.mosaic .portfolio-item {
+    position: relative;
+    width: 100%; /* Prend toute la largeur de la grille */
+    padding-top: 100%; /* Maintient un rapport d'aspect carré */
+    overflow: hidden;
+}
+
+.portfolio.mosaic img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre les images pour remplir les vignettes */
+    border-radius: 0; /* Aucune bordure arrondie */
+}
+
+.portfolio img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.portfolio-item {
+    position: relative;
+}
+
+.info-card {
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: none;
+}
+
+/* Styles pour la lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: auto; /* Gère les débordements */
+    padding: 2rem; /* Ajoute du padding pour l'espace autour du contenu */
+}
+
+.lightbox-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 90%;
+    max-height: 95%;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0.7em;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 0;
+    right: -50px; /* Ajustez cette valeur pour positionner le bouton à droite de l'image */
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lightbox-info-card {
+    background-color: #fff;
+    color: #333;
+    padding: 0.1em 0.5em;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+}
+
+
+
+/* Styles pour les sections */
+.section {
+    margin-bottom: 2em;
+}
+
+.section h2 {
+    display: inline-block;
+    padding-bottom: 0.2em;
+    margin-bottom: 0.05em;
+}
+
+.section .description {
+    font-size: 0.9em; /* Taille réduite pour la description */
+    margin-bottom: 1em; /* Ajuster l'espace sous la description */
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section .separator {
+    border-bottom: 1px solid #333;
+    margin: 1em auto;
+    max-width: 80%;
+}
+
+/* Styles pour les cartes */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    background-color: var(--couleur-03);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.card iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+}
+
+.card .info {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre le contenu verticalement */
+    align-items: center; /* Centre le contenu horizontalement */
+    flex-grow: 1; /* Permet à l'info de prendre tout l'espace vertical disponible */
+    text-align: center; /* Centre le texte horizontalement à l'intérieur de l'info */
+    font-size: 1.2rem;
+}
+
+.card .info h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--couleur-06);
+}
+
+.card .info p {
+    color: var(--couleur-06);
+    font-size: 0.8em; /* Réduit la taille des descriptions */
+    margin: 0.5em 0 0;
+    text-align: center; /* Centre le texte à l'intérieur du paragraphe */
+    align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-group button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-group {
+        flex-direction: row; /* Aligner les boutons en ligne */
+    }
+
+    .filter-group button {
+        flex: 1; /* Permet aux boutons de prendre toute la largeur disponible */
+    }
+}
