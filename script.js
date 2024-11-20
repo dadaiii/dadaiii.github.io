@@ -1,54 +1,60 @@
-// Liste des titres possibles
-const titles = [
-    "Bienvenue sur le site de Elisa!",
-    "Site 100% humain!",
-    "Site garantis sans colorant!",
-    "WOW UN VISITEUR!!!!",
-    "Merci de regarder mon site :)"
-];
+document.addEventListener('DOMContentLoaded', function() {
+    // Liste des titres possibles
+    const titles = [
+        "Bienvenue sur le site de Elisa!",
+        "Site 100% humain!",
+        "Site garanti sans colorant!",
+        "WOW UN VISITEUR!!!!",
+        "Merci de regarder mon site :)"
+    ];
 
-// Choisir un titre aléatoire
-const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+    // Choisir un titre aléatoire
+    document.title = titles[Math.floor(Math.random() * titles.length)];
 
-// Appliquer le titre sélectionné
-document.title = randomTitle;
+    // Fonction pour masquer tous les contenus dans la zone de contenu
+    function hideAllContent() {
+        document.querySelectorAll('#content .content-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+    }
 
-// Sélectionne tous les éléments ayant la classe "folder" dans la sidebar
-document.querySelectorAll('.sidebar .folder').forEach(folder => {
-    folder.addEventListener('click', function(event) {
-        event.stopPropagation();
+    // Gestion des clics dans la sidebar pour les dossiers
+    document.querySelectorAll('.sidebar .folder').forEach(folder => {
+        folder.addEventListener('click', function(event) {
+            event.stopPropagation();  // Empêche la propagation pour éviter de fermer le dossier
+            const subFolder = this.querySelector('ul');
+            if (subFolder) subFolder.style.display = subFolder.style.display === 'block' ? 'none' : 'block';
+        });
+    });
 
-        const subFolder = this.querySelector('ul');
-        if (subFolder) {
-            subFolder.style.display = subFolder.style.display === 'block' ? 'none' : 'block';
-        }
+    // Gestion des clics sur les fichiers
+    document.querySelectorAll('.sidebar .file').forEach(file => {
+        file.addEventListener('click', function(event) {
+            event.stopPropagation();  // Empêche la propagation pour ne pas fermer le dossier
 
-        if (this.id && this.id.startsWith('le-film')) {
-            const videoContent = document.getElementById('video-content');
-            const videoPlayer = document.getElementById('film-player');
-            let videoUrl = ""; 
+            // Masquer tous les contenus avant d'afficher le nouveau
+            hideAllContent();
 
-            switch(this.id) {
-                case "le-film-feutre":
-                    videoUrl = "https://www.youtube.com/embed/MvvCZeqBebY"; 
-                    break;
-                case "le-film-fin":
-                    videoUrl = "https://www.youtube.com/embed/D2OSE5Fnw7g"; 
-                    break;
-                case "le-film-seanmhathair":
-                    videoUrl = "https://www.youtube.com/embed/bKtLhx3766s"; 
-                    break;
-                case "le-film-maison-poupees":
-                    videoUrl = "https://www.youtube.com/embed/ID_MAISON_POUPEES"; 
-                    break;
-                case "le-film-camion":
-                    videoUrl = "https://www.youtube.com/embed/ID_CAMION"; 
-                    break;
+            // Afficher la section associée au fichier cliqué
+            const contentId = this.id.replace('file-', ''); // 'file-seanmhathair-video' -> 'seanmhathair-video'
+            const contentSection = document.getElementById(contentId);
+
+            if (contentSection) {
+                contentSection.classList.remove('hidden');
+                if (contentSection.id === 'seanmhathair-video') {
+                    // Mettre à jour l'iframe pour la vidéo de Seanmhathair
+                    const iframe = contentSection.querySelector('iframe');
+                    if (iframe) {
+                        iframe.src = 'https://www.youtube.com/embed/bKtLhx3766s?rel=0&modestbranding=1&showinfo=0&fs=0';
+                    }
+                } else if (contentSection.id === 'fin-video') {
+                    // Mettre à jour l'iframe pour la vidéo de fin
+                    const iframe = contentSection.querySelector('iframe');
+                    if (iframe) {
+                        iframe.src = 'https://www.youtube.com/embed/D2OSE5Fnw7g?rel=0&modestbranding=1&showinfo=0&fs=0';
+                    }
+                }
             }
-
-            videoPlayer.src = videoUrl;
-            videoContent.style.display = 'block'; // Afficher le lecteur vidéo
-        }
+        });
     });
 });
-

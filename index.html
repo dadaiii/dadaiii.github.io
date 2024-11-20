@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site de Elisa</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
     <div class="window">
@@ -32,55 +33,151 @@
                 <ul>
                     <li class="folder">Le feutre
                         <ul>
-                            <li class="folder" id="le-film-feutre">Le film</li>
-                            <li class="folder">Explications</li>
-                            <li class="folder">Images</li>
+                            <li class="file" id="file-feutre-video">Vidéo</li>
+                            <li class="file" id="file-feutre-explication">Explications</li>
+                            <li class="file" id="file-feutre-images">Images</li>
                         </ul>
                     </li>
                     <li class="folder">La fin
                         <ul>
-                            <li class="folder" id="le-film-fin">Le film</li>
-                            <li class="folder">Explications</li>
-                            <li class="folder">Images</li>
+                            <li class="file" id="file-fin-video">Vidéo</li>
+                            <li class="file" id="file-fin-explication">Explications</li>
+                            <li class="file" id="file-fin-images">Images</li>
                         </ul>
                     </li>
                     <li class="folder">Seanmhathair, souvenir de la pierre
                         <ul>
-                            <li class="folder" id="le-film-seanmhathair">Le film</li>
-                            <li class="folder">Explications</li>
-                            <li class="folder">Images</li>
+                            <li class="file" id="file-seanmhathair-video">Vidéo</li>
+                            <li class="file" id="file-seanmhathair-explication">Explications</li>
+                            <li class="file" id="file-seanmhathair-images">Images</li>
                         </ul>
                     </li>
                     <li class="folder">La maison des poupées cinglées
                         <ul>
-                            <li class="folder" id="le-film-maison-poupees">Le film</li>
-                            <li class="folder">Explications</li>
-                            <li class="folder">Images</li>
+                            <li class="file" id="file-maison-video">Vidéo</li>
+                            <li class="file" id="file-maison-explication">Explications</li>
+                            <li class="file" id="file-maison-images">Images</li>
                         </ul>
                     </li>
                     <li class="folder">Le camion
                         <ul>
-                            <li class="folder" id="le-film-camion">Le film</li>
-                            <li class="folder">Explications</li>
-                            <li class="folder">Images</li>
+                            <li class="file" id="file-camion-projet">Projet</li>
+                            <li class="file" id="file-camion-scenario">Scénario</li>
+                            <li class="file" id="file-camion-references">Références</li>
+                        </ul>
+                    </li>
+                    <!-- Nouveau dossier "À propos" -->
+                    <li class="folder">À propos
+                        <ul>
+                            <li class="file" id="file-about-CV">CV</li>
+                            <li class="file" id="file-about-presentation">Présentation</li>
                         </ul>
                     </li>
                 </ul>
             </div>
 
             <!-- Conteneur content pour la gestion de l'espace -->
-            <div id="video-content" class="hidden">
-                <!-- Wrapper pour centrer et maintenir la position du lecteur vidéo et des barres -->
-                <div class="video-wrapper">
-                    <!-- Barre en haut -->
-                    <div class="video-bar top-bar"></div>
-                    
-                    <!-- Vidéo -->
-                    <iframe id="film-player" src="https://www.youtube.com/embed/Ov6s1ztOPtHUN5ra" frameborder="0" allowfullscreen></iframe>
-            
-                    <!-- Barre du bas -->
-                    <div class="video-bar bottom-bar"></div> <!-- Barre en bas -->
+            <div id="content">
+
+                <!-- LE FEUTRE -->
+                <div id="feutre-video" class="content-section hidden">
+                    <iframe id="film-player-feutre" width="640" height="360" 
+                            src="https://www.youtube.com/embed/MvvCZeqBebY?rel=0&modestbranding=1&showinfo=0&fs=0" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
                 </div>
+                <div id="feutre-explication" class="content-section hidden">
+                    <p>Voici l'explication pour le Feutre...</p>
+                </div>
+                <div id="feutre-images" class="content-section hidden">
+                    <img src="image_feutre.jpg" alt="Image Feutre">
+                </div>
+
+                <!-- LA FIN -->
+                <div id="fin-video" class="content-section hidden">
+                    <iframe id="film-player-fin" width="640" height="360" 
+                            src="https://www.youtube.com/embed/D2OSE5Fnw7g?rel=0&modestbranding=1&showinfo=0&fs=0" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div id="fin-explication" class="content-section hidden">
+                    <p>Voici l'explication pour la fin...</p>
+                </div>
+                <div id="fin-images" class="content-section hidden">
+                    <img src="image_feutre.jpg" alt="Image Feutre">
+                </div>
+
+                <!-- SEANMATHAIR SOUVENIRS DE LA PIERRE -->
+
+                <div id="seanmhathair-video" class="content-section hidden">
+                    <div class="video-wrapper">
+                        <!-- Top bar -->
+                        <div class="video-bar top-bar">
+                            <span>Now Playing</span>
+                        </div>
+                
+                        <!-- Lecteur vidéo (iframe) -->
+                        <div class="video-frame">
+                            <iframe id="film-player-seanmhathair" width="640" height="360" 
+                                    src="https://www.youtube.com/embed/bKtLhx3766s?rel=0&modestbranding=1&showinfo=0&fs=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                
+                        <!-- Bottom bar -->
+                        <div class="video-bar bottom-bar">
+                            <span>Controls</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="seanmhathair-explication" class="content-section hidden">
+                    <p>Voici l'explication pour seanmhathair...</p>
+                </div>
+                <div id="seanmhathair-images" class="content-section hidden">
+                    <img src="image_feutre.jpg" alt="Image Feutre">
+                </div>
+
+                <!-- LA MAISON DES POUPEES CINGLEES -->
+                <div id="maison-video" class="content-section hidden">
+                    <iframe id="film-player-maison" width="640" height="360" 
+                            src="https://www.youtube.com/embed/MvvCZeqBebY?rel=0&modestbranding=1&showinfo=0&fs=0" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div id="maison-explication" class="content-section hidden">
+                    <p>Voici l'explication pour la maison...</p>
+                </div>
+                <div id="maison-images" class="content-section hidden">
+                    <img src="image_feutre.jpg" alt="Image Feutre">
+                </div>
+
+                <!-- LE CAMION FOU -->
+                <div id="camion-projet" class="content-section hidden">
+                    <p>Le camion est un projet en cours. Pas de video.</p>
+                </div>
+                <div id="camion-scenario" class="content-section hidden">
+                    <p>Scenario du camion a venir.</p>
+                </div>
+                <div id="camion-references" class="content-section hidden">
+                    <img src="image_feutre.jpg" alt="Image Feutre">
+                </div>
+
+                <!-- A PROPOS -->
+                <div id="about-CV" class="content-section hidden">
+                    <p>Ici mon CV</p>
+                </div>
+                <div id="about-presentation" class="content-section hidden">
+                    <p>Etudiante en animation 3D</p>
+                </div>
+                
             </div>
         </div>
     </div>

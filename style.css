@@ -22,7 +22,7 @@ body {
     border: 2px solid #000;
     box-shadow: 5px 5px #404040;
     display: flex;
-    flex-direction: column; /* Affichage vertical */
+    flex-direction: column;
 }
 
 /* Barre de titre avec les boutons */
@@ -40,8 +40,7 @@ body {
     background-color: #C0C0C0;
     padding: 4px;
     font-size: 12px;
-    width: 100%; /* S'étend sur toute la largeur */
-    box-sizing: border-box;
+    width: 100%;
 }
 
 .menu-bar span {
@@ -89,80 +88,108 @@ body {
     margin-right: 1px;
 }
 
-/* Contenu principal, à droite de la sidebar */
-.content {
-    display: flex;
-    flex: 1; /* Remplir l'espace restant */
-    padding: 10px;
+/* Conteneur pour le contenu principal */
+#content {
+    padding: 16px;
+    width: calc(100% - 150px); /* Ajuste la largeur en fonction de la sidebar */
 }
 
-/* Style de base du lecteur vidéo */
-/* Conteneur principal vidéo centré */
-#video-content {
-    display: none; /* Masquer par défaut */
-    display: flex; /* Utilise Flexbox */
-    flex-direction: column; /* Organise les éléments de haut en bas */
-    width: 100%; /* Prend toute la largeur disponible */
-    height: 100%; /* Prend toute la hauteur disponible */
-    padding: 20px; /* Retire tout espace supplémentaire, si nécessaire */
-      overflow-y: auto;
-}
-
-#video-content.hidden {
+/* Style pour masquer les éléments dynamiquement */
+.hidden {
     display: none;
 }
 
+/* Styles spécifiques pour la boîte d'explication */
+.text-box {
+    padding: 12px;
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    margin-top: 10px;
+}
+
+/* Conteneur vidéo */
+#video-content {
+    display: none; /* Masquer par défaut */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    align-items: center; /* Centrer le contenu */
+}
 
 /* Wrapper pour le lecteur vidéo et les barres */
 .video-wrapper {
     display: flex;
-    flex-direction: column; /* Organise les éléments de haut en bas */
-    width: 640px; /* Largeur fixe du conteneur */
-    background-color: #000; /* Fond noir autour de la vidéo */
-    border: none; /* Retirer la bordure */
-    margin: 0px; /* S'assure qu'il n'y a pas de marge autour */
-}
-/* Style de la vidéo */
-#film-player {
-    width: 100%; /* Prend toute la largeur du conteneur */
-    height: auto; /* La hauteur sera calculée automatiquement en fonction du ratio */
-    aspect-ratio: 16 / 9; /* Maintient un ratio 16:9 */
-    background-color: #000; /* Fond noir pour la vidéo */
-    border: none; /* Retirer la bordure */
+    flex-direction: column;
+    width: 640px;
+    background-color: #C0C0C0; /* Gris typique Windows 95 */
+    border: 2px solid #000000;  /* Bordure noire autour */
+    padding: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); /* Ombre douce */
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'MS Sans Serif', sans-serif; /* Police Windows 95 */
 }
 
-
-/* Barre grise du haut (top bar), au-dessus de la vidéo */
+/* Top bar */
 .video-bar.top-bar {
-    width: 100%;
-    height: 20px; /* Hauteur de la barre */
-    background-color: #8b8b8b; /* Gris clair */
-    border-top: 1px solid #000; /* Bordure supérieure pour simuler les interfaces de Windows 95 */
-    border-left: 1px solid #000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    box-shadow: 2px 2px 0px #313131; /* Ombre nette, sans estompe */
-    font-family: "Tahoma", sans-serif; /* Police proche de Windows 95 */
+    background-color: #0000A0; /* Bleu plus foncé de Windows 95 */
+    color: white;
+    padding: 5px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0;  /* Pas de coins arrondis */
+    border-bottom: 1px solid #000;
 }
 
-/* Barre du bas (bottom bar) sous la vidéo */
+/* Conteneur de la vidéo */
+.video-frame {
+    background-color: #000;
+    border: 3px solid #00BFFF; /* Bordure bleue, comme sur le player Windows 95 */
+    padding: 5px;
+    margin: 10px 0;
+    box-shadow: inset 0 0 5px #00BFFF; /* Effet lumineux sur la vidéo */
+    width: 640px; /* largeur du cadre vidéo */
+    height: 360px; /* hauteur du cadre vidéo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ajout de la barre de défilement à droite */
+.video-frame iframe {
+    border: none;
+    overflow-y: scroll; /* Pour ajouter une barre de défilement verticale */
+}
+
+/* Bottom bar */
 .video-bar.bottom-bar {
-    width: 100%;
-    height: 40px; /* Hauteur de la barre */
-    background-color: #8b8b8b; /* Gris clair */
-    border-top: 1px solid #000; /* Bordure supérieure pour simuler les interfaces de Windows 95 */
-    border-left: 1px solid #000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    box-shadow: 2px 2px 0px #313131; /* Ombre nette, sans estompe */
-    font-family: "Tahoma", sans-serif; /* Police proche de Windows 95 */
+    background-color: #0000A0; /* Bleu pour la barre de commande */
+    color: white;
+    padding: 5px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0;  /* Pas de coins arrondis */
+    border-top: 1px solid #000;
+    border-bottom: none;
 }
 
-.hidden {
-    display: none;
+/* Style de la barre de défilement */
+.video-frame::-webkit-scrollbar {
+    width: 12px; /* Largeur de la barre */
+}
+
+.video-frame::-webkit-scrollbar-thumb {
+    background-color: #6e6e6e; /* Couleur de la barre de défilement */
+    border-radius: 6px;
+}
+
+.video-frame::-webkit-scrollbar-track {
+    background-color: #c0c0c0;
 }
 
