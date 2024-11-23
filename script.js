@@ -11,11 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Liste des titres possibles
     const titles = [
-        "Bienvenue sur le site de Elisa!",
-        "Site 100% humain!",
-        "Site garanti sans colorant!",
-        "WOW UN VISITEUR!!!!",
-        "Merci de regarder mon site :)"
+        "ElisaLane.com"
     ];
 
     // Choisir un titre aléatoire
@@ -52,6 +48,60 @@ document.addEventListener('DOMContentLoaded', function() {
                     iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0&fs=1`;
                 }
             }
+
+            // Si sur mobile, ferme la sidebar après le clic
+            if (window.innerWidth <= 768) {
+                toggleSidebar(false); // Ferme la sidebar sur mobile
+            }
         });
+    });
+
+    // Fonction pour afficher ou masquer la sidebar (Menu hamburger)
+    function toggleSidebar(visible) {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('show', visible); // Ajoute ou enlève la classe 'show' pour contrôler l'affichage
+    }
+
+    // Fonction pour initialiser l'état de la flèche à gauche (position fermée)
+    function initializeMenu() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        if (menuToggle) {
+            menuToggle.classList.remove('open');
+            menuToggle.classList.add('close'); // Par défaut, flèche à gauche
+        }
+    }
+
+    // Appel pour initialiser l'état de la flèche au chargement
+    initializeMenu();
+
+    // Gestion du clic sur le menu hamburger pour mobile
+    const menuToggle = document.querySelector('.menu-toggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const isSidebarVisible = sidebar.classList.contains('show'); // Vérifier si la sidebar est visible par la présence de la classe 'show'
+
+            // 1. D'abord, change la position de la flèche
+            if (isSidebarVisible) {
+                // Si la sidebar est déjà visible, ferme le menu et repositionne la flèche
+                menuToggle.classList.remove('open');
+                menuToggle.classList.add('close');
+            } else {
+                // Si la sidebar est fermée, ouvre le menu et déplace la flèche
+                menuToggle.classList.remove('close');
+                menuToggle.classList.add('open');
+            }
+
+            // 2. Ensuite, affiche ou masque la sidebar
+            toggleSidebar(!isSidebarVisible);
+        });
+    }
+
+    // Ajout de défilement horizontal pour les sections avec overflow
+    const contentSections = document.querySelectorAll('.content-section');
+    contentSections.forEach(section => {
+        // Si la section dépasse la largeur de l'écran, permet un défilement horizontal
+        section.style.overflowX = 'auto';
+        section.style.whiteSpace = 'nowrap'; // Empêche les sauts de ligne dans les éléments enfants
     });
 });
