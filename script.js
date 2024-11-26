@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    
     // Fonction pour masquer tous les contenus dans la zone de contenu
     function hideAllContent() {
         document.querySelectorAll('#content .content-section').forEach(section => {
@@ -6,20 +7,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Masque tout le contenu au chargement
+    // Masquer tout le contenu au chargement
     hideAllContent();
 
-    // Liste des titres possibles
-    const titles = [
-        "ElisaLane.com"
-    ];
+    // Affiche la section "Ma bande démo" par défaut
+    const defaultFileId = "file-bande-demo-video"; // ID du fichier par défaut dans la sidebar
+    const defaultFile = document.getElementById(defaultFileId);
 
-    // Choisir un titre aléatoire
+    if (defaultFile) {
+        const contentId = "bande-demo-video"; // ID de la section associée
+        const contentSection = document.getElementById(contentId);
+
+        if (contentSection) {
+            contentSection.classList.remove('hidden'); // Affiche la section associée
+        }
+
+        // Si c'est une vidéo, configure l'iframe
+        const iframe = contentSection.querySelector('iframe');
+        const videoId = defaultFile.dataset.videoId; // Récupère l'ID YouTube depuis l'attribut 'data-video-id'
+        if (iframe && videoId) {
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0&fs=1`;
+        }
+    }
+
+    // Liste des titres possibles
+    const titles = ["ElisaLane.com"];
     document.title = titles[Math.floor(Math.random() * titles.length)];
 
     // Gestion des clics dans la sidebar pour les dossiers
     document.querySelectorAll('.sidebar .folder').forEach(folder => {
-        folder.addEventListener('click', function(event) {
+        folder.addEventListener('click', function (event) {
             event.stopPropagation(); // Empêche la propagation pour éviter de fermer le dossier
             const subFolder = this.querySelector('ul');
             if (subFolder) subFolder.style.display = subFolder.style.display === 'block' ? 'none' : 'block';
@@ -28,14 +45,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Gestion des clics sur les fichiers
     document.querySelectorAll('.sidebar .file').forEach(file => {
-        file.addEventListener('click', function(event) {
+        file.addEventListener('click', function (event) {
             event.stopPropagation(); // Empêche la propagation pour ne pas fermer le dossier
 
             // Masquer tous les contenus avant d'afficher le nouveau
             hideAllContent();
 
             // Afficher la section associée au fichier cliqué
-            const contentId = this.id.replace('file-', ''); // Exemple : 'file-seanmhathair-video' -> 'seanmhathair-video'
+            const contentId = this.id.replace('file-', ''); // Exemple : 'file-feutre-video' -> 'feutre-video'
             const contentSection = document.getElementById(contentId);
 
             if (contentSection) {
@@ -62,38 +79,24 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.classList.toggle('show', visible); // Ajoute ou enlève la classe 'show' pour contrôler l'affichage
     }
 
-    // Fonction pour initialiser l'état de la flèche à gauche (position fermée)
-    function initializeMenu() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        if (menuToggle) {
-            menuToggle.classList.remove('open');
-            menuToggle.classList.add('close'); // Par défaut, flèche à gauche
-        }
-    }
-
-    // Appel pour initialiser l'état de la flèche au chargement
-    initializeMenu();
-
     // Gestion du clic sur le menu hamburger pour mobile
     const menuToggle = document.querySelector('.menu-toggle');
     if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function () {
             const sidebar = document.querySelector('.sidebar');
             const isSidebarVisible = sidebar.classList.contains('show'); // Vérifier si la sidebar est visible par la présence de la classe 'show'
 
-            // 1. D'abord, change la position de la flèche
+            // Ouvrir ou fermer la sidebar
+            toggleSidebar(!isSidebarVisible);
+
+            // Changer l'icône de la flèche
             if (isSidebarVisible) {
-                // Si la sidebar est déjà visible, ferme le menu et repositionne la flèche
-                menuToggle.classList.remove('open');
-                menuToggle.classList.add('close');
-            } else {
-                // Si la sidebar est fermée, ouvre le menu et déplace la flèche
                 menuToggle.classList.remove('close');
                 menuToggle.classList.add('open');
+            } else {
+                menuToggle.classList.remove('open');
+                menuToggle.classList.add('close');
             }
-
-            // 2. Ensuite, affiche ou masque la sidebar
-            toggleSidebar(!isSidebarVisible);
         });
     }
 
