@@ -128,11 +128,13 @@ body {
     padding: 20px; /* Ajout d'un padding pour l'espace autour de l'iframe */
 }
 
-/* Sections du contenu */
 .content-section {
-    position: relative; /* Nécessaire pour positionner les éléments à l'intérieur */
-    width: 100%; /* La section occupe toute la largeur */
-    overflow: hidden; /* Cache tout le contenu excédentaire */
+    position: relative;
+    width: 100%;
+    height: 100%; /* Utilise toute la hauteur disponible */
+    overflow-y: auto; /* Permet le défilement vertical */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur */
 }
 
 .content-section iframe {
@@ -147,12 +149,6 @@ body {
 .content-video {
     padding: 10px;
     background-color: #f0f0f0;
-}
-
-.content-text {
-    font-size: 16px;
-    color: #333;
-    margin-top: 20px;
 }
 
 .content-image {
@@ -243,4 +239,59 @@ body {
         overflow-x: auto;
         white-space: nowrap;
     }
+}
+/* Style général pour la section texte */
+.content-text {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    word-wrap: break-word; /* Gère les mots trop longs */
+    overflow-wrap: break-word; /* Fonctionne sur les navigateurs modernes */
+    white-space: normal; /* Autorise les retours automatiques à la ligne */
+    max-width: 100%; /* Empêche le contenu de dépasser la largeur du parent */
+    overflow: hidden; /* Masque les débordements éventuels */
+    box-sizing: border-box; /* Inclut le padding et les bordures dans la largeur totale */
+}
+
+/* Style des titres */
+.content-text h2 {
+    font-size: 1.8rem;
+    color: #1a5d8e;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.content-text h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Style des paragraphes */
+.content-text p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* Style des listes */
+.content-text ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.content-text ul li {
+    margin-bottom: 10px;
+}
+
+/* Mettre en valeur les éléments importants */
+.content-text strong {
+    font-weight: bold;
+    color: #222;
+}
+
+.content-text em {
+    font-style: italic;
+    color: #555;
 }
