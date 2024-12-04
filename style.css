@@ -102,6 +102,24 @@ body {
     font-size: 0.8rem;
 }
 
+/* Style de base pour les fichiers */
+.sidebar li.file {
+    padding: 2px;
+    cursor: pointer;
+    font-size: 0.8rem; /* Taille de police d'origine */
+    font-family: "Arial", sans-serif; /* Police d'origine */
+    background-color: #E0E0E0; /* Couleur de fond d'origine */
+    color: black; /* Couleur du texte d'origine */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transition douce */
+}
+
+/* Style de surbrillance lorsque l'élément est actif */
+.sidebar li.file.active {
+    background-color: #949494; /* Couleur de fond en surbrillance */
+    color: white; /* Couleur du texte en surbrillance */
+    font-weight: bold; /* Mettre en gras */
+}
+
 .sidebar ul ul {
     margin-left: 5px;
     display: none;
