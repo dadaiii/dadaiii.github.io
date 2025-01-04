@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (iframe && videoId) {
             iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0&fs=1`;
         }
+
+        // Ajoute la classe 'active' au bouton "bande demo" par défaut
+        defaultFile.classList.add('active');
     }
 
     // Liste des titres possibles
@@ -65,6 +68,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0&fs=1`;
                 }
             }
+
+            // Retirer la classe 'active' de tous les fichiers
+            document.querySelectorAll('.sidebar li.file').forEach(f => f.classList.remove('active'));
+
+            // Ajouter la classe 'active' au fichier cliqué
+            this.classList.add('active');
 
             // Si sur mobile, ferme la sidebar après le clic
             if (window.innerWidth <= 768) {
@@ -107,4 +116,17 @@ document.addEventListener('DOMContentLoaded', function () {
         section.style.overflowX = 'auto';
         section.style.whiteSpace = 'nowrap'; // Empêche les sauts de ligne dans les éléments enfants
     });
+
+    const files = document.querySelectorAll('.sidebar li.file'); // Sélectionne tous les fichiers
+
+    files.forEach(file => {
+        file.addEventListener('click', () => {
+            // Retirer la classe active de tous les fichiers
+            files.forEach(f => f.classList.remove('active'));
+
+            // Ajouter la classe active à l'élément cliqué
+            file.classList.add('active');
+        });
+    });
+
 });
