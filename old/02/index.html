@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Elisa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <span class="title">Explorateur de fichiers</span>
+            <div class="title-buttons">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <span>Fichier</span>
+            <span>Édition</span>
+            <span>Affichage</span>
+            <span>Favoris</span>
+            <span>Outils</span>
+            <span>?</span>
+        </div>
+
+        <!-- Flèche de contrôle du menu -->
+        <span class="menu-toggle">&#8594;</span> <!-- Flèche pour ouvrir/fermer la sidebar -->
+        
+        
+        <!-- Conteneur principal avec sidebar et contenu -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <ul>
+                    <li class="file" id="file-bande-demo-video" data-video-id="lCDXxPk1tkU">Ma bande démo</li>
+                    
+                    <li class="folder">La maison
+                        <ul>
+                            <li class="file" id="file-maison-video" data-video-id="au2uFkz8h9U">Vidéo</li>
+                            <li class="file" id="file-maison-explication">Explications</li>
+                            <li class="file" id="file-maison-images">Images</li>
+                        </ul>
+                    </li>
+
+                    <li class="folder">Seanmhathair
+                        <ul>
+                            <li class="file" id="file-seanmhathair-video" data-video-id="bKtLhx3766s">Vidéo</li>
+                            <li class="file" id="file-seanmhathair-explication">Explications</li>
+                            <li class="file" id="file-seanmhathair-images">Images</li>
+                        </ul>
+                    </li>
+
+                    <li class="folder">La fin
+                        <ul>
+                            <li class="file" id="file-fin-video" data-video-id="D2OSE5Fnw7g">Vidéo</li>
+                            <li class="file" id="file-fin-explication">Explications</li>
+                            <li class="file" id="file-fin-images">Images</li>
+                        </ul>
+                    </li>
+
+                    <li class="folder">Le feutre
+                        <ul>
+                            <li class="file" id="file-feutre-video" data-video-id="MvvCZeqBebY">Vidéo</li>
+                            <li class="file" id="file-feutre-explication">Explications</li>
+                            <li class="file" id="file-feutre-images">Images</li>
+                        </ul>
+                    </li>
+
+                    <!-- <li class="folder">Le camion
+                        <ul>
+                            <li class="file" id="file-camion-projet">Projet</li>
+                            <li class="file" id="file-camion-scenario">Scénario</li>
+                            <li class="file" id="file-camion-references">Références</li>
+                        </ul>
+                    </li> -->
+
+                    <!-- <li class="folder">À propos
+                        <ul>
+                            <li class="file" id="file-about-CV">CV</li>
+                            <li class="file" id="file-about-presentation">Présentation</li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+
+            <!-- Conteneur content pour la gestion de l'espace -->
+            <div id="content">
+
+                <!-- BANDE DEMO -->
+                <div id="bande-demo-video" class="content-section">
+                    <div class="content-video">
+                        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- LA MAISON -->
+                <div id="maison-video" class="content-section hidden">
+                    <div class="content-video">
+                        <iframe width="100%" height="360" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div id="maison-explication" class="content-section hidden">
+                    <div class="content-text">
+                        <p>Voici l'explication pour la maison...</p>
+                    </div>
+                </div>
+                <div id="maison-images" class="content-section hidden">
+                    <div class="content-image">
+                        <div class="content-column">
+                            <img src="https://imgur.com/qj73GQA.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/NqaHqoz.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/408UvuR.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/yj5VSeh.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/StDyqts.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/uIdSNJi.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/7vVtrPb.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/yzk5XTm.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/GyN5YN7.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/MO5fikb.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/CC80stl.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/d1Lo0Ss.jpg" alt="Image du projet la maison">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/XZthgL8.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/lrFGDsF.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/ZCWQhoF.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/OhgmjPN.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/qbgPmz6.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/wT3fdYy.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/4YI2LwB.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/TKjjwPV.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/Cs7mNIQ.jpg" alt="Image du projet la maison">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/rc8naFD.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/DDYNnLX.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/bGnRsK9.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/cJbOfOm.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/eS4qZuJ.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/U6IANSy.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/wPqq3Wt.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/vGQRWK0.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/JaDMZno.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/LiZv7zc.jpg" alt="Image du projet la maison">
+                            <img src="https://imgur.com/reJCGza.jpg" alt="Image du projet la maison">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEANMHATHAIR -->
+                <div id="seanmhathair-video" class="content-section hidden">
+                    <div class="content-video">
+                        <iframe width="100%" height="360" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div id="seanmhathair-explication" class="content-section hidden">
+                    <div class="content-text">
+                        <h2>Seanmathair, souvenir de la pierre</h2>
+                        <p>
+                            <strong>Durée :</strong> 6 minutes
+                        </p>
+                        <p>
+                            <em>"Seanmathair, souvenir de la pierre"</em> est le premier projet de groupe sur lequel j'ai travaillé à Waide Somme. Ce court-métrage explore les thématiques de la mémoire, des racines et de la transmission à travers des visuels poétiques et une narration immersive.
+                        </p>
+                        <h3>Collaboration</h3>
+                        <p>
+                            <strong>Co-écrit avec :</strong> Aurelle Tridant et Théo Gitler<br>
+                            <strong>Co-réalisé avec :</strong> Aurelle Tridant
+                        </p>
+                        <h3>Mes contributions</h3>
+                        <ul>
+                            <li>Modélisation des personnages principaux</li>
+                            <li>Création des rigs pour l’animation</li>
+                            <li>Animation des deux personnages</li>
+                        </ul>
+                        <p>
+                            Ce projet m'a permis de renforcer mes compétences en travail d'équipe et en storytelling visuel, tout en expérimentant des approches artistiques uniques.
+                        </p>
+                    </div>
+                </div>
+                
+                <div id="seanmhathair-images" class="content-section hidden">
+                    <div class="content-image">
+                        <div class="content-column">
+                            <img src="https://imgur.com/it4jsei.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/PVYyIvX.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/FQ2IbmG.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/FRsPyl8.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/LQuXTYW.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/ileEkmp.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/yLyt99R.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/9pYEHHu.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/DORZIgs.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/Y7CwFyF.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/ijEpP4H.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/DwFWKQU.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/YNS8QkK.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/PrF9WTm.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/AHkRRh3.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/jnlpsXi.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/axTZWzF.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/QdxAnKh.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/YhJ1TDx.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/94E2gOz.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/FGwaUyk.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/AJGpNAK.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/gJ5hJjK.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/un6EWP0.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/sNMyihZ.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/lk4GnOY.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/E9ERNeH.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/zJFsx1l.jpg" alt="Image du projet Seanmathair">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/TOy635P.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/Wd0zgdn.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/KDunwJf.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/6PGPRRW.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/gRbP12j.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/g9eDNtr.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/y8b1sD7.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/DH9jNhy.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/GSmFi9z.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/rXpSsNC.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/BO0aIwj.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/K3dEghy.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/vSqSUZq.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/yL4sK5I.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/z48B40I.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/jZZzNZw.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/jgLWhfq.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/zkJrLMX.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/hgur9zK.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/RyYRtHC.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/n3rcwKm.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/Jt4o0Ru.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/4CQfYeh.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/LMsAjQ1.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/VJrDrWU.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/PwY2XlO.jpg" alt="Image du projet Seanmathair">
+                            <img src="https://imgur.com/yzy72aB.jpg" alt="Image du projet Seanmathair">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LA FIN -->
+                <div id="fin-video" class="content-section hidden">
+                    <div class="content-video">
+                        <iframe width="100%" height="360" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div id="fin-explication" class="content-section hidden">
+                    <div class="content-text">
+                        <p>Voici l'explication pour la fin...</p>
+                    </div>
+                </div>
+                <div id="fin-images" class="content-section hidden">
+                    <div class="content-image">
+                        <div class="content-column">
+                            <img src="https://imgur.com/AGr3Goh.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/EL85NlR.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/TSVFVYN.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/gvf3uy9.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/zfCNDBG.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/arYPIAo.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/MRxGQ8t.jpg" alt="Image du projet la fin">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/tzFmw0o.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/00kBFf2.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/loH6uvr.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/8CgGnEr.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/ybj1mRb.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/ZBdvELn.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/YMCavzd.jpg" alt="Image du projet la fin">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/EZOqWVW.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/GOs3nPb.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/ZwwcaBG.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/cqweVac.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/pwOE1tE.jpg" alt="Image du projet la fin">
+                            <img src="https://imgur.com/BpdPZs0.jpg" alt="Image du projet la fin">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LE FEUTRE -->
+                <div id="feutre-video" class="content-section hidden">
+                    <div class="content-video">
+                        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div id="feutre-explication" class="content-section hidden">
+                    <div class="content-text">
+                        <p>Voici l'explication pour le Feutre...</p>
+                    </div>
+                </div>
+                
+                <div id="feutre-images" class="content-section hidden">
+                    <div class="content-image">
+                        <div class="content-column">
+                            <img src="https://imgur.com/uxBtEa1.jpg" alt="Image Feutre 1">
+                            <img src="https://imgur.com/QuhDz5Z.jpg" alt="Image Feutre 2">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/ogusMpz.jpg" alt="Image Feutre 4">
+                            <img src="https://imgur.com/bSUyt2L.jpg" alt="Image Feutre 5">
+                        </div>
+                        <div class="content-column">
+                            <img src="https://imgur.com/tgmsvLY.jpg" alt="Image Feutre 7">
+                            <img src="https://imgur.com/3jnmLSR.jpg" alt="Image Feutre 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+/* Réinitialisation des marges et paddings par défaut, et configuration de la police */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+body {
+    background-color: #008080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Fenêtre de l'explorateur */
+.window {
+    width: 80vw;
+    height: 80vh;
+    background-color: #C0C0C0;
+    border: 2px solid #000;
+    box-shadow: 5px 5px #404040;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barre de titre avec les boutons */
+.title-bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #000080;
+    color: white;
+    padding: 4px;
+    font-size: 14px;
+}
+
+/* Barre de menu */
+.menu-bar {
+    background-color: #C0C0C0;
+    padding: 4px;
+    font-size: 12px;
+    width: 100%;
+}
+
+.menu-bar span {
+    margin-right: 15px;
+}
+
+/* Contenu principal de la fenêtre, incluant la sidebar et la zone de contenu */
+.main-content {
+    display: flex;
+    height: calc(100% - 56px); /* Ajusté pour enlever la barre de titre */
+    flex-direction: row;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 150px;
+    background-color: #E0E0E0;
+    padding: 8px;
+    border-right: 2px solid #A0A0A0;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+/* Masquer la sidebar sur mobile */
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+/* Icone de menu hamburger */
+.menu-toggle {
+    display: none; /* Cacher le toggle sur les grands écrans */
+    position: fixed; /* Fixe le bouton en haut à gauche */
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    z-index: 1000; /* Augmenter le z-index pour s'assurer que la flèche est au-dessus */
+    transition: transform 0.3s ease, left 0.3s ease; /* Transition pour mouvement à gauche/droite */
+}
+
+/* Rotation de la flèche lorsque la sidebar est ouverte */
+.menu-toggle.open {
+    transform: rotate(180deg); /* Flèche pointant vers la gauche */
+}
+
+/* Sidebar sous forme de liste */
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar li {
+    padding: 2px;
+    cursor: pointer;
+    position: relative;
+    font-size: 0.8rem;
+}
+
+.sidebar ul ul {
+    margin-left: 5px;
+    display: none;
+}
+
+.sidebar li.folder::before {
+    content: "📁";
+    margin-right: 1px;
+}
+
+/* Style pour masquer les éléments dynamiquement */
+.hidden {
+    display: none;
+}
+
+#content {
+    position: relative;
+    overflow: hidden; /* Empêche les débordements */
+    width: 100%; /* Utilise toute la largeur du conteneur parent */
+    height: 100%; /* Adapte la hauteur */
+    max-height: 90vh; /* Optionnel : limite à 90% de la hauteur visible */
+    display: flex; /* Centrage vertical + horizontal */
+    justify-content: center;
+    padding: 20px; /* Ajout d'un padding pour l'espace autour de l'iframe */
+}
+
+.content-section {
+    position: relative;
+    width: 100%;
+    height: 100%; /* Prend toute la hauteur disponible */
+    overflow-y: auto; /* Défilement vertical uniquement */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    box-sizing: border-box; /* Inclut le padding dans la largeur/hauteur */
+    padding: 20px; /* Espace intérieur pour éviter que le texte touche les bords */
+    white-space: normal; /* Autorise les retours automatiques à la ligne */
+    word-wrap: break-word; /* Gère les mots trop longs */
+    line-height: 1.5; /* Améliore la lisibilité du texte */
+}
+
+.content-section iframe {
+    position: absolute; /* Positionne l'iframe dans son conteneur */
+    top: 0;
+    left: 0;
+    width: 100%; /* Adapte à la largeur */
+    height: 100%; /* Adapte à la hauteur */
+    border: 0; /* Supprime la bordure */
+}
+
+.content-video {
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.content-image {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.content-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 23%;
+    align-items: flex-start;
+    overflow: hidden;
+    height: auto;
+}
+
+.content-column img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.content-column img:hover {
+    transform: scale(1.05);
+}
+
+.content-video::before {
+    content: "";
+    display: block;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+}
+
+/* RESPONSIVE : Adaptation sur mobile */
+
+/* Affichage du bouton hamburger uniquement sur les petits écrans */
+@media (max-width: 768px) {
+    .bande-container {
+        flex-direction: column; /* Passe les éléments en colonne sur petits écrans */
+        align-items: center; /* Centre le contenu */
+    }
+
+    .bande-text {
+        max-width: 100%; /* Permet au texte de s'adapter à l'écran */
+    }
+
+    .bande-video iframe {
+        max-width: 100%; /* S'adapte à la largeur de l'écran */
+        height: auto; /* Ajuste la hauteur pour conserver les proportions */
+    }
+    .menu-toggle {
+        display: block; /* Afficher la flèche sur mobile */
+    }
+
+    /* Positionnement de la flèche quand la sidebar est ouverte */
+    .menu-toggle.open {
+        transform: translateX(200px); /* Déplace la flèche vers la droite (200px) */
+    }
+
+    /* Lorsque le menu est fermé, la flèche reste en haut à gauche */
+    .menu-toggle.close {
+        transform: translateX(0); /* Positionne la flèche en position initiale */
+    }
+
+    /* Gérer le déplacement de la sidebar sur mobile */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #E0E0E0;
+        z-index: 999;
+        transform: translateX(-100%); /* Sidebar cachée par défaut */
+        transition: transform 0.3s ease;
+    }
+
+    /* Sidebar visible quand la classe .show est ajoutée */
+    .sidebar.show {
+        transform: translateX(0); /* Déplacer la sidebar pour la rendre visible */
+    }
+
+    .sidebar li.folder::before {
+        font-size: 20px; /* Agrandir l'icône des dossiers */
+    }
+
+    #content {
+        width: 100%;
+        height: calc(100% - 56px); /* Ajuste la hauteur pour compenser la barre de titre */
+        overflow-y: auto;
+    }
+
+    .content-section {
+        position: relative;
+        width: 100%; /* Prend toute la largeur du parent */
+        height: 100%; /* Prend toute la hauteur disponible */
+        overflow-y: auto; /* Permet uniquement le défilement vertical */
+        overflow-x: hidden; /* Empêche le défilement horizontal */
+        box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+        padding: 20px; /* Ajoute un espace intérieur autour du contenu */
+    }
+}
+/* Style général pour la section texte */
+.content-text {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    word-wrap: break-word; /* Gère les mots trop longs */
+    overflow-wrap: break-word; /* Fonctionne sur les navigateurs modernes */
+    white-space: normal; /* Autorise les retours automatiques à la ligne */
+    max-width: 100%; /* Empêche le contenu de dépasser la largeur du parent */
+    overflow: hidden; /* Masque les débordements éventuels */
+    box-sizing: border-box; /* Inclut le padding et les bordures dans la largeur totale */
+}
+
+/* Style des titres */
+.content-text h2 {
+    font-size: 1.8rem;
+    color: #1a5d8e;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.content-text h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Style des paragraphes */
+.content-text p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* Style des listes */
+.content-text ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.content-text ul li {
+    margin-bottom: 10px;
+}
+
+/* Mettre en valeur les éléments importants */
+.content-text strong {
+    font-weight: bold;
+    color: #222;
+}
+
+.content-text em {
+    font-style: italic;
+    color: #555;
+}
