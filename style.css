@@ -51,6 +51,24 @@ header {
     aspect-ratio: 16 / 9; /* Garde le ratio 16:9 pour la vidéo */
 }
 
+/* Style commun pour les vidéos */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Limite la largeur maximale */
+    margin: 20px auto; /* Centre la vidéo et ajoute un espacement vertical */
+    aspect-ratio: 16 / 9; /* Maintient un ratio 16:9 */
+    overflow: hidden;
+    border-radius: 5px; /* Optionnel : arrondit légèrement les coins */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optionnel : ajoute une ombre */
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Supprime la bordure */
+}
+
 /* Galerie */
 .gallery {
     display: grid; /* Utilise une grille pour organiser les articles */
