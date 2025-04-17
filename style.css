@@ -5,25 +5,33 @@
     font-style: normal;  /* Style de la police (normal, italique, etc.) */
 }
 
+/* Empêche le débordement horizontal */
 body {
     font-family: 'Nintendo', sans-serif;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Supprime le scroll horizontal */
     background-color: rgb(255, 255, 255);
     text-align: center;
     font-size: 18px;
 }
 
 header {
-    font-size: 24px;
-    margin: 20px 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Taille réduite du texte */
+    text-align: center;
 }
 
+/* Conteneur principal */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-width: 100%; /* Limite la largeur à 100% de l'écran */
+    overflow: hidden; /* Empêche tout débordement */
+    padding: 10px;
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
 .demo {
@@ -34,6 +42,7 @@ header {
     padding: 20px;
     width: 70%; /* Largeur par défaut pour les écrans plus grands */
     margin: 0 auto;
+    margin-bottom: 15px;
 }
 
 .demo-video {
@@ -42,13 +51,16 @@ header {
     aspect-ratio: 16 / 9; /* Garde le ratio 16:9 pour la vidéo */
 }
 
+/* Galerie */
 .gallery {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap; /* Permet d'afficher les articles sur plusieurs lignes */
     align-items: center;
-    gap: 20px;
+    gap: 10px; /* Espacement réduit entre les articles */
     padding: 20px;
     width: 60%; /* Largeur de la galerie pour les grands écrans */
+    max-width: 100%; /* Limite la largeur de la galerie */
+    overflow: hidden; /* Empêche tout débordement */
 }
 
 .gallery-item {
@@ -56,9 +68,11 @@ header {
     align-items: center;
     gap: 20px;
     justify-content: center;
-    width: 100%;
+    flex: 1 1 calc(50% - 10px); /* Deux articles par ligne */
+    max-width: calc(50% - 10px);
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ajout d'un léger contour */
 }
 
 .gallery-item:hover {
@@ -66,14 +80,14 @@ header {
 }
 
 .gallery-item img {
-    width: auto;
-    height: 150px;
-    max-width: 100%;
+    width: 100%; /* Images responsives */
+    height: auto;
 }
 
 .gallery-item .text {
     width: 50%;
     text-align: left;
+    padding: 10px;
 }
 
 .article-container {
@@ -106,4 +120,105 @@ header {
     cursor: pointer;
     color: blue;
     text-decoration: underline;
+}
+
+/* Conteneur de la navigation */
+.nav-container {
+    display: flex;
+    justify-content: center; /* Centre tout horizontalement */
+    align-items: center; /* Centre tout verticalement */
+    gap: 30px; /* Espacement entre le header et les liens */
+    width: 100%; /* Prend toute la largeur */
+    max-width: 100%; /* Limite la largeur de la navigation */
+    overflow: hidden; /* Empêche tout débordement */
+    padding: 10px 20px; /* Espacement interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+/* Style pour le header */
+nav header {
+    font-size: 1.8rem; /* Taille du texte */
+    font-weight: bold;
+    margin: 0; /* Supprime les marges */
+}
+
+/* Style pour la barre de navigation */
+nav {
+    display: flex;
+    flex-direction: column; /* Place les éléments verticalement */
+    align-items: center; /* Centre horizontalement */
+    padding: 10px 0;
+    background-color: transparent; /* Supprime la couleur de fond */
+    border-bottom: none; /* Supprime la barre horizontale */
+}
+
+/* Style pour les liens */
+nav ul {
+    display: flex;
+    justify-content: center; /* Centre les liens horizontalement */
+    align-items: center; /* Centre verticalement */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px; /* Espacement entre les liens */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: black; /* Couleur au survol */
+}
+
+.about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Photo ronde */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.description h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.description p {
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black; /* Fond noir */
+    color: white; /* Texte blanc */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: white; /* Fond blanc au survol */
+    color: black; /* Texte noir au survol */
+    border: 1px solid black; /* Ajout d'une bordure noire */
 }
