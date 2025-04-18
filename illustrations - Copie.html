@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illustrations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<nav>
+    <div class="nav-container">
+        <header>elisalane.com</header>
+        <ul>
+            <li><a href="index.html">Vidéo</a></li>
+            <li><a href="illustrations.html">Gribouillages</a></li>
+            <li><a href="about.html">Ma vie</a></li>
+        </ul>
+    </div>
+</nav>
+<body>
+    <div class="container">
+
+
+        <div class="illustration-gallery" id="gallery">
+            <!-- Toutes les images de la galerie -->
+            <div class="gallery-item"><img src="https://i.imgur.com/8pQZ3.jpg" alt="Illustration 1"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/5qH5y.jpg" alt="Illustration 2"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/3tQZ3.jpg" alt="Illustration 3"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/7pH5y.jpg" alt="Illustration 4"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/2qH5y.jpg" alt="Illustration 5"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/6pQZ3.jpg" alt="Illustration 6"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/4tZ3.jpg" alt="Illustration 7"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/1pH5y.jpg" alt="Illustration 8"></div>
+            <!-- Ajoute plus d'images ici -->
+        </div>
+
+        <div class="pagination">
+            <button id="prev-page" onclick="changePage(-1)">Précédent</button>
+            <span id="page-info"></span>
+            <button id="next-page" onclick="changePage(1)">Suivant</button>
+        </div>
+    </div>
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Image en grand">
+    </div>
+    <script>
+        // Fonction pour ouvrir la lightbox
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src; // Définit l'image à afficher
+            lightbox.style.display = 'flex'; // Affiche la lightbox
+        }
+
+        // Fonction pour fermer la lightbox
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none'; // Masque la lightbox
+        }
+
+        // Ajoute un événement de clic à chaque image de la galerie
+        document.querySelectorAll('.illustration-gallery .gallery-item img').forEach(img => {
+            img.addEventListener('click', () => openLightbox(img.src));
+        });
+
+        const itemsPerPage = 1 * 5; // 10 lignes x 5 colonnes
+        let currentPage = 1;
+
+        function paginateGallery() {
+            const gallery = document.getElementById('gallery');
+            const items = Array.from(gallery.children);
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+
+            // Masque toutes les images
+            items.forEach((item, index) => {
+                item.style.display = (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) ? 'block' : 'none';
+            });
+
+            // Met à jour les informations de pagination
+            document.getElementById('page-info').textContent = `Page ${currentPage} / ${totalPages}`;
+
+            // Gère l'état des boutons
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            paginateGallery();
+        }
+
+        // Initialise la pagination
+        paginateGallery();
+    </script>
+</body>
+</html>
