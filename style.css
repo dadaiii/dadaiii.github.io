@@ -376,3 +376,13 @@ nav ul li a:hover {
     border-top: 2px solid #ccc; /* Ligne grise */
     width: 80%; /* Ajuste la largeur pour correspondre au titre */
 }
+
+/* Description des sections */
+.section-description {
+    text-align: center; /* Centre le texte */
+    font-size: 1rem; /* Taille de police de 16px */
+    color: #666; /* Couleur grise pour un contraste doux */
+    margin: 10px auto 10px auto; /* Ajoute des marges verticales et centre horizontalement */
+    max-width: 600px; /* Limite la largeur pour un meilleur rendu */
+    line-height: 1.5; /* Améliore la lisibilité */
+}
