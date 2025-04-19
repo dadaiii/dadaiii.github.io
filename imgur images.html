@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertisseur Imgur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .notification {
+            display: inline-block;
+            margin-left: 10px;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convertisseur de liens Imgur</h1>
+    <p>Collez vos liens Imgur (un par ligne) :</p>
+    <textarea id="imgur-links" placeholder="Exemple : https://i.imgur.com/8pQZ3"></textarea>
+    <button onclick="convertLinks()">Convertir</button>
+    <button onclick="copyToClipboard()">Copier</button>
+    <span class="notification" id="notification">Résultat copié dans le presse-papiers !</span>
+    <h2>Résultat :</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        function convertLinks() {
+            const links = document.getElementById('imgur-links').value.trim().split('\n');
+            const outputDiv = document.getElementById('output');
+            let result = '';
+            links.forEach((link, index) => {
+                const trimmedLink = link.trim();
+                if (trimmedLink) {
+                    result += `<div class="gallery-item"><img src="${trimmedLink}.jpg" alt="Illustration ${index + 1}"></div>\n`;
+                }
+            });
+            outputDiv.textContent = result;
+        }
+
+        function copyToClipboard() {
+            const outputDiv = document.getElementById('output');
+            const textToCopy = outputDiv.textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showNotification('Résultat copié dans le presse-papiers !');
+            }).catch(err => {
+                showNotification('Erreur lors de la copie : ' + err, true);
+            });
+        }
+
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.backgroundColor = isError ? '#f44336' : '#4caf50'; // Rouge pour erreur, vert pour succès
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000); // Notification visible pendant 3 secondes
+        }
+    </script>
+</body>
+</html>
