@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effet CRT</title>
+    <style>
+        :root {
+            --rgb-opacity: 0.2;
+            --grid-opacity: 0.5;
+        }
+
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Courier New", Courier, monospace;
+            overflow: hidden;
+        }
+
+        .screen {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            background: black;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* Lignes de balayage */
+        @keyframes static-noise {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .screen::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/noise.png');
+            animation: static-noise 0.5s infinite;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .screen::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.5) 100%);
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* Sous-pixels RGB au premier plan */
+        @keyframes rgb-flicker {
+            0%, 100% {
+                opacity: 0.22;
+            }
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        .rgb-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to right,
+                red 0px,
+                red 1px,
+                green 1px,
+                green 2px,
+                blue 2px,
+                blue 3px
+            );
+            mix-blend-mode: screen;
+            opacity: var(--rgb-opacity);
+            pointer-events: none;
+            z-index: 2; /* Place les sous-pixels au-dessus du contenu */
+            animation: rgb-flicker 0.1s infinite;
+        }
+
+        /* Grille fine entre les pixels */
+        .grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to right,
+                black 0px,
+                black 1px,
+                transparent 1px,
+                transparent 3px
+            ),
+            repeating-linear-gradient(
+                to bottom,
+                black 0px,
+                black 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            mix-blend-mode: multiply;
+            opacity: var(--grid-opacity);
+            pointer-events: none;
+            z-index: 3; /* Place la grille au-dessus des sous-pixels */
+        }
+
+        .content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column; /* Empile les éléments verticalement */
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            filter: contrast(1.5) brightness(0.8);
+            z-index: 1; /* Place le contenu sous les sous-pixels */
+        }
+
+        /* Effet d'aberration chromatique sur le texte */
+        h1, p {
+            position: relative;
+            margin: 10px 0; /* Espacement entre les éléments */
+        }
+
+        h1::before, p::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: red;
+            transform: translate(-2px, 0); /* Décalage uniquement vers la gauche */
+            opacity: 0.7;
+            mix-blend-mode: overlay; /* Mode de fusion similaire à Photoshop */
+        }
+
+        h1::after, p::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: blue;
+            transform: translate(2px, 0); /* Décalage uniquement vers la droite */
+            opacity: 0.7;
+            mix-blend-mode: overlay; /* Mode de fusion similaire à Photoshop */
+        }
+    </style>
+</head>
+<body>
+    <div class="screen" aria-label="Écran CRT simulé">
+        <div class="rgb-overlay"></div>
+        <div class="grid"></div>
+        <div class="content">
+            <h1 data-text="Coucou bb :)">Coucou bb :)</h1>
+            <p data-text="Je t'ai fait un petit monstre de CSS j'éspère qu'il te plait">Je t'ai fait un petit monstre de CSS j'éspère qu'il te plait</p>
+            <p data-text="Effet CRT avec balayage et sous-pixels">Effet CRT avec balayage et sous-pixels</p>
+        </div>
+    </div>
+</body>
+</html>
