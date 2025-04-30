@@ -22,6 +22,10 @@ header {
     text-align: center;
 }
 
+h1 {
+    margin-top: 0; /* Supprime la marge au-dessus du titre */
+}
+
 /* Conteneur principal */
 .container {
     display: flex;
@@ -55,7 +59,7 @@ header {
 .video-container {
     position: relative;
     width: 100%;
-    max-width: 80rem; /* 1280px */
+    max-width: 60rem; /* 1280px */
     margin: 1.25rem auto; /* 20px */
     aspect-ratio: 16 / 9; /* Maintient un ratio 16:9 */
     overflow: hidden;
@@ -437,5 +441,4 @@ nav ul li a:hover {
     width: auto; /* Les images conservent leurs proportions */
     height: 150px; /* Fixe une hauteur pour uniformiser les images */
     cursor: pointer; /* Affiche un curseur en forme de doigt */
-    border-radius: 5px; /* Optionnel : arrondit légèrement les coins */
 }
