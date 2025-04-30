@@ -424,3 +424,18 @@ nav ul li a:hover {
     width: 100%; /* Les images prennent toute la largeur de leur colonne */
     object-fit: cover;
 }
+
+/* Ligne d'images */
+.image-row {
+    display: flex; /* Aligne les images en ligne */
+    gap: 10px; /* Ajoute un espacement entre les images */
+    margin: 20px 0; /* Ajoute un espacement vertical autour de la ligne */
+    justify-content: center; /* Centre les images horizontalement */
+}
+
+.image-row img {
+    width: auto; /* Les images conservent leurs proportions */
+    height: 150px; /* Fixe une hauteur pour uniformiser les images */
+    cursor: pointer; /* Affiche un curseur en forme de doigt */
+    border-radius: 5px; /* Optionnel : arrondit légèrement les coins */
+}
