@@ -55,7 +55,7 @@ header {
 .video-container {
     position: relative;
     width: 100%;
-    max-width: 50rem; /* 800px */
+    max-width: 80rem; /* 1280px */
     margin: 1.25rem auto; /* 20px */
     aspect-ratio: 16 / 9; /* Maintient un ratio 16:9 */
     overflow: hidden;
@@ -135,6 +135,8 @@ header {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
+    max-width: 300px;
+    border-radius: 5px;
 }
 
 .article-content {
@@ -145,10 +147,16 @@ header {
 }
 
 .back-button {
-    margin: 10px;
+    margin: 5px;
     cursor: pointer;
     color: blue;
     text-decoration: underline;
+}
+
+.additional-text {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 /* Conteneur de la navigation */
@@ -388,4 +396,11 @@ nav ul li a:hover {
     margin: 10px auto 10px auto; /* Ajoute des marges verticales et centre horizontalement */
     max-width: 600px; /* Limite la largeur pour un meilleur rendu */
     line-height: 1.5; /* Améliore la lisibilité */
+}
+
+/* Galerie d'images */
+.image-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
 }
