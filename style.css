@@ -434,7 +434,7 @@ nav ul li a:hover {
     display: flex; /* Aligne les images en ligne */
     gap: 10px; /* Ajoute un espacement entre les images */
     margin: 20px 0; /* Ajoute un espacement vertical autour de la ligne */
-    justify-content: center; /* Centre les images horizontalement */
+    justify-content: center; /* Centre les images horizontalement */;
 }
 
 .image-row img {

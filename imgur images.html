@@ -61,7 +61,7 @@
             links.forEach((link, index) => {
                 const trimmedLink = link.trim();
                 if (trimmedLink) {
-                    result += `<div class="gallery-item"><img src="${trimmedLink}.jpg" alt="Illustration ${index + 1}"></div>\n`;
+                    result += `<div class="gallery-item"><img src="${trimmedLink}.jpg" alt="Illustration ${index + 1}" onclick="openLightbox(this.src)"></div>\n`;
                 }
             });
             outputDiv.textContent = result;
