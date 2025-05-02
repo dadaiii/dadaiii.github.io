@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de l'Internet</title>
+    <script async src="https://cse.google.com/cse.js?cx=03039493d2d3e42cb"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #counter, #scoreboard {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .player {
+            margin-bottom: 10px;
+        }
+        .gcse-search {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .bonus-btn {
+            background-color: #28a745;
+        }
+        .bonus-btn:hover {
+            background-color: #218838;
+        }
+        .malus-btn {
+            background-color: #dc3545;
+        }
+        .malus-btn:hover {
+            background-color: #c82333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu de l'Internet</h1>
+
+    <!-- Section pour ajouter les joueurs -->
+    <div id="player-section">
+        <h2>Joueurs</h2>
+        <div id="players"></div>
+        <input type="text" id="player-name" placeholder="Nom du joueur">
+        <button class="btn" onclick="addPlayer()">Ajouter un joueur</button>
+    </div>
+
+    <!-- Moteur de recherche -->
+    <div class="gcse-search"></div>
+
+    <!-- Compteur de clics -->
+    <div id="counter">Page clicks: 0</div>
+
+    <!-- Tableau des scores -->
+    <div id="scoreboard">
+        <h2>Scores</h2>
+        <ul id="score-list"></ul>
+    </div>
+
+    <!-- Section pour entrer les liens -->
+    <div id="links-section">
+        <h2>Liens trouvés</h2>
+        <input type="text" id="link-input" placeholder="Collez le lien ici">
+        <button class="btn" onclick="addLink()">Ajouter le lien</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Joueur</th>
+                    <th>Lien</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="links-table">
+                <!-- Les liens seront ajoutés ici dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Boutons bonus et malus -->
+    <div id="bonus-malus-section">
+        <h2>Bonus et Malus</h2>
+        <!-- Bonus -->
+        <button class="btn bonus-btn" onclick="addPoints(5)">Anomalie (+5)</button>
+        <button class="btn bonus-btn" onclick="addPoints(5)">CP (+5)</button>
+        <button class="btn bonus-btn" onclick="addPoints(3)">Illegal (+3)</button>
+        <button class="btn bonus-btn" onclick="addPoints(2)">Creepy (+2)</button>
+        <button class="btn bonus-btn" onclick="addPoints(2)">Voodoo (+2)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">Perso connu (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">Sombre histoire (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">Escobar (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">Cryptique (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">Porno glauque (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">Tech (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1)">CP sans Gouv (+1)</button>
+        <button class="btn bonus-btn" onclick="addPoints(1.5)">Secte (+1.5)</button>
+        <button class="btn bonus-btn" onclick="addPoints(0.5)">Info Jamy (+0.5)</button>
+        <button class="btn bonus-btn" onclick="addPoints(0.5)">Matrice (+0.5)</button>
+
+        <!-- Malus -->
+        <button class="btn malus-btn" onclick="addPoints(-2)">People (-2)</button>
+        <button class="btn malus-btn" onclick="addPoints(-2)">Geek (-2)</button>
+        <button class="btn malus-btn" onclick="addPoints(-2)">Twilight (-2)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Porno Soft (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Secrets d'histoire (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Enquête exclusive (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Phobie administrative (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Arnaque (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Shopping (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">Skyblog (-1)</button>
+        <button class="btn malus-btn" onclick="addPoints(-1)">e=m6 (-1)</button>
+    </div>
+
+    <script>
+        let clickCounter = 0;
+        let players = [];
+        let currentPlayerIndex = 0;
+
+        // Ajouter un joueur
+        function addPlayer() {
+            const playerName = document.getElementById('player-name').value;
+            if (playerName) {
+                players.push({ name: playerName, score: 0 });
+                document.getElementById('player-name').value = '';
+                updatePlayerList();
+                updateScoreboard();
+            }
+        }
+
+        // Mettre à jour la liste des joueurs
+        function updatePlayerList() {
+            const playersDiv = document.getElementById('players');
+            playersDiv.innerHTML = '';
+            players.forEach((player, index) => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player';
+                playerDiv.innerText = `${index + 1}. ${player.name}`;
+                if (index === currentPlayerIndex) {
+                    playerDiv.style.fontWeight = 'bold';
+                }
+                playersDiv.appendChild(playerDiv);
+            });
+        }
+
+        // Ajouter des points au joueur actif
+        function addPoints(points) {
+            if (players.length > 0) {
+                players[currentPlayerIndex].score += points;
+                updateScoreboard();
+            }
+        }
+
+        // Passer au joueur suivant
+        function nextPlayer() {
+            if (players.length > 0) {
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+                updatePlayerList();
+            }
+        }
+
+        // Mettre à jour le tableau des scores
+        function updateScoreboard() {
+            const scoreList = document.getElementById('score-list');
+            scoreList.innerHTML = '';
+            players.forEach(player => {
+                const scoreItem = document.createElement('li');
+                scoreItem.innerText = `${player.name}: ${player.score} points`;
+                scoreList.appendChild(scoreItem);
+            });
+        }
+
+        // Ajouter un lien au tableau
+        function addLink() {
+            const linkInput = document.getElementById('link-input').value;
+            if (linkInput && players.length > 0) {
+                const linksTable = document.getElementById('links-table');
+                const row = document.createElement('tr');
+
+                const playerCell = document.createElement('td');
+                playerCell.innerText = players[currentPlayerIndex].name;
+
+                const linkCell = document.createElement('td');
+                const linkAnchor = document.createElement('a');
+                linkAnchor.href = linkInput;
+                linkAnchor.target = '_blank';
+                linkAnchor.innerText = linkInput;
+                linkCell.appendChild(linkAnchor);
+
+                const scoreCell = document.createElement('td');
+                scoreCell.innerText = players[currentPlayerIndex].score;
+
+                row.appendChild(playerCell);
+                row.appendChild(linkCell);
+                row.appendChild(scoreCell);
+
+                linksTable.appendChild(row);
+
+                // Réinitialiser le champ de saisie
+                document.getElementById('link-input').value = '';
+
+                // Passer au joueur suivant
+                nextPlayer();
+            }
+        }
+
+        // Observer pour surveiller les clics sur les pages de résultats
+        const observer = new MutationObserver(() => {
+            const paginationElements = document.querySelectorAll('.gsc-cursor-page');
+            paginationElements.forEach((element) => {
+                element.addEventListener('click', () => {
+                    clickCounter++;
+                    document.getElementById('counter').innerText = `Page clicks: ${clickCounter}`;
+                });
+            });
+        });
+
+        // Configurer l'observer pour surveiller les changements dans le body
+        observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+</body>
+</html>
