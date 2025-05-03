@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de l'Internet</title>
+    <script async src="https://cse.google.com/cse.js?cx=03039493d2d3e42cb"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #counter, #scoreboard {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .player {
+            margin-bottom: 10px;
+        }
+        .gcse-search {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .bonus-btn {
+            background-color: #28a745;
+        }
+        .bonus-btn:hover {
+            background-color: #218838;
+        }
+        .malus-btn {
+            background-color: #dc3545;
+        }
+        .malus-btn:hover {
+            background-color: #c82333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .info-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px; /* Augmenté pour correspondre à la hauteur */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f9fa; /* Gris clair */
+            color: #333;
+            font-size: 14px;
+            min-width: 120px;
+            height: 40px; /* Hauteur fixe pour uniformiser */
+            text-align: center;
+            box-sizing: border-box; /* Inclure le padding dans la hauteur totale */
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu de l'Internet</h1>
+
+    <!-- Section pour ajouter les joueurs -->
+    <div id="player-section">
+        <h2>Joueurs</h2>
+        <div id="players"></div>
+        <input type="text" id="player-name" placeholder="Nom du joueur">
+        <button class="btn" onclick="addPlayer()">Ajouter un joueur</button>
+    </div>
+
+    <!-- Moteur de recherche -->
+    <div class="gcse-search"></div>
+
+    
+
+    <!-- Tableau des scores -->
+    <div id="scoreboard">
+        <h2>Scores</h2>
+        <ul id="score-list"></ul>
+    </div>
+
+
+    <!-- Section pour entrer les liens -->
+    <div id="links-section">
+        <h2>Liens trouvés</h2>
+        <input type="text" id="link-input" placeholder="Collez le lien ici">
+        <button class="btn" onclick="addLink()">Ajouter le lien</button>
+
+        <!-- Section pour afficher les bonus/malus sélectionnés et le compteur -->
+        <div id="clicks-and-bonuses" style="display: flex; align-items: center; margin-top: 10px; gap: 20px;">
+            <!-- Compteur de clics -->
+            <div id="counter" class="info-box">
+                Page clicks: 0
+            </div>
+
+            <!-- Bonus/Malus sélectionnés -->
+            <div id="selected-bonuses" class="info-box">
+                <!-- Les bonus/malus sélectionnés apparaîtront ici -->
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <!-- Colonnes dynamiques pour chaque joueur -->
+                </tr>
+            </thead>
+            <tbody id="links-table">
+                <!-- Les liens seront ajoutés ici dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Boutons bonus et malus -->
+    <div id="bonus-malus-section">
+        <h2>Bonus et Malus</h2>
+        <!-- Bonus -->
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(5, 'Anomalie')">Anomalie (+5)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(5, 'CP')">CP (+5)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(3, 'Illegal')">Illegal (+3)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(2, 'Creepy')">Creepy (+2)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(2, 'Voodoo')">Voodoo (+2)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'Perso connu')">Perso connu (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'Sombre histoire')">Sombre histoire (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'Escobar')">Escobar (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'Cryptique')">Cryptique (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'Porno glauque')">Porno glauque (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'Tech')">Tech (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1, 'CP sans Gouv')">CP sans Gouv (+1)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(1.5, 'Secte')">Secte (+1.5)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(0.5, 'Info Jamy')">Info Jamy (+0.5)</button>
+        <button class="btn bonus-btn" onclick="selectBonusOrMalus(0.5, 'Matrice')">Matrice (+0.5)</button>
+
+        <!-- Malus -->
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-2, 'People')">People (-2)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-2, 'Geek')">Geek (-2)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-2, 'Twilight')">Twilight (-2)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Porno Soft')">Porno Soft (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Secrets d\'histoire')">Secrets d'histoire (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Enquête exclusive')">Enquête exclusive (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Phobie administrative')">Phobie administrative (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Arnaque')">Arnaque (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Shopping')">Shopping (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'Skyblog')">Skyblog (-1)</button>
+        <button class="btn malus-btn" onclick="selectBonusOrMalus(-1, 'e=m6')">e=m6 (-1)</button>
+    </div>
+
+    <script>
+        let clickCounter = 0;
+        document.getElementById('counter').innerText = `Page clicks: ${clickCounter}`;
+        let players = [];
+        let currentPlayerIndex = 0;
+        let currentRound = 1;
+
+        // Ajouter un joueur
+        function addPlayer() {
+            const playerName = document.getElementById('player-name').value;
+            if (playerName) {
+                players.push({ name: playerName, score: 0 });
+                document.getElementById('player-name').value = '';
+                updatePlayerList();
+                updateTableHeader(); // Mettre à jour l'en-tête du tableau
+            }
+        }
+
+        // Mettre à jour la liste des joueurs
+        function updatePlayerList() {
+            const playersDiv = document.getElementById('players');
+            playersDiv.innerHTML = '';
+            players.forEach((player, index) => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player';
+                playerDiv.innerText = `${index + 1}. ${player.name}`;
+                if (index === currentPlayerIndex) {
+                    playerDiv.style.fontWeight = 'bold';
+                }
+                playersDiv.appendChild(playerDiv);
+            });
+        }
+
+        // Ajouter des points au joueur actif
+        function addPoints(points) {
+            if (players.length > 0) {
+                const adjustedPoints = points - clickCounter; // Déduire les clics
+                players[currentPlayerIndex].score += adjustedPoints;
+                updateScoreboard();
+            }
+        }
+
+        // Passer au joueur suivant
+        function nextPlayer() {
+            if (players.length > 0) {
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+                updatePlayerList();
+            }
+        }
+
+        // Mettre à jour le tableau des scores
+        function updateScoreboard() {
+            const scoreList = document.getElementById('score-list');
+            scoreList.innerHTML = '';
+            players.forEach(player => {
+                const scoreItem = document.createElement('li');
+                scoreItem.innerText = `${player.name}: ${player.score} points`;
+                scoreList.appendChild(scoreItem);
+            });
+        }
+
+        // Ajouter un lien au tableau
+        function addLink() {
+            const linkInput = document.getElementById('link-input').value;
+            if (linkInput && players.length > 0) {
+                const linksTable = document.getElementById('links-table');
+                let currentRow = linksTable.querySelector(`tr[data-round="${currentRound}"]`);
+
+                // Si la ligne pour le round actuel n'existe pas, créez-la
+                if (!currentRow) {
+                    currentRow = document.createElement('tr');
+                    currentRow.setAttribute('data-round', currentRound);
+
+                    const roundCell = document.createElement('td');
+                    roundCell.innerText = `Round ${currentRound}`;
+                    currentRow.appendChild(roundCell);
+
+                    // Ajouter des cellules vides pour chaque joueur
+                    players.forEach(() => {
+                        const emptyCell = document.createElement('td');
+                        currentRow.appendChild(emptyCell);
+                    });
+
+                    linksTable.appendChild(currentRow);
+                }
+
+                // Ajouter le lien et le score pour le joueur actif
+                const playerCell = currentRow.children[currentPlayerIndex + 1]; // +1 pour ignorer la colonne "Round"
+                const linkAnchor = document.createElement('a');
+                linkAnchor.href = linkInput;
+                linkAnchor.target = '_blank';
+                linkAnchor.innerText = `Score: ${players[currentPlayerIndex].score}`;
+                playerCell.appendChild(linkAnchor);
+
+                // Réinitialiser le champ de saisie
+                document.getElementById('link-input').value = '';
+
+                // Effacer les boutons sélectionnés
+                document.getElementById('selected-bonuses').innerHTML = '';
+
+                // Réinitialiser le compteur de clics
+                clickCounter = 0;
+                document.getElementById('counter').innerText = `Page clicks: ${clickCounter}`;
+
+                // Passer au joueur suivant
+                nextPlayer();
+
+                // Si tous les joueurs ont joué, passer au round suivant
+                if (currentPlayerIndex === 0) {
+                    currentRound++;
+                }
+            }
+        }
+
+        // Mettre à jour l'en-tête du tableau
+        function updateTableHeader() {
+            const tableHeader = document.querySelector('#links-table').previousElementSibling;
+            tableHeader.innerHTML = '<tr><th>Round</th></tr>'; // Réinitialiser l'en-tête
+            players.forEach(player => {
+                const th = document.createElement('th');
+                th.innerText = player.name;
+                tableHeader.querySelector('tr').appendChild(th);
+            });
+        }
+
+        // Observer pour surveiller les clics sur les pages de résultats
+        const observer = new MutationObserver(() => {
+            const paginationElements = document.querySelectorAll('.gsc-cursor-page');
+            paginationElements.forEach((element) => {
+                element.addEventListener('click', () => {
+                    clickCounter++;
+                    document.getElementById('counter').innerText = `Page clicks: ${clickCounter}`;
+                });
+            });
+        });
+
+        // Configurer l'observer pour surveiller les changements dans le body
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Sélectionner un bonus ou malus
+        function selectBonusOrMalus(points, label) {
+            const selectedBonusesDiv = document.getElementById('selected-bonuses');
+            const buttonCopy = document.createElement('span');
+            buttonCopy.innerText = `${label} (${points > 0 ? '+' : ''}${points})`;
+            buttonCopy.style.marginRight = '10px';
+            buttonCopy.style.padding = '5px 10px';
+            buttonCopy.style.border = '1px solid #ccc';
+            buttonCopy.style.borderRadius = '5px';
+            buttonCopy.style.backgroundColor = points > 0 ? '#28a745' : '#dc3545';
+            buttonCopy.style.color = 'white';
+            buttonCopy.style.cursor = 'default';
+            selectedBonusesDiv.appendChild(buttonCopy);
+
+            // Ajouter les points au joueur actif
+            addPoints(points);
+        }
+    </script>
+
+
+</html></body></html>
