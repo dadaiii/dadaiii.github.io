@@ -73,31 +73,41 @@ h1 {
     border: none; /* Supprime la bordure */
 }
 
-/* Galerie */
+/* Conteneur de la galerie */
 .gallery {
-    display: grid; /* Utilise une grille pour organiser les articles */
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
-    gap: 1.25rem; /* 20px */
-    padding: 0.3125rem; /* 5px */
-    width: 80%; /* Largeur de la galerie */
-    max-width: 100%; /* Limite la largeur de la galerie */
-    margin: 0 auto;
-    margin-top: 1.875rem; /* 30px */
-    margin-bottom: 1.875rem; /* 30px */
-}
-
-/* Articles de la galerie */
-.gallery-item {
     display: flex;
-    flex-direction: column; /* Aligne les éléments verticalement */
-    align-items: stretch; /* Étire les éléments pour occuper toute la largeur */
-    justify-content: flex-start; /* Assure que l'image reste en haut */
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    box-shadow: none; /* Supprime l'ombre */
+    flex-direction: column; /* Organise les éléments en colonne */
+    align-items: flex-start; /* Aligne les éléments sur la gauche */
+    gap: 20px; /* Ajoute un espace entre les lignes */
+    margin: auto; /* Centre la galerie horizontalement et verticalement */
+    padding: 20px; /* Ajoute un espacement interne */
+    max-width: 800px; /* Limite la largeur maximale de la galerie */
+    height: 100%; /* Permet à la galerie de s'adapter à la hauteur disponible */
+    justify-content: center; /* Centre la galerie verticalement */
 }
 
-/* Images des articles */
+/* Conteneur pour chaque ligne de la galerie */
+.gallery-row {
+    display: flex; /* Aligne l'image et le contenu côte à côte */
+    align-items: center; /* Centre verticalement l'image et le contenu */
+    gap: 20px; /* Ajoute un espace entre l'image et le contenu */
+    width: 100%; /* Chaque ligne occupe toute la largeur disponible */
+}
+
+/* Style pour les gallery-item */
+.gallery-item {
+    flex: 1; /* Le contenu prend tout l'espace restant */
+    padding: 10px;
+    border: 1px solid #ccc; /* Ajoute une bordure */
+    border-radius: 5px; /* Arrondit les coins */
+    background-color: #f9f9f9; /* Ajoute un fond clair */
+}
+
+/* Texte des articles */
+.gallery-item .text {
+    text-align: left; /* Aligne le texte à gauche */
+}
+
 .gallery-item img {
     width: 100%; /* L'image occupe toute la largeur de son conteneur */
     height: auto; /* Maintient le ratio si l'aspect-ratio est supporté */
@@ -106,21 +116,15 @@ h1 {
     margin-bottom: 0.3125rem; /* 5px */
 }
 
-/* Texte des articles */
-.gallery-item .text {
-    text-align: center;
-    padding: 0;
-    margin-top: 0.3125rem; /* 5px */
-}
-
 .gallery-item h2 {
-    margin: 0.125rem 0; /* 2px */
-    font-size: 1.5rem; /* 24px */
+    margin: 0.125rem 0; /* Réduit les marges autour du titre */
+    font-size: 1.5rem; /* Taille du titre */
 }
 
 .gallery-item p {
-    margin: 0.125rem 0; /* 2px */
-    font-size: 1.2rem; /* 19.2px */
+    margin: 0.125rem 0; /* Réduit les marges autour de la description */
+    font-size: 1.2rem; /* Taille de la description */
+    text-align: left; /* Aligne la description à gauche */
 }
 
 .article-container {
