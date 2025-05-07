@@ -92,6 +92,7 @@ h1 {
     align-items: center; /* Centre verticalement l'image et le contenu */
     gap: 20px; /* Ajoute un espace entre l'image et le contenu */
     width: 100%; /* Chaque ligne occupe toute la largeur disponible */
+    cursor: pointer;
 }
 
 /* Style pour les gallery-item */
