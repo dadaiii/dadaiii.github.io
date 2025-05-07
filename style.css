@@ -8,12 +8,12 @@
 /* Empêche le débordement horizontal */
 body {
     font-family: 'Nintendo', sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 0; /* Supprime les marges globales */
+    padding: 0; /* Supprime les paddings globaux */
     overflow-x: hidden; /* Supprime le scroll horizontal */
     background-color: rgb(255, 255, 255);
     text-align: center;
-    font-size: 1.125rem; /* 18px */
+    font-size: 1.1rem; /* Augmente légèrement la taille de base (17.6px) */
 }
 
 header {
@@ -75,33 +75,32 @@ h1 {
 
 /* Conteneur de la galerie */
 .gallery {
-    display: flex;
-    flex-direction: column; /* Organise les éléments en colonne */
-    align-items: flex-start; /* Aligne les éléments sur la gauche */
-    gap: 20px; /* Ajoute un espace entre les lignes */
-    margin: auto; /* Centre la galerie horizontalement et verticalement */
-    padding: 20px; /* Ajoute un espacement interne */
-    max-width: 800px; /* Limite la largeur maximale de la galerie */
-    height: 100%; /* Permet à la galerie de s'adapter à la hauteur disponible */
-    justify-content: center; /* Centre la galerie verticalement */
+    width: 100%; /* La galerie occupe toute la largeur disponible */
+    max-width: 700px; /* Limite la largeur maximale de la galerie */
+    margin: 0 auto; /* Centre la galerie horizontalement */
 }
 
 /* Conteneur pour chaque ligne de la galerie */
 .gallery-row {
-    display: flex; /* Aligne l'image et le contenu côte à côte */
-    align-items: center; /* Centre verticalement l'image et le contenu */
-    gap: 20px; /* Ajoute un espace entre l'image et le contenu */
-    width: 100%; /* Chaque ligne occupe toute la largeur disponible */
-    cursor: pointer;
+    display: flex;
+    flex-direction: column; /* Organise les items en colonne */
+    gap: 20px; /* Ajoute un espacement uniforme entre les items */
+    width: 100%; /* Les lignes occupent toute la largeur de la galerie */
 }
 
 /* Style pour les gallery-item */
 .gallery-item {
-    flex: 1; /* Le contenu prend tout l'espace restant */
+    width: 100%; /* Chaque item occupe toute la largeur de la galerie */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacement entre l'image et le texte */
     padding: 10px;
     border: 1px solid #ccc; /* Ajoute une bordure */
     border-radius: 5px; /* Arrondit les coins */
     background-color: #f9f9f9; /* Ajoute un fond clair */
+    margin: 0.625rem 0; /* Ajoute un espacement vertical entre les items */
+    cursor: pointer;
 }
 
 /* Texte des articles */
@@ -123,9 +122,22 @@ h1 {
 }
 
 .gallery-item p {
-    margin: 0.125rem 0; /* Réduit les marges autour de la description */
-    font-size: 1.2rem; /* Taille de la description */
+    margin: 0; /* Supprime les marges des paragraphes */
+    font-size: 1.3rem; /* Augmente légèrement la taille des descriptions des articles (20.8px) */
     text-align: left; /* Aligne la description à gauche */
+}
+
+.thumbnail-container {
+    width: 100px; /* Taille carrée du conteneur */
+    height: 100px; /* Taille carrée du conteneur */
+    overflow: hidden; /* Cache les parties débordantes de l'image */
+    flex-shrink: 0; /* Empêche le conteneur de se réduire */
+}
+
+.gallery-thumbnail {
+    width: 100%; /* L'image remplit la largeur du conteneur */
+    height: 100%; /* L'image remplit la hauteur du conteneur */
+    object-fit: cover; /* Ajuste l'image pour qu'elle remplisse le conteneur sans déformation */
 }
 
 .article-container {
@@ -334,7 +346,7 @@ nav ul li a:hover {
 
 .pagination button {
     padding: 0.625rem 1.25rem; /* 10px 20px */
-    font-size: 1rem; /* 16px */
+    font-size: 1.1rem; /* Augmente légèrement la taille des boutons de pagination (17.6px) */
     cursor: pointer;
     background-color: black;
     color: white;
@@ -348,7 +360,7 @@ nav ul li a:hover {
 }
 
 .pagination #page-info {
-    font-size: 1rem; /* 16px */
+    font-size: 1.1rem; /* Augmente légèrement la taille des informations de pagination (17.6px) */
     color: black;
 }
 
@@ -360,23 +372,25 @@ nav ul li a:hover {
     padding: 1.25rem; /* 20px */
     font-size: 0.9rem; /* 14.4px */
     margin-top: 1.25rem; /* 20px */
+    line-height: 0.8; /* Réduit l'espacement vertical entre les lignes */
 }
 
-.site-footer a {
-    color: #00bcd4;
-    text-decoration: none;
-}
-
-.site-footer a:hover {
-    text-decoration: underline;
+.site-footer p {
+    margin: 0.5rem 0; /* Réduit les marges entre les paragraphes */
+    font-size: 1rem; /* Augmente la taille des paragraphes du footer (16px) */
 }
 
 /* Texte de bienvenue */
 .welcome-text {
+    margin: 0; /* Supprime toutes les marges */
+    padding: 0; /* Supprime tous les paddings */
     text-align: center;
-    font-size: 1.25rem; /* 20px */
-    margin-bottom: 1rem; /* 16px */
+    font-size: 1.3rem; /* Augmente légèrement la taille du texte de bienvenue (20.8px) */
     color: #333; /* Couleur du texte */
+}
+
+.welcome-text p {
+    margin: 0; /* Supprime les marges des paragraphes à l'intérieur */
 }
 
 /* Titres des sections */
@@ -400,7 +414,7 @@ nav ul li a:hover {
 /* Description des sections */
 .section-description {
     text-align: center; /* Centre le texte */
-    font-size: 1rem; /* Taille de police de 16px */
+    font-size: 1.1rem; /* Augmente légèrement la taille des descriptions (17.6px) */
     color: #666; /* Couleur grise pour un contraste doux */
     margin: 10px auto 10px auto; /* Ajoute des marges verticales et centre horizontalement */
     max-width: 600px; /* Limite la largeur pour un meilleur rendu */
