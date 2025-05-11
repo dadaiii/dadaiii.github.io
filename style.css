@@ -535,7 +535,6 @@ nav ul li a:hover {
     .nav-links li a {
         font-size: 1.4rem; /* Taille de police adaptée pour les petits écrans */
         padding: 5px 10px; /* Réduit le padding interne des liens */
-        border: 1px solid #b7b7b7; /* Ajoute une bordure pour les liens */
         border-radius: 3px; /* Arrondit les coins des liens */
         text-decoration: none; /* Supprime le soulignement */
         text-align: center; /* Centre le texte dans les liens */
