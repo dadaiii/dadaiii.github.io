@@ -342,6 +342,7 @@ nav ul li a:hover {
     align-items: center;
     margin-top: 1.25rem; /* 20px */
     gap: 0.625rem; /* 10px */
+    margin : auto;
 }
 
 .pagination button {
