@@ -501,3 +501,324 @@ nav ul li a:hover {
 .carousel-button:hover {
     background-color: #555;
 }
+
+/* Styles pour les écrans de téléphone */
+@media (max-width: 768px) {
+    /* Navigation sous le header */
+    nav .nav-container {
+        display: flex;
+        flex-direction: column; /* Place le header au-dessus des liens */
+        align-items: center;
+        gap: 0px; /* Ajoute un espace entre le header et les liens */
+        margin: 0; /* Centre horizontalement */
+    }
+
+    /* Alignement horizontal des liens */
+    .nav-links {
+        display: flex; /* Aligne les éléments horizontalement */
+        flex-direction: row; /* Place le header au-dessus des liens */
+        justify-content: space-between; /* Ajoute un espace uniforme entre les liens */
+        align-items: center; /* Centre verticalement */
+        width: 100%; /* Les liens occupent toute la largeur */
+        max-width: 300px; /* Limite la largeur totale des liens */
+        padding: 0;
+        margin: 0 auto; /* Centre horizontalement */
+        list-style: none; /* Supprime les puces */
+    }
+
+    .nav-links li {
+        margin: 0; /* Supprime les marges */
+    }
+
+    .nav-links li a {
+        font-size: 1.4rem; /* Taille de police adaptée pour les petits écrans */
+        padding: 5px 10px; /* Réduit le padding interne des liens */
+        border: 1px solid #b7b7b7; /* Ajoute une bordure pour les liens */
+        border-radius: 3px; /* Arrondit les coins des liens */
+        text-decoration: none; /* Supprime le soulignement */
+        text-align: center; /* Centre le texte dans les liens */
+    }
+
+    /* Augmenter la taille de la police du header */
+    nav header {
+        font-size: 2rem; /* Taille de la police du header */
+        text-align: center; /* Centre le texte du header */
+    }
+
+    /* Vidéo démo pleine largeur */
+    .demo {
+        width: 100%; /* Le conteneur prend toute la largeur */
+        padding: 0; /* Supprime le padding */
+    }
+
+    .demo-video {
+        width: 100%; /* La vidéo prend toute la largeur de l'écran */
+        height: auto; /* Conserve le ratio de la vidéo */
+    }
+
+    /* Navigation plus compacte */
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        gap: 1px; /* Réduit l'espacement entre les éléments de navigation */
+    }
+
+    nav ul li {
+        margin: 2px 0; /* Réduit les marges verticales */
+    }
+
+    nav ul li a {
+        font-size: 1rem; /* Réduit la taille de la police des liens */
+    }
+
+    /* Message de bienvenue plus petit */
+    .welcome-text {
+        font-size: 1rem; /* Réduit la taille de la police */
+        padding: 5px; /* Réduit le padding */
+        margin-bottom: 20px; /* Supprime les marges */
+    }
+
+    /* Réduction générale des tailles de police */
+    body {
+        font-size: 1rem; /* Taille de police globale réduite */
+    }
+
+    .section-title {
+        text-align: center; /* Aligne le texte à gauche */
+        font-size: 2rem; /* Taille du texte */
+        margin: 0px; /* Supprime les marges */
+        padding: 0; /* Supprime les paddings */
+        width: 100%; /* Permet au titre de prendre toute la largeur */
+        color: #333; /* Couleur du texte */
+        font-weight: bold; /* Rend le texte plus épais */
+        box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    }
+
+    .section-description {
+        font-size: 0.9rem; /* Réduit la taille des descriptions */
+    }
+    
+    .section-divider {
+        width: 100%; /* Permet au diviseur de prendre toute la largeur */
+    }
+
+    .gallery-item h2 {
+        font-size: 1.3rem; /* Réduit la taille des titres des articles */
+    }
+
+    .gallery-item p {
+        font-size: 1rem; /* Réduit la taille des descriptions des articles */
+    }
+
+    /* Vidéo démo pleine largeur */
+    .demo-video {
+        width: 100%; /* La vidéo prend toute la largeur de l'écran */
+        height: auto; /* Garde le ratio de la vidéo */
+    }
+
+    /* Ajustement des marges et paddings */
+    .container {
+        padding: 10px; /* Réduit le padding global */
+    }
+
+    .site-footer {
+        padding: 10px; /* Réduit le padding du footer */
+    }
+    .footer-content p {
+        font-size: 0.9em; /* Réduit la taille de la police du footer */
+    }
+    /* Augmenter la taille de la police du header */
+    nav header {
+        font-size: 3rem; /* Augmente la taille de la police à 32px */
+    }
+
+    /* Conteneur principal */
+    .container {
+        padding: 10px; /* Réduit le padding pour économiser de l'espace */
+    }
+
+    /* Articles */
+    .article-container {
+        margin-bottom: 20px; /* Ajoute un espacement entre les articles */
+    }
+
+    /* Titres des articles */
+    .article-container h1 {
+        font-size: 1.5rem; /* Réduit la taille des titres */
+        text-align: center; /* Centre les titres */
+    }
+
+    /* Vidéo */
+    .video-container {
+        width: 100%; /* La vidéo prend toute la largeur */
+        max-width: 100%; /* Empêche le débordement */
+        margin: 0 auto; /* Centre la vidéo */
+    }
+
+    .video-container iframe {
+        width: 100%; /* La vidéo prend toute la largeur */
+        height: 100%; /* Conserve le ratio de la vidéo */
+    }
+
+    /* Texte des articles */
+    .article-container p {
+        font-size: 0.9rem; /* Réduit la taille du texte */
+        line-height: 1.5; /* Améliore la lisibilité */
+        text-align: justify
+    }
+
+    /* Images */
+    .image-row {
+        display: flex;
+        flex-direction: column; /* Les images sont empilées verticalement */
+        gap: 10px; /* Ajoute un espacement entre les images */
+        align-items: center; /* Centre les images */
+    }
+
+    .image-row img {
+        width: 100%; /* Les images prennent toute la largeur */
+        max-width: 300px; /* Limite la largeur maximale */
+        height: auto; /* Conserve le ratio des images */
+    }
+
+    /* Galerie d'images */
+    .image-gallery {
+        display: flex;
+        flex-direction: column; /* Les colonnes sont empilées verticalement */
+        gap: 20px; /* Ajoute un espacement entre les colonnes */
+    }
+
+    .content-column {
+        display: flex;
+        flex-wrap: wrap; /* Permet aux images de s'adapter à l'espace disponible */
+        justify-content: center; /* Centre les images */
+        gap: 10px; /* Ajoute un espacement entre les images */
+    }
+
+    .content-column img {
+        width: 100%; /* Les images prennent toute la largeur */
+        height: auto; /* Conserve le ratio des images */
+    }
+
+    /* Section diviseurs */
+    .section-divider {
+        margin: 20px 0; /* Ajoute un espacement vertical autour des diviseurs */
+    }
+    /* Limiter la largeur de l'image spécifique */
+    img[src="https://imgur.com/XZthgL8.jpg"] {
+        width: 100%; /* L'image prend toute la largeur disponible */
+        max-width: 100%; /* Empêche le débordement */
+        height: auto; /* Conserve le ratio de l'image */
+        display: block; /* Supprime les marges internes inutiles */
+        margin: 0 auto; /* Centre l'image horizontalement */
+    }
+    /* Carousel d'images */
+    .image-carousel {
+        display: flex;
+        flex-direction: column; /* Empile les éléments verticalement */
+        align-items: center; /* Centre le carousel */
+        gap: 10px; /* Ajoute un espacement entre les éléments */
+        padding: 10px; /* Ajoute un padding autour du carousel */
+    }
+
+    .carousel-images {
+        display: flex;
+        flex-direction: column; /* Empile les images verticalement */
+        gap: 10px; /* Ajoute un espacement entre les images */
+        width: 100%; /* Les images prennent toute la largeur */
+        padding: 0; /* Supprime le padding interne */
+    }
+
+    .carousel-images img {
+        width: 100%; /* Les images prennent toute la largeur */
+        max-width: 300px; /* Limite la largeur maximale */
+        height: auto; /* Conserve le ratio des images */
+        border-radius: 5px; /* Ajoute des coins arrondis */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+    }
+
+    .carousel-button {
+        display: block; /* Affiche les boutons */
+        margin: 10px auto; /* Centre les boutons sous le carousel */
+        padding: 10px 20px; /* Ajoute un padding interne */
+        color: white; /* Couleur du texte */
+        border: none; /* Supprime les bordures */
+        border-radius: 5px; /* Ajoute des coins arrondis */
+        cursor: pointer; /* Change le curseur au survol */
+        font-size: 1rem; /* Taille de la police */
+        transition: background-color 0.3s ease;
+    }
+
+
+    .carousel-images img {
+        display: none; /* Masque toutes les images par défaut */
+    }
+
+    .carousel-images img:first-child {
+        display: block; /* Affiche uniquement la première image */
+        width: 100%; /* La première image prend toute la largeur */
+        height: auto; /* Conserve le ratio de l'image */
+        margin: 0 auto; /* Centre l'image */
+    }
+
+    /* Galerie d'illustrations */
+    .illustration-gallery {
+        display: grid; /* Utilise une grille pour organiser les images */
+        grid-template-columns: 1fr; /* Une seule colonne sur les petits écrans */
+        gap: 2px; /* Ajoute un espacement entre les images */
+        justify-items: center; /* Centre les images horizontalement */
+    }
+
+    .gallery-item img {
+            width: 100%; /* Les images prennent toute la largeur disponible */
+            height: auto; /* Conserve le ratio d'origine des images */
+            aspect-ratio: unset; /* Supprime le format carré */
+            object-fit: unset; /* Affiche l'image dans son format d'origine */
+        }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        flex-direction: row; /* Empile les éléments verticalement */
+        align-items: center; /* Centre les boutons */
+        gap: 10px; /* Ajoute un espacement entre les boutons */
+    }
+
+    .pagination button {
+        padding: 10px 20px; /* Ajoute un padding interne */
+        font-size: 1rem; /* Taille de la police adaptée */
+        border: none; /* Supprime les bordures */
+        border-radius: 5px; /* Ajoute des coins arrondis */
+        color: white; /* Couleur du texte */
+        cursor: pointer; /* Change le curseur au survol */
+        transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+        background-color: #0056b3; /* Change la couleur de fond au survol */
+    }
+
+    /* Lightbox */
+    .lightbox {
+        display: none; /* Masque la lightbox par défaut */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Place la lightbox au-dessus de tout */
+    }
+
+    .lightbox img {
+        width: 100%; /* L'image prend toute la largeur disponible */
+        max-width: 90%; /* Limite la largeur maximale à 90% de l'écran */
+        height: auto; /* Conserve le ratio de l'image */
+        border-radius: 5px; /* Ajoute des coins arrondis */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+    }
+}

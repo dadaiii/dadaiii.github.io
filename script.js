@@ -20,20 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Liste des textes de bienvenue
-    const welcomeMessages = [
-        "Bienvenue sur Elisalane.com, y'a plein de trucs à voir :)",
-        "Merci de passer par mon site ! Il est pas fou mais il est à moi.",
-        "Il vous plait mon site ? C'est moi qui l'ai fait !",
-        "Merci de visiter Elisalane.com ! C'est ici que je partage mes créations.",
-        "Promis je suis plus douée en animation qu'en html."
-    ];
 
-    // Sélectionne un message aléatoire
-    const randomMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
-
-    // Affiche le message dans la section de bienvenue
-    document.getElementById("welcome-text").querySelector("p").textContent = randomMessage;
 });
 
 
@@ -109,10 +96,20 @@ function preloadImages(imageUrls) {
 
 function updateCarousel() {
     const carouselImages = document.querySelector(".carousel-images");
-    carouselImages.innerHTML = `
-        <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
-        <img src="${images[(currentIndex + 1) % images.length]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[(currentIndex + 1) % images.length]}')">
-    `;
+    const isResponsive = window.innerWidth <= 768; // Vérifie si l'écran est en mode responsive
+
+    if (isResponsive) {
+        // Affiche uniquement la première image en mode responsive
+        carouselImages.innerHTML = `
+            <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
+        `;
+    } else {
+        // Affiche deux images côte à côte en mode normal
+        carouselImages.innerHTML = `
+            <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
+            <img src="${images[(currentIndex + 1) % images.length]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[(currentIndex + 1) % images.length]}')">
+        `;
+    }
 }
 
 function prevImages(event) {
@@ -132,3 +129,5 @@ document.addEventListener("DOMContentLoaded", () => {
     preloadImages(images); // Précharge toutes les images
     updateCarousel(); // Initialise le carrousel
 });
+
+window.addEventListener("resize", updateCarousel);
