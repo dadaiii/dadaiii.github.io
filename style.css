@@ -352,7 +352,8 @@ nav ul li a:hover {
     color: white;
     border: none;
     border-radius: 0.3125rem; /* 5px */
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;  
+    font-family: 'Nintendo', sans-serif;
 }
 
 .pagination button:hover {
