@@ -104,7 +104,7 @@ function updateCarousel() {
             <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
         `;
     } else {
-        // Affiche deux images côte à côte en mode normal
+        // Affiche deux images côte à côte en mode normal 
         carouselImages.innerHTML = `
             <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
             <img src="${images[(currentIndex + 1) % images.length]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[(currentIndex + 1) % images.length]}')">
