@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Morpion</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; min-height: 100vh; background: #fafbfc; }
+    .centered-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hidden { display: none; }
+    .board { display: grid; grid-template-columns: repeat(3, 60px); grid-gap: 5px; margin: 20px 0; }
+    .cell {
+      width: 60px; height: 60px; font-size: 2em; text-align: center;
+      background: #f0f0f0; border: 1px solid #ccc; cursor: pointer;
+    }
+    .cell:disabled { background: #e0e0e0; cursor: default; }
+    .controls { margin-bottom: 20px; }
+    .red-btn {
+      background: #d32f2f; color: #fff; border: none; padding: 10px 24px;
+      font-size: 1.1em; border-radius: 4px; cursor: pointer; margin-right: 10px;
+    }
+    #result {
+      margin-top: 30px; font-size: 1.1em; font-weight: bold; color: #388e3c;
+      word-break: break-all;
+      text-align: center;
+    }
+    #pwBox {
+      margin-top: 25px; padding: 12px; background: #f5f5f5; border-radius: 6px;
+      border: 1px solid #bbb; color: #222; font-size: 1.1em;
+      text-align: center;
+    }
+    #main-title {
+      font-size: 2.2em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
+      user-select: none;
+      cursor: pointer;
+      color: #1976d2;
+    }
+    label, input {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    input[type="text"] {
+      margin-bottom: 10px;
+      width: 180px;
+      padding: 6px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="centered-container">
+    <div id="main-title" onclick="secretClick()">Jeu du morpion</div>
+    <div class="controls">
+      <label for="keyword">Joueur 1 :</label>
+      <input type="text" id="keyword" autocomplete="off">
+
+      <label for="masterKey">Joueur 2 :</label>
+      <input type="text" id="masterKey" autocomplete="off">
+      <br>
+      <button class="red-btn" onclick="startGame()">Jouer</button>
+    </div>
+
+    <div id="game" class="hidden">
+      <div class="board" id="board"></div>
+      <div id="result"></div>
+      <button class="red-btn" onclick="startGame()">Rejouer</button>
+    </div>
+
+    <div id="pwBox" class="hidden" onclick="copyPwBox()" title="Copier"></div>
+  </div>
+  <script>
+    // --- Morpion ---
+    let board = [];
+    let currentPlayer = "X";
+    let gameActive = false;
+
+    function startGame() {
+      document.getElementById('game').classList.remove('hidden');
+      document.getElementById('result').textContent = "";
+      board = Array(9).fill("");
+      currentPlayer = "X";
+      gameActive = true;
+      renderBoard();
+      document.getElementById('pwBox').classList.add('hidden');
+    }
+
+    function renderBoard() {
+      const boardDiv = document.getElementById('board');
+      boardDiv.innerHTML = "";
+      for (let i = 0; i < 9; i++) {
+        const btn = document.createElement('button');
+        btn.className = "cell";
+        btn.textContent = board[i];
+        btn.disabled = !gameActive || board[i] !== "";
+        btn.onclick = () => handleMove(i);
+        boardDiv.appendChild(btn);
+      }
+    }
+
+    function handleMove(idx) {
+      if (!gameActive || board[idx] !== "") return;
+      board[idx] = currentPlayer;
+      renderBoard();
+      if (checkWin(currentPlayer)) {
+        const joueur1 = document.getElementById('keyword').value.trim() || "Joueur 1";
+        const joueur2 = document.getElementById('masterKey').value.trim() || "Joueur 2";
+        const gagnant = currentPlayer === "X" ? joueur1 : joueur2;
+        document.getElementById('result').textContent = gagnant + " a gagné !";
+        gameActive = false;
+      } else if (board.every(cell => cell !== "")) {
+        document.getElementById('result').textContent = "Match nul !";
+        gameActive = false;
+      } else {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
+    }
+
+    function checkWin(player) {
+      const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return wins.some(line => line.every(i => board[i] === player));
+    }
+
+    // --- Secret password reveal ---
+    let secretCount = 0;
+    function secretClick() {
+      secretCount++;
+      if (secretCount === 5) {
+        showPassword();
+        secretCount = 0;
+      }
+      setTimeout(() => { secretCount = 0; }, 2500); // reset if not fast enough
+    }
+
+    function showPassword() {
+      var keyword = document.getElementById('keyword').value.trim();
+      var masterKey = document.getElementById('masterKey').value.trim();
+      var pwBox = document.getElementById('pwBox');
+      if (keyword.length < 2 || masterKey.length === 0) {
+        pwBox.textContent = "erreur";
+        pwBox.classList.remove('hidden');
+        return;
+      }
+      pwBox.textContent = "erreur : " + generatePassword(keyword, masterKey);
+      pwBox.classList.remove('hidden');
+    }
+
+    function copyPwBox() {
+      const pwBox = document.getElementById('pwBox');
+      if (pwBox.textContent && pwBox.textContent !== "erreur") {
+        navigator.clipboard.writeText(pwBox.textContent.replace(/^erreur\s*:\s*/, ''));
+        pwBox.textContent = "Copié !";
+        setTimeout(() => {
+          pwBox.classList.add('hidden');
+        }, 1200);
+      }
+    }
+
+    // --- Password generation (copie de ton algo) ---
+    function generatePassword(keyword, masterKey) {
+      var allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!*-%.@#$&";
+      var specialChars = "!*-%.@#$&";
+      var nKw = keyword.length;
+      var nMk = masterKey.length;
+
+      function positiveMod(n, m) {
+        var r = n % m;
+        if (r < 0) r += m;
+        return r;
+      }
+
+      function randomCharFromAllowed(seed) {
+        var idx = positiveMod(seed, allowedChars.length);
+        return allowedChars.charAt(idx);
+      }
+
+      function charFromSpecial(seed) {
+        var idx = positiveMod(seed, specialChars.length);
+        return specialChars.charAt(idx);
+      }
+
+      function toUpper(theChar) {
+        return theChar.toUpperCase();
+      }
+
+      function deterministicShuffle(listIn, seed) {
+        var listOut = [];
+        var tempList = listIn.slice();
+        while (tempList.length > 0) {
+          var idx = positiveMod(seed, tempList.length);
+          listOut.push(tempList[idx]);
+          tempList.splice(idx, 1);
+          seed += 7;
+        }
+        return listOut;
+      }
+
+      var seed = 0;
+      for (var i = 0; i < keyword.length; i++) seed += keyword.charCodeAt(i);
+      for (var i = 0; i < masterKey.length; i++) seed += masterKey.charCodeAt(i);
+
+      var baseIndexes = [];
+      var pos = 1;
+      for (var i = 0; i < 7; i++) {
+        baseIndexes.push(pos);
+        pos += 2;
+      }
+
+      var shuffledIndexes = deterministicShuffle(baseIndexes, seed);
+
+      var pw = "";
+      pw += toUpper(keyword.charAt(0)) + toUpper(keyword.charAt(1));
+      pw += (keyword.length % 10).toString();
+      pw += "a";
+
+      for (var i = 0; i < 7; i++) {
+        var indexKey = positiveMod(shuffledIndexes[i] - 1, nKw);
+        var indexMaster = i % nMk;
+        var c1 = keyword.charCodeAt(indexKey);
+        var c2 = masterKey.charCodeAt(indexMaster);
+        if ([0, 2, 4, 6].includes(i)) {
+          pw += randomCharFromAllowed(c1 + c2 + (i + 1) + nKw);
+        } else {
+          pw += randomCharFromAllowed(c1 + c2 + (i + 1) + nMk);
+        }
+      }
+
+      pw += charFromSpecial(nKw + nMk);
+      pw += charFromSpecial(nKw * nMk);
+
+      return pw;
+    }
+  </script>
+</body>
+</html>
