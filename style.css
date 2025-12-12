@@ -136,12 +136,55 @@ h1 {
     background: rgba(0,0,0,0.6);
     color: #fff;
     border: none;
-    padding: 0.35rem 0.6rem;
+    padding: 0.45rem 0.6rem;
     border-radius: 4px;
     cursor: pointer;
 }
 .pdf-page-info { color: #333; font-weight: bold; }
 .pdf-canvas { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+/* Fullscreen pseudo-class adjustments */
+.pdf-container:fullscreen, .pdf-container:-webkit-full-screen, .pdf-container:-moz-full-screen, .pdf-container:-ms-fullscreen {
+    height: 100vh !important;
+    max-height: 100vh !important;
+}
+.pdf-container:fullscreen .pdf-viewer, .pdf-container:-webkit-full-screen .pdf-viewer, .pdf-container:-moz-full-screen .pdf-viewer, .pdf-container:-ms-fullscreen .pdf-viewer {
+    height: calc(100% - 3.2rem);
+}
+
+/* Mobile responsive: smaller screens adjustments */
+@media (max-width: 640px) {
+    .pdf-container {
+        height: 60vh; /* smaller on phones */
+        max-height: 60vh;
+    }
+    .pdf-fullscreen-btn {
+        bottom: 0.55rem;
+        right: 0.5rem;
+        font-size: 1.05rem;
+        padding: 0.45rem 0.6rem;
+    }
+    .pdf-controls {
+        position: absolute;
+        bottom: 0.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        background: rgba(255,255,255,0.92);
+        border-radius: 999px;
+        padding: 0.3rem;
+        gap: 0.5rem;
+    }
+    .pdf-controls button { padding: 0.5rem 0.65rem; }
+    .pdf-page-info { font-size: 0.95rem; }
+    .pdf-canvas { border-radius: 4px; }
+}
+
+/* Very small narrow devices (portrait phone) */
+@media (max-width: 420px) {
+    .pdf-container { height: 55vh; max-height: 55vh; }
+    .pdf-controls { bottom: 0.4rem; }
+}
 
 /* Conteneur de la galerie */
 .gallery {

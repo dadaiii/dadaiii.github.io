@@ -64,6 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Try to initialize PDF.js viewer (page-by-page) for the built-in PDF iframe.
     // It will fall back to the iframe if loading fails (CORS / Drive access).
     initPdfPageViewer();
+    // re-render when entering/exiting fullscreen so canvas fits the new size
+    document.addEventListener('fullscreenchange', reRenderAllPdfViewers.bind(null));
+    document.addEventListener('webkitfullscreenchange', reRenderAllPdfViewers.bind(null));
+    document.addEventListener('mozfullscreenchange', reRenderAllPdfViewers.bind(null));
+    document.addEventListener('MSFullscreenChange', reRenderAllPdfViewers.bind(null));
 });
 
 /* Minimal PDF.js page-by-page viewer
@@ -137,6 +142,9 @@ async function initPdfPageViewer() {
         }
 
         let pageNum = 1;
+        // expose data on the container to enable re-rendering after resize
+        container._pdfDoc = pdfDoc;
+        container._pageNum = pageNum;
         const renderPage = async (num) => {
             const page = await pdfDoc.getPage(num);
             const viewport = page.getViewport({ scale: 1 });
@@ -152,6 +160,8 @@ async function initPdfPageViewer() {
             };
             await page.render(renderContext).promise;
             currentEl.textContent = num;
+            // store current page
+            container._pageNum = num;
         };
 
         totalEl.textContent = pdfDoc.numPages;
@@ -167,12 +177,31 @@ async function initPdfPageViewer() {
             renderPage(pageNum);
         });
 
+        // Touch swipe navigation (mobile)
+        let touchStartX = 0;
+        canvas.addEventListener('touchstart', function (e) {
+            if (e.touches && e.touches.length) touchStartX = e.touches[0].clientX;
+        });
+        canvas.addEventListener('touchend', function (e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const dx = touchEndX - touchStartX;
+            if (dx < -40) { // swipe left -> next
+                if (pageNum < pdfDoc.numPages) { pageNum++; renderPage(pageNum); }
+            } else if (dx > 40) { // swipe right -> prev
+                if (pageNum > 1) { pageNum--; renderPage(pageNum); }
+            }
+        });
+
         // Initial render
         renderPage(pageNum);
 
         // Hide the original iframe to avoid double UI
         iframe.style.display = 'none';
+        // add a reference to the render function for external calls (resize/orientation)
+        container._renderPage = renderPage;
     });
+
+    // re-rendering is handled at the global level using reRenderAllPdfViewers
 }
 
 function loadScript(url) {
@@ -184,6 +213,31 @@ function loadScript(url) {
         document.head.appendChild(s);
     });
 }
+
+// small throttle to avoid hogging CPU on resize
+function throttle(fn, wait) {
+    let last = 0;
+    return function (...args) {
+        const now = Date.now();
+        if (now - last >= wait) {
+            last = now;
+            fn.apply(this, args);
+        }
+    };
+}
+
+// Re-render all viewers on resize/orientation change so the canvas scales properly
+function reRenderAllPdfViewers() {
+    document.querySelectorAll('.pdf-container').forEach((container) => {
+        if (container._renderPage && container._pageNum) {
+            // render with the current page
+            try { container._renderPage(container._pageNum); } catch (e) { /* ignore */ }
+        }
+    });
+}
+
+window.addEventListener('resize', throttle(reRenderAllPdfViewers, 160));
+window.addEventListener('orientationchange', reRenderAllPdfViewers);
 
 /* Expose for debugging */
 window.openLightbox = openLightbox;
