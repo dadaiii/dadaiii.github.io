@@ -1,3 +1,193 @@
+// script.js
+// Centralise les comportements JS : lightbox, fullscreen PDF, et viewer page-by-page (PDF.js)
+
+/* Lightbox */
+function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Fermer la lightbox en cliquant en dehors de l'image
+    const lb = document.getElementById('lightbox');
+    if (lb) lb.addEventListener('click', function (e) {
+        if (e.target === this) closeLightbox();
+    });
+
+    /* Fullscreen toggling for PDF containers */
+    document.addEventListener('click', function (e) {
+        if (!e.target.classList) return;
+        if (e.target.classList.contains('pdf-fullscreen-btn')) {
+            const btn = e.target;
+            const container = btn.closest('.pdf-container');
+            if (!container) return;
+            const doc = document;
+            const isFs = doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement || doc.msFullscreenElement;
+            if (!isFs) {
+                const request = container.requestFullscreen || container.webkitRequestFullscreen || container.mozRequestFullScreen || container.msRequestFullscreen;
+                if (request) request.call(container);
+            } else {
+                const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen || doc.msExitFullscreen;
+                if (exit) exit.call(doc);
+            }
+        }
+    });
+
+    function updatePdfFsButtons() {
+        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+        document.querySelectorAll('.pdf-fullscreen-btn').forEach(function (btn) {
+            const parent = btn.closest('.pdf-container');
+            if (!parent) return;
+            if (fsEl && (fsEl === parent || fsEl.contains(parent))) {
+                btn.classList.add('exit');
+                // Use clear 'Quitter' label to avoid double 'x' conflict with viewer controls
+                btn.textContent = 'Quitter';
+            } else {
+                btn.classList.remove('exit');
+                btn.textContent = '⤢';
+            }
+        });
+    }
+
+    document.addEventListener('fullscreenchange', updatePdfFsButtons);
+    document.addEventListener('webkitfullscreenchange', updatePdfFsButtons);
+    document.addEventListener('mozfullscreenchange', updatePdfFsButtons);
+    document.addEventListener('MSFullscreenChange', updatePdfFsButtons);
+
+    // Try to initialize PDF.js viewer (page-by-page) for the built-in PDF iframe.
+    // It will fall back to the iframe if loading fails (CORS / Drive access).
+    initPdfPageViewer();
+});
+
+/* Minimal PDF.js page-by-page viewer
+   This tries to fetch the PDF by converting the Google Drive preview URL to a direct download link.
+   If loading via PDF.js fails (CORS or fetch error), we keep the iframe as-is.
+*/
+async function initPdfPageViewer() {
+    const pdfContainers = document.querySelectorAll('.pdf-container');
+    if (!pdfContainers.length) return;
+
+    // Load PDF.js from CDN
+    const pdfjsUrl = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js';
+    try {
+        if (typeof window.pdfjsLib === 'undefined') {
+            await loadScript(pdfjsUrl);
+        }
+        // set worker
+        if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
+        }
+    } catch (err) {
+        // Can't load pdf.js -> leave iframe as-is
+        return;
+    }
+
+    pdfContainers.forEach(async (container) => {
+        const iframe = container.querySelector('iframe.pdf-embed');
+        if (!iframe) return;
+        const src = iframe.src;
+
+        // Try to extract Google Drive ID and convert to direct download link
+        const driveIdMatch = src.match(/\/d\/(.*?)\//);
+        let pdfUrl = null;
+        if (driveIdMatch && driveIdMatch[1]) {
+            const id = driveIdMatch[1];
+            pdfUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+        } else {
+            // Not a drive link - try to use the iframe src directly
+            pdfUrl = src;
+        }
+
+        // Create controls and canvas
+        const viewer = document.createElement('div');
+        viewer.className = 'pdf-viewer';
+        viewer.innerHTML = `
+            <div class="pdf-controls">
+                <button class="pdf-prev">‹</button>
+                <span class="pdf-page-info">Page <span class="pdf-current">1</span> / <span class="pdf-total">?</span></span>
+                <button class="pdf-next">›</button>
+            </div>
+            <canvas class="pdf-canvas" aria-label="PDF Viewer"></canvas>
+        `;
+        // Insert viewer before the iframe
+        container.insertBefore(viewer, iframe);
+
+        const canvas = viewer.querySelector('canvas.pdf-canvas');
+        const ctx = canvas.getContext('2d');
+        const prevBtn = viewer.querySelector('.pdf-prev');
+        const nextBtn = viewer.querySelector('.pdf-next');
+        const currentEl = viewer.querySelector('.pdf-current');
+        const totalEl = viewer.querySelector('.pdf-total');
+
+        // Try to load the PDF
+        let pdfDoc = null;
+        try {
+            pdfDoc = await window.pdfjsLib.getDocument({ url: pdfUrl }).promise;
+        } catch (err) {
+            // Could not load via pdf.js (probably CORS or permission) -> remove viewer and keep iframe
+            viewer.remove();
+            return;
+        }
+
+        let pageNum = 1;
+        const renderPage = async (num) => {
+            const page = await pdfDoc.getPage(num);
+            const viewport = page.getViewport({ scale: 1 });
+            // scale to container width
+            const containerWidth = container.clientWidth;
+            const scale = containerWidth / viewport.width * 0.95; // small margin
+            const scaledViewport = page.getViewport({ scale });
+            canvas.width = scaledViewport.width;
+            canvas.height = scaledViewport.height;
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: scaledViewport
+            };
+            await page.render(renderContext).promise;
+            currentEl.textContent = num;
+        };
+
+        totalEl.textContent = pdfDoc.numPages;
+
+        prevBtn.addEventListener('click', function () {
+            if (pageNum <= 1) return;
+            pageNum--;
+            renderPage(pageNum);
+        });
+        nextBtn.addEventListener('click', function () {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            renderPage(pageNum);
+        });
+
+        // Initial render
+        renderPage(pageNum);
+
+        // Hide the original iframe to avoid double UI
+        iframe.style.display = 'none';
+    });
+}
+
+function loadScript(url) {
+    return new Promise(function (resolve, reject) {
+        const s = document.createElement('script');
+        s.src = url;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+    });
+}
+
+/* Expose for debugging */
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
 window.addEventListener('DOMContentLoaded', () => {
     const articles = document.querySelectorAll('.article-container');
     const hash = window.location.hash;

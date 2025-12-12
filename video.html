@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>elisalane.com</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <nav>
@@ -329,6 +330,19 @@
                 
             </div>
         </div>
+            <div id="article-nostalgie" class="article-container">
+                <h1>Nostalgie numérique - archéologues du presque contemporain</h1>
+                 <div class="pdf-container">
+                     <button class="pdf-fullscreen-btn" aria-label="Plein écran" title="Plein écran">⤢</button>
+                     <iframe class="pdf-embed" src="https://docs.google.com/file/d/1jDlPtTqXoiEvGfC2HrtMl5OfqgUTzq2Q/preview" title="Nostalgie numérique - preview" allowfullscreen></iframe>
+                 </div>
+            <p>Mémoire de DNSEP, ESAD mention images animées 2025-2026.</p>
+            <hr class="section-divider">
+            
+            <p>Le fossé qui séparait le numérique et l’analogique a commencé ces dernières années à se retrouver au sein même du format numérique : l’engouement pour le vinyle et la cassette s’étend désormais aux DVD, à l'esthétique kitsch des premiers blogs, et aux polygones apparents des premiers modèles 3D. Artistes et animateurs du XXIe siècle s’emparent de cette nostalgie comme source d’inspiration, mais aussi comme d’outil pour s’opposer aux standards visuels imposés par l’industrie. La décomposition et la dégradation rapide des technologies numériques deviennent alors le matériau d’une réflexion mélancolique sur le temps qui passe, les ruines archéologiques d’un passé proche.</p>
+            <hr class="section-divider">
+            
+        </div>
 
         <!-- Ajoute tous tes autres articles ici -->
 
@@ -351,28 +365,7 @@
         <img id="lightbox-img" src="" alt="Image en grand">
     </div>
 
-    <script>
-        // Fonction pour ouvrir la lightbox
-        function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = src; // Définit l'image à afficher
-            lightbox.style.display = 'flex'; // Affiche la lightbox
-        }
-
-        // Fonction pour fermer la lightbox
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none'; // Masque la lightbox
-        }
-
-        // Fermer la lightbox en cliquant en dehors de l'image
-        document.getElementById('lightbox').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeLightbox();
-            }
-        });
-    </script>
+    <!-- All JS moved to script.js for maintainability; script.js handles: lightbox, fullscreen PDF, and PDF page-by-page viewer -->
     <script src="script.js"></script>
 </body>
 </html>

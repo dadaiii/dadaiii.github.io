@@ -73,6 +73,76 @@ h1 {
     border: none; /* Supprime la bordure */
 }
 
+/* Container pour les PDF intégrés : limite la hauteur pour éviter de pousser le footer trop bas */
+.pdf-container {
+    width: 100%;
+    height: 75vh; /* limite à 75% de la hauteur viewport */
+    max-height: 75vh;
+    overflow: hidden; /* évite la page scroll globale */
+    display: block;
+    margin-bottom: 1rem;
+    position: relative; /* pour permettre de placer un bouton en overlay */
+}
+.pdf-container .pdf-embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Bouton plein écran pour PDF */
+.pdf-fullscreen-btn {
+    position: absolute;
+    bottom: 0.6rem; /* bottom-right */
+    right: 0.6rem;
+    top: auto;
+    z-index: 20;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    padding: 0.45rem 0.65rem;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition: background 0.15s ease, transform 0.08s ease;
+}
+.pdf-fullscreen-btn:hover { background: rgba(0,0,0,0.85); }
+
+/* Style pour indiquer état plein écran (optionnel) */
+.pdf-fullscreen-btn.exit::after { content: " ×"; }
+
+/* PDF viewer (page-by-page) styles */
+.pdf-viewer {
+    width: 100%;
+    height: calc(100% - 2.6rem); /* allow controls */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    padding: 0.6rem 0.6rem 1rem 0.6rem;
+}
+.pdf-controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+.pdf-controls button {
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.pdf-page-info { color: #333; font-weight: bold; }
+.pdf-canvas { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
 /* Conteneur de la galerie */
 .gallery {
     width: 100%; /* La galerie occupe toute la largeur disponible */
