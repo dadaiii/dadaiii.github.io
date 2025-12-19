@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Typewriter Live — Effet machine à écrire</title>
+  <style>
+    :root{--bg:#f7f7f8;--card:#fff;--accent:#111;--muted:#666;--mono:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#f0f3f8, var(--bg));font-family:Inter,system-ui,Arial; padding:24px}
+    .card{width:100%;max-width:920px;background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 30px rgba(14,20,30,0.06)}
+    h1{margin:0 0 12px;font-size:1.25rem}
+    .controls{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+    textarea{width:100%;min-height:120px;padding:12px;border-radius:8px;border:1px solid #e6e9ee;font-size:1rem;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+    @media (max-width:700px){.row{grid-template-columns:1fr}}
+
+    @font-face {
+      font-family: 'W95FA';
+      src: url('assets/fonts/W95FA.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    .viewer{position:relative;min-height:140px;padding:18px;border-radius:8px;background:linear-gradient(180deg,#fafafa,#fff);border:1px solid #edf0f4;font-size:1.05rem;line-height:1.5;white-space:pre-wrap;word-break:break-word;font-family:'W95FA', var(--mono);overflow:auto;height:35vh;max-height:85vh}
+    .preview-controls{display:flex;gap:8px;align-items:center;justify-content:flex-start;margin-bottom:6px}
+    .preview-controls .small{margin-right:6px}
+    .preview-controls input[type=range]{width:140px}
+    .resizer{height:8px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.04));border-radius:0 0 6px 6px;cursor:row-resize;margin-top:6px}
+    @media (max-width:700px){.viewer{height:40vh}}
+    .caret{display:inline-block;width:10px;height:1.1em;background:var(--accent);vertical-align:bottom;margin-left:3px;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    .small{font-size:.9rem;color:var(--muted)}
+    .toolbar{display:flex;gap:8px;align-items:center}
+    .btn{background:#111;color:#fff;padding:6px 10px;border-radius:6px;border:none;cursor:pointer}
+    .btn.secondary{background:#e9eef6;color:#111}
+    label{display:flex;gap:8px;align-items:center}
+    input[type=range]{width:140px}
+    .footer-help{margin-top:10px;color:var(--muted);font-size:.9rem}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Typewriter Live — tapez pour voir l'effet en direct</h1>
+    <div class="controls">
+      <div style="flex:1">
+        <textarea id="source" placeholder="Tapez votre texte ici...">Bonjour ! Tapez un texte et il s'écrira ici avec un effet machine à écrire en direct.</textarea>
+        <div class="footer-help small">Le rendu se met à jour en temps réel ; vous pouvez modifier la vitesse ci-dessous.</div>
+      </div>
+      <div style="width:280px;min-width:200px">
+        <div class="toolbar">
+          <label class="small">Vitesse&nbsp;
+            <input id="speed" type="range" min="4" max="60" value="18"> <span id="speedVal">18</span> ms/car
+          </label>
+        </div>
+        <div style="margin-top:8px">
+          <label style="display:flex;align-items:center;gap:8px"><input id="humanize" type="checkbox" checked> <span class="small">Humaniser (variations & fautes)</span></label>
+          <div style="margin-top:8px">
+            <label class="small">Erreur&nbsp;<input id="errorProb" type="range" min="0" max="20" value="5"> <span id="errorVal">5</span>%</label>
+          </div>
+          <div style="margin-top:8px">
+            <label class="small">Variation vitesse&nbsp;<input id="variation" type="range" min="0" max="70" value="30"> <span id="variationVal">30</span>%</label>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="play" class="btn">Play</button>
+          <button id="pause" class="btn secondary">Pause</button>
+          <button id="reset" class="btn secondary">Reset</button>
+        </div>
+        <div style="margin-top:12px">
+          <label class="small">Mode&nbsp;<select id="mode"><option value="live">Live (réécriture continue)</option><option value="compile">Compile (attend la pause)</option></select></label>
+        </div>
+        <div style="margin-top:10px">
+          <label class="small">Police&nbsp;
+            <select id="fontSelect">
+              <option value="W95FA">W95FA (retro)</option>
+              <option value="monospace">Monospace</option>
+              <option value="serif">Serif</option>
+              <option value="sans-serif">Sans-serif</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="small">Preview</div>
+        <div class="preview-controls small">
+          <span>Fenêtre</span>
+          <input id="viewerHeightRange" type="range" min="10" max="80" value="35">
+          <span id="viewerHeightVal">35vh</span>
+          <label style="display:flex;align-items:center;gap:6px;margin-left:8px"><input id="followBottom" type="checkbox" checked> <span class="small">Suivre le bas</span></label>
+        </div>
+        <div id="viewer" class="viewer" aria-live="polite"></div>
+        <div class="resizer" id="viewerResizer" title="Ajuster la hauteur"></div> 
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Typewriter Live script with humanization and typo simulation
+    (function(){
+      const source = document.getElementById('source');
+      const viewer = document.getElementById('viewer');
+      const speedInput = document.getElementById('speed');
+      const speedVal = document.getElementById('speedVal');
+      const playBtn = document.getElementById('play');
+      const pauseBtn = document.getElementById('pause');
+      const resetBtn = document.getElementById('reset');
+      const modeSel = document.getElementById('mode');
+
+      // New controls
+      const humanizeChk = document.getElementById('humanize');
+      const errorProbInput = document.getElementById('errorProb');
+      const errorVal = document.getElementById('errorVal');
+      const variationInput = document.getElementById('variation');
+      const variationVal = document.getElementById('variationVal');
+      const fontSelect = document.getElementById('fontSelect');
+
+      // State
+      let playing = true;
+      let animationId = null;
+      let lastTick = performance.now();
+      let index = 0; // number of correct characters currently typed
+      let target = source.value || '';
+      let displayExtra = ''; // wrong chars currently shown (typo buffer)
+      let mistake = null; // {phase: 'typing'|'pause'|'backspacing', buffer, pos, pause}
+
+      let speed = Number(speedInput.value); // base ms per character
+      let variation = Number(variationInput.value); // percent
+      let errorProb = Number(errorProbInput.value); // percent
+
+      // Update labels
+      speedVal.textContent = speed;
+      errorVal.textContent = errorProb;
+      variationVal.textContent = variation;
+
+      function randomChar(){
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:!?\"'()[]{}<>" + ' ';
+        // choose letter or neighbor
+        return chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+      function getRandomDelay(){
+        if(!humanizeChk.checked) return speed;
+        const v = variation / 100;
+        const factor = 1 + (Math.random() * 2 - 1) * v; // between 1-v and 1+v
+        const jitter = 0.9 + Math.random() * 0.2; // small jitter
+        const d = Math.round(speed * factor * jitter);
+        return Math.max(8, d);
+      }
+
+      function render(){
+        const text = target.slice(0, index) + displayExtra;
+        viewer.textContent = text;
+        const caret = document.createElement('span');
+        caret.className = 'caret';
+        viewer.appendChild(caret);
+        // if follow bottom is enabled, keep caret visible at the bottom of the window
+        if(typeof followBottom !== 'undefined' && followBottom && followBottom.checked){
+          // schedule to make sure layout updated
+          requestAnimationFrame(()=>{ viewer.scrollTop = viewer.scrollHeight; });
+        }
+      }
+
+      function startMistake(){
+        const willMakeMistake = humanizeChk.checked && Math.random() < (errorProb / 100);
+        if(!willMakeMistake) return false;
+        const len = Math.random() < 0.75 ? 1 : (Math.random() < 0.6 ? 2 : 3);
+        let buf = '';
+        for(let i=0;i<len;i++) buf += randomChar();
+        mistake = { phase: 'typing', buffer: buf, pos: 0, pause: 220 + Math.random() * 420 };
+        return true;
+      }
+
+      function step(now){
+        const elapsed = now - lastTick;
+        const delay = getRandomDelay();
+        if(elapsed < delay){ animationId = requestAnimationFrame(step); return; }
+        lastTick = now;
+
+        if(!playing){ animationId = requestAnimationFrame(step); return; }
+
+        // If currently handling a mistake
+        if(mistake){
+          if(mistake.phase === 'typing'){
+            // add one wrong char
+            displayExtra += mistake.buffer.charAt(mistake.pos++);
+            if(mistake.pos >= mistake.buffer.length){
+              mistake.phase = 'pause';
+              mistake.pauseUntil = performance.now() + mistake.pause;
+            }
+          } else if(mistake.phase === 'pause'){
+            if(performance.now() >= mistake.pauseUntil) mistake.phase = 'backspacing';
+          } else if(mistake.phase === 'backspacing'){
+            // remove one wrong char at a time
+            if(displayExtra.length > 0){
+              displayExtra = displayExtra.slice(0, -1);
+            } else {
+              mistake = null;
+            }
+          }
+        } else {
+          // normal behaviour: move index toward target
+          if(modeSel.value === 'live'){
+            if(index < target.length){
+              // Before typing next correct char, maybe do a mistake
+              const made = startMistake();
+              if(!made){ index++; }
+            } else if(index > target.length){ index--; }
+          } else {
+            // compile mode: similar but only when target updated by debounce
+            if(index < target.length){
+              const made = startMistake();
+              if(!made){ index++; }
+            } else if(index > target.length){ index = target.length; }
+          }
+        }
+
+        render();
+        animationId = requestAnimationFrame(step);
+      }
+
+      // Debounce for compile mode — wait 650ms after typing stops to set target
+      let debounceTimer = null;
+      function scheduleUpdate(){
+        const val = source.value;
+        if(modeSel.value === 'live'){
+          target = val;
+        } else {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(()=>{ target = val },650);
+        }
+      }
+
+      // Event bindings
+      speedInput.addEventListener('input', ()=>{ speed = Number(speedInput.value); speedVal.textContent = speed });
+      errorProbInput.addEventListener('input', ()=>{ errorProb = Number(errorProbInput.value); errorVal.textContent = errorProb });
+      variationInput.addEventListener('input', ()=>{ variation = Number(variationInput.value); variationVal.textContent = variation });
+
+      source.addEventListener('input', ()=>{ scheduleUpdate(); });
+
+      playBtn.addEventListener('click', ()=>{ playing = true });
+      pauseBtn.addEventListener('click', ()=>{ playing = false });
+      resetBtn.addEventListener('click', ()=>{ index = 0; target = ''; source.value = ''; displayExtra = ''; mistake = null; render(); });
+
+      // ResizeObserver to re-render current slice for wrapping
+      const ro = new ResizeObserver(()=>{ render() });
+      ro.observe(viewer);
+
+      // Start
+      lastTick = performance.now();
+      animationId = requestAnimationFrame(step);
+      scheduleUpdate();
+
+      // font selector
+      if(fontSelect){ fontSelect.value = 'W95FA'; viewer.style.fontFamily = "'W95FA', var(--mono)"; fontSelect.addEventListener('change', ()=>{ const v = fontSelect.value; viewer.style.fontFamily = v === 'W95FA' ? "'W95FA', var(--mono)" : v; }); }
+
+      // Accessibility & compile commit
+      source.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' && modeSel.value === 'compile'){
+          clearTimeout(debounceTimer); target = source.value;
+        }
+      });
+
+      // Caret blink
+      setInterval(()=>{ const c = viewer.querySelector('.caret'); if(c) c.style.opacity = c.style.opacity === '0' ? '1' : '0'; },500);
+
+      // expose for debug
+      window.__typewriter = {play: ()=>playing = true, pause: ()=>playing = false, setSpeed:(v)=>{speed = v; speedInput.value = v; speedVal.textContent = v}}
+    })();
+  </script>
+</body>
+</html>
