@@ -375,3 +375,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener("resize", updateCarousel);
+
+// Scroll fluide pour les liens de navigation
+document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Met à jour l'URL sans recharger
+            history.pushState(null, null, targetId);
+        }
+    });
+});
+
