@@ -342,22 +342,31 @@ nav header { font-size: 1.8rem; font-weight: bold; }
 
 /* Lightbox */
 .lightbox {
-    display: none; /* Masque la lightbox par défaut */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+    background-color: rgba(0, 0, 0, 0.8);
+    flex-direction: column; /* Ajouté pour empiler img et caption */
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Place la lightbox au-dessus de tout */
+    z-index: 1000;
 }
 
 .lightbox img {
     max-width: 90%;
-    max-height: 90%;
-    border-radius: 5px; /* Optionnel : arrondit légèrement les coins */
+    max-height: 80%; /* Réduit pour laisser place à la légende */
+    border-radius: 5px;
+}
+
+.lightbox-caption {
+    color: white;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 90%;
 }
 
 .lightbox .close {

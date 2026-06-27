@@ -1,11 +1,31 @@
 // script.js
 // Centralise les comportements JS : lightbox, fullscreen PDF, et viewer page-by-page (PDF.js)
 
-/* Lightbox */
-function openLightbox(src) {
+/* Lightbox améliorée */
+function openLightbox(element) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = src;
+
+    // On récupère l'élément légende (ou on le crée s'il n'existe pas)
+    let caption = document.querySelector('.lightbox-caption');
+    if (!caption) {
+        caption = document.createElement('div');
+        caption.className = 'lightbox-caption';
+        lightbox.appendChild(caption);
+    }
+
+    // Définit l'image
+    lightboxImg.src = element.src;
+
+    // Définit la description
+    const text = element.getAttribute('data-caption');
+    if (text) {
+        caption.textContent = text;
+        caption.style.display = 'block';
+    } else {
+        caption.style.display = 'none';
+    }
+
     lightbox.style.display = 'flex';
 }
 
@@ -89,10 +109,10 @@ async function initPdfPageViewer() {
         if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
         }
-    } catch (err) {
+        } catch (err) {
         // Can't load pdf.js -> leave iframe as-is
-        return;
-    }
+            return;
+        }
 
     pdfContainers.forEach(async (container) => {
         const iframe = container.querySelector('iframe.pdf-embed');
@@ -105,10 +125,10 @@ async function initPdfPageViewer() {
         if (driveIdMatch && driveIdMatch[1]) {
             const id = driveIdMatch[1];
             pdfUrl = `https://drive.google.com/uc?export=download&id=${id}`;
-        } else {
+    } else {
             // Not a drive link - try to use the iframe src directly
             pdfUrl = src;
-        }
+    }
 
         // Create controls and canvas
         const viewer = document.createElement('div');
@@ -189,7 +209,7 @@ async function initPdfPageViewer() {
                 if (pageNum < pdfDoc.numPages) { pageNum++; renderPage(pageNum); }
             } else if (dx > 40) { // swipe right -> prev
                 if (pageNum > 1) { pageNum--; renderPage(pageNum); }
-            }
+    }
         });
 
         // Initial render
@@ -222,7 +242,7 @@ function throttle(fn, wait) {
         if (now - last >= wait) {
             last = now;
             fn.apply(this, args);
-        }
+}
     };
 }
 
@@ -233,7 +253,7 @@ function reRenderAllPdfViewers() {
             // render with the current page
             try { container._renderPage(container._pageNum); } catch (e) { /* ignore */ }
         }
-    });
+});
 }
 
 window.addEventListener('resize', throttle(reRenderAllPdfViewers, 160));
@@ -345,13 +365,13 @@ function updateCarousel() {
     if (isResponsive) {
         // Affiche uniquement la première image en mode responsive
         carouselImages.innerHTML = `
-            <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
+            <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox(this)">
         `;
     } else {
-        // Affiche deux images côte à côte en mode normal 
+        // Affiche deux images côte à côte en mode normal
         carouselImages.innerHTML = `
-            <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[currentIndex]}')">
-            <img src="${images[(currentIndex + 1) % images.length]}" alt="Image du projet Seanmathair" onclick="openLightbox('${images[(currentIndex + 1) % images.length]}')">
+            <img src="${images[currentIndex]}" alt="Image du projet Seanmathair" onclick="openLightbox(this)">
+            <img src="${images[(currentIndex + 1) % images.length]}" alt="Image du projet Seanmathair" onclick="openLightbox(this)">
         `;
     }
 }
@@ -375,21 +395,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener("resize", updateCarousel);
-
-// Scroll fluide pour les liens de navigation
-document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
-            // Met à jour l'URL sans recharger
-            history.pushState(null, null, targetId);
-        }
-    });
-});
 
